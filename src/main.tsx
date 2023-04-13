@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } 
 
 import './index.css';
 import { App } from './App';
-import { Layout } from './components/layout/Layout';
+import { Layout } from './components/layout/layout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
