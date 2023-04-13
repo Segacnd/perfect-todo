@@ -1,0 +1,82 @@
+.previewWrapper {
+  --box-shadow: -1px 2px 4px 1px rgba(0, 0, 0, 0.2);
+
+  padding: 5px;
+  width: 200px;
+  height: 36px;
+  display: flex;
+  justify-content: flex-start;
+
+  border-radius: 4px;
+  box-shadow: var(--box-shadow);
+  text-align: start;
+  position: relative;
+}
+.todo {
+  flex-grow: 1;
+  cursor: pointer;
+  padding-inline: 6px;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -ms-line-clamp: 2;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  display: -webkit-box;
+  display: box;
+  word-wrap: nowrap;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+
+  font-size: var(--font-small);
+  font-weight: var(--fweight-small);
+}
+
+@keyframes show {
+  from {
+    transform: opacity(0);
+  }
+  to {
+    transform: opacity(1);
+  }
+}
+
+.previewWrapper:hover {
+  --box-shadow-active: -1px 2px 8px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--box-shadow-active);
+}
+.completeTodo {
+  border-radius: 50%;
+  position: relative;
+  align-self: center;
+
+}
+.completeTodo label img:active {
+  border-radius: 50%;
+  background-color: var(--clr-blue);
+}
+.deleteTodo {
+    position: relative;
+    align-self: center;
+}
+
+.deleteTodo button {
+  color: var(--clr-blue);
+
+  border: transparent;
+  outline: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+.deleteTodo img {
+  width: var(--font-medium);
+}
+
+.completeTodo input {
+  display: none;
+}
+
+.completeTodo label {
+  cursor: pointer;
+}

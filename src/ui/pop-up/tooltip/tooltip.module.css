@@ -1,0 +1,33 @@
+:root {
+  --bg-clr: #d7dde9;
+  --text-clr: #232323;
+
+  --clr-pink: #f9cedf;
+  --clr-blue: #8cbbf1;
+  --clr-yelow: #fceecb;
+  --clr-white: #fdfdff;
+  --box-shadow: -1px 2px 10px 1px rgba(0, 0, 0, 0.2);
+  --box-shadow-active: -1px 2px 10px 1px rgba(0, 0, 0, 0.3);
+
+  --font-big: 24px;
+  --font-medium: 18px;
+  --font-small: 14px;
+
+  --fweight-big: 700;
+  --fweight-medium: 500;
+  --fweight-small: 300;
+}
+
+.tooltip {
+  position: absolute;
+  left: -200%;
+  bottom: -150%;
+  width: clamp(80px, 120px, 150px);
+  padding: 4px 4px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: var(--clr-white);
+  box-shadow: var(--box-shadow);
+  font-size: var(--font-small);
+  font-weight: var(--fweight-small);
+}

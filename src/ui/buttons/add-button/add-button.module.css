@@ -1,0 +1,25 @@
+.buttonWrapper{
+  position: relative;
+
+}
+.addButton {
+  border: transparent;
+  outline: transparent;
+  background-color: transparent;
+
+  background-color: var(--clr-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  border-radius: 24px;
+  padding-bottom: 5px;
+  color: var(--clr-white);
+  font-size: var(--font-big);
+  font-weight: var(--fweight-medium);
+}
+
+.addButton:hover {
+  color: var(--text-clr);
+}
