@@ -5,6 +5,6 @@ type TooltipProps = {
   text: string;
 };
 
-export const Tooltip: FC<TooltipProps> = ({ text }: TooltipProps) => {
+export const Tooltip: FC<TooltipProps> = ({ text }) => {
   return <p className={styles.tooltip}>{text}</p>;
 };
