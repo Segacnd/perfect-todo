@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
@@ -10,7 +10,7 @@ type ToDo = {
   completed: boolean;
 };
 
-export const TodosContainer = () => {
+export const TodosContainer: FC = () => {
   const [todos, setTodos] = useState<ToDo[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(true);
 

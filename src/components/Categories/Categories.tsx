@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 
-export const Categories = () => {
+export const Categories: FC = () => {
   return (
     <aside>
       <div className='category-header'>
