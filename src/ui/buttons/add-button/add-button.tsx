@@ -8,7 +8,7 @@ type AddButtonProps = {
   click: () => void;
 };
 
-export const AddButton: FC<AddButtonProps> = ({ text, click, tooltipText }: AddButtonProps) => {
+export const AddButton: FC<AddButtonProps> = ({ text, click, tooltipText }) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState<boolean>(false);
 
   const showTooltip = (): void => {

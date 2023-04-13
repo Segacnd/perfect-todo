@@ -10,7 +10,7 @@ type TodopreviewProps = {
   deleteTodo: (id: number) => void;
 };
 
-export const TodoPreview: FC<TodopreviewProps> = ({ text, completeTodo, deleteTodo }: TodopreviewProps) => {
+export const TodoPreview: FC<TodopreviewProps> = ({ text, completeTodo, deleteTodo }) => {
   const id = useId();
 
   return (
