@@ -11,12 +11,12 @@ type AddButtonProps = {
 export const AddButton: FC<AddButtonProps> = ({ text, click, tooltipText }) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState<boolean>(false);
 
-  const showTooltip = (): void => {
-    setIsTooltipOpen(true);
-  };
-
   const hideTooltip = (): void => {
     setIsTooltipOpen(false);
+  };
+
+  const showTooltip = (): void => {
+    setIsTooltipOpen(true);
   };
 
   return (
