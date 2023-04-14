@@ -8,7 +8,6 @@ module.exports = {
     'airbnb-typescript',
     'airbnb/hooks',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:react/jsx-runtime',
   ],
@@ -26,13 +25,17 @@ module.exports = {
         'jsx-a11y/label-has-associated-control': 'off',
       },
     },
+    {
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: './tsconfig.json',
+      },
+      extends: ['plugin:@typescript-eslint/recommended'],
+      files: ['*.ts', '*.tsx'], // Your TypeScript files extension
+    }
   ],
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: './tsconfig.json',
-  },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'jsx-a11y/label-has-associated-control': [

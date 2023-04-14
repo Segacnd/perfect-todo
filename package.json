@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build --mode development",
     "preview": "vite preview",
-    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\""
+    "lint": "eslint \"**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
