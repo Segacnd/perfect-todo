@@ -5,11 +5,13 @@ import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } 
 import './index.css';
 import { App } from './App';
 import { Layout } from './components/layout/Layout';
+import { TodoPage } from './pages/todo-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route path='/' element={<App />} />
+      <Route path='/todo/:id' element={<TodoPage />} />
     </Route>
   )
 );

@@ -1,4 +1,5 @@
 import { useEffect, useState, FC } from 'react';
+import { Link } from 'react-router-dom';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
@@ -31,7 +32,11 @@ export const TodosContainer: FC = () => {
         {todos &&
           todos
             .filter((el) => (isChecked ? el.completed : !el.completed))
-            .map((el) => <TodoPreview key={el.id} text={el.title} completeTodo={() => {}} deleteTodo={() => {}} />)}
+            .map((el) => (
+              <Link to={`/todo/${el.id}`} key={el.id}>
+                <TodoPreview text={el.title} completeTodo={() => {}} deleteTodo={() => {}} />{' '}
+              </Link>
+            ))}
       </div>
     </section>
   );

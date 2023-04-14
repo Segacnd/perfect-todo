@@ -1,0 +1,16 @@
+.note {
+  border: 1px solid var(--text-clr);
+  border-radius: 4px;
+  width: 35%;
+  position: relative;
+  background-color: var(--clr-yelow);
+  box-shadow: var(--box-shadow);
+  padding: 10px;
+  text-overflow: ellipsis;
+  height: 160px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+.note:hover {
+  box-shadow: var(--box-shadow-active);
+}

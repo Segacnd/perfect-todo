@@ -26,7 +26,11 @@
   margin: 0;
 }
 
-h1,h2,h3,h4,h5{
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-weight: var(--fweight-medium);
   margin: 0;
 }
@@ -48,7 +52,7 @@ body {
   min-height: 100vh;
   background-color: var(--bg-clr);
 }
-footer{
+footer {
   margin-top: 20px;
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
@@ -80,26 +84,25 @@ header {
   height: 10%;
   border-bottom: 1px solid #2323234b;
 }
-main{
+main {
   width: 100%;
   height: 90%;
   display: flex;
-
 }
-aside{
+aside {
   height: 100%;
   width: 200px;
   border-right: 1px solid #2323234b;
   padding: 10px 14px;
 }
 
-.category-header{
+.category-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.addButton{
+.addButton {
   border: transparent;
   outline: transparent;
   background-color: transparent;
@@ -116,21 +119,20 @@ aside{
   font-weight: var(--fweight-medium);
 }
 
-
-.addButton:hover{
+.addButton:hover {
   color: var(--clr-white);
 }
 
-aside li{
+aside li {
   font-weight: var(--fweight-medium);
   margin-block: 4px;
   padding-left: 14px;
   cursor: pointer;
 }
-aside li:hover{
+aside li:hover {
   color: var(--clr-blue);
 }
-.todos-container{
+.todos-container {
   width: 100%;
   height: 100%;
   padding: 10px 10px;
@@ -139,18 +141,18 @@ aside li:hover{
   gap: 20px;
 }
 
-.todos-header{
+.todos-header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
- padding-left: 10px;
+  padding-left: 10px;
 }
 
-.todos-header h3{
+.todos-header h3 {
   flex-grow: 1;
 }
-.todos-wrapper{
+.todos-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
@@ -158,9 +160,9 @@ aside li:hover{
   padding: 4px 28px;
 }
 
-
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -170,6 +172,6 @@ aside li:hover{
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--clr-blue);
-  
+
   border-radius: 4px;
 }
