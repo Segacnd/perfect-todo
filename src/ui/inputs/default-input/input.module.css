@@ -1,0 +1,24 @@
+.inputWrapper{
+    display: flex;
+    flex-direction: column;
+}
+.input{
+    width: 250px;
+    height: 40px;
+    border: none;
+    outline: transparent;
+    padding: 6px 18px 4px 10px;
+    background-color: #2323230f;
+    caret-color: var(--clr-blue);
+    font-weight: var(--fweight-medium);
+    border-bottom: 2px solid var(--clr-blue);
+}
+.input:focus{
+    border-bottom: 3px solid var(--clr-yelow);
+}
+.label{
+    margin-left: 10px;
+    width: 210px;
+    font-size: var(--font-small);
+    font-weight: var(--fweight-small);
+}
