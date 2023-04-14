@@ -21,8 +21,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: install modules
-        run: yarn
+        run: npm i
       - name: build project
-        run: yarn build
+        run: npm build
       - name: linting
-        run: yarn lint
+        run: npm lint
