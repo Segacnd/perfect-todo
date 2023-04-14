@@ -1,0 +1,19 @@
+.button {
+  --box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  outline: transparent;
+  background-color: var(--clr-yelow);
+  border: transparent;
+  font-size: var(--font-medium);
+  font-weight: var(--fweight-medium);
+  box-shadow: var(--box-shadow);
+}
+.button:hover {
+  color: var(--clr-white);
+  background-color: var(--clr-blue);
+}
+
+.button:focus {
+    color: var(--clr-white);
+    background-color: var(--clr-blue);
+  }

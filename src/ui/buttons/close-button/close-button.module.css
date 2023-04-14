@@ -1,0 +1,23 @@
+.closeButton {
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border: transparent;
+  outline: transparent;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.closeButton img {
+  width: 100%;
+  height: 100%;
+}
+.closeButton:focus {
+  background-color: var(--clr-blue);
+}
+.closeButton:hover {
+  background-color: var(--clr-blue);
+}
