@@ -7,10 +7,12 @@
   display: flex;
   justify-content: flex-start;
 
+  background-color: var(--preview-bg);
   border-radius: 4px;
   box-shadow: var(--box-shadow);
   text-align: start;
   position: relative;
+  border: transparent;
 }
 .todo {
   flex-grow: 1;
@@ -43,7 +45,6 @@
 }
 
 .previewWrapper:hover {
-  --box-shadow-active: -1px 2px 8px 1px rgba(0, 0, 0, 0.4);
   box-shadow: var(--box-shadow-active);
 }
 .completeTodo {

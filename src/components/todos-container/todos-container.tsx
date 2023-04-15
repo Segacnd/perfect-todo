@@ -1,4 +1,5 @@
 import { useEffect, useState, FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
@@ -11,6 +12,7 @@ type ToDo = {
 };
 
 export const TodosContainer: FC = () => {
+  const { t } = useTranslation();
   const [todos, setTodos] = useState<ToDo[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(true);
 
@@ -25,7 +27,7 @@ export const TodosContainer: FC = () => {
       <div className='todos-header'>
         <h3>Home</h3>
         <ViewToggler isChecked={isChecked} setIsChecked={setIsChecked} />
-        <AddButton tooltipText='add new todo' text='+' click={() => {}} />
+        <AddButton tooltipText={t('tooltip_add_todo')} text='+' click={() => {}} />
       </div>
       <div className='todos-wrapper'>
         {todos &&
