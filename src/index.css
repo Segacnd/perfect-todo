@@ -113,10 +113,27 @@ header {
   height: 10%;
   background-color: var(--clr-blue);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  gap: 10px;
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
+  padding-inline: 1%;
+}
+header p{
+  font-size: var(--font-medium);
+  font-weight: var(--fweight-medium);
+}
+header button{
+  border: transparent;
+  background-color: transparent;
+  outline: transparent;
+  padding: 0;
+
+}
+header button img{
+  width: 24px;
+  height: 24px;
 }
 main {
   width: 100%;

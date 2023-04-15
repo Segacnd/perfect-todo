@@ -4,8 +4,10 @@ import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } 
 
 import './index.css';
 import './i18n';
+import { Provider } from 'react-redux';
 import { App } from './App';
 import { Layout } from './components/layout/layout';
+import { store } from './redux/store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,7 +20,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </>
   </React.StrictMode>
 );

@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
+import { useAppSelector } from '../../redux/store';
+import { viewControllerSelector } from '../../redux/selectors';
 
 type ToDo = {
   userId: number;
@@ -14,7 +16,7 @@ type ToDo = {
 export const TodosContainer: FC = () => {
   const { t } = useTranslation();
   const [todos, setTodos] = useState<ToDo[]>([]);
-  const [isChecked, setIsChecked] = useState<boolean>(true);
+  const { todoPreviewType } = useAppSelector(viewControllerSelector);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
@@ -26,13 +28,13 @@ export const TodosContainer: FC = () => {
     <section className='todos-container'>
       <div className='todos-header'>
         <h3>Home</h3>
-        <ViewToggler isChecked={isChecked} setIsChecked={setIsChecked} />
+        <ViewToggler />
         <AddButton tooltipText={t('tooltip_add_todo')} text='+' click={() => {}} />
       </div>
       <div className='todos-wrapper'>
         {todos &&
           todos
-            .filter((el) => (isChecked ? el.completed : !el.completed))
+            .filter((el) => (todoPreviewType === 'completed' ? el.completed : !el.completed))
             .map((el) => <TodoPreview key={el.id} text={el.title} completeTodo={() => {}} deleteTodo={() => {}} />)}
       </div>
     </section>

@@ -19,6 +19,7 @@ i18next
           modal_add_new_category_title: 'New category',
           input_add_category_placeholder: 'Please, enter a category name',
           button_text_create: 'create',
+          greetings_account_preview: 'Hello',
         },
       },
       ru: {
@@ -33,6 +34,8 @@ i18next
           modal_add_new_category: 'Новая категория',
           input_add_category_placeholder: 'Введите имя категории',
           button_text_create: 'создать',
+          greetings_account_preview: 'Привет',
+          modal_add_new_category_title: 'Новая категория',
         },
       },
     },

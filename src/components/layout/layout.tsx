@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '../header/Header';
 import moonIcon from '../../assets/moon-icon.svg';
 import sunIcon from '../../assets/sun-icon.svg';
+import { useAppDispatch } from '../../redux/store';
+import { viewControllerActions } from '../../redux/slices/view-controller-slice';
 
 const langs = {
   en: { nativeName: 'English' },
@@ -13,12 +15,14 @@ const langs = {
 
 export const Layout: FC = () => {
   const { t, i18n } = useTranslation();
+  const dispatch = useAppDispatch();
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
 
   const switchTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
+    dispatch(viewControllerActions.themeToggler(newTheme));
   };
 
   return (
