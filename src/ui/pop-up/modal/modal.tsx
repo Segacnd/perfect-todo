@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import styles from './modal.module.css';
@@ -11,6 +11,7 @@ import { categoryActions } from '../../../redux/slices/category-slice';
 export const Modal: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [value, setValue] = useState<string>('');
 
   const closeModal = (): void => {
     dispatch(categoryActions.modalToggler(false));
@@ -24,7 +25,7 @@ export const Modal: FC = () => {
           <CloseButton click={closeModal} />
         </div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, eveniet?</p>
-        <Input value='' labelText='' placeholder={t('input_add_category_placeholder')} change={() => {}} />
+        <Input value={value} labelText='' placeholder={t('input_add_category_placeholder')} change={setValue} />
         <Button text={t('button_text_create')} buttonClick={() => {}} buttonType='submit' />
       </div>
     </div>,

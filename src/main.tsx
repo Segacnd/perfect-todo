@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from 'react-router-dom';
-
+import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
 import './i18n';
 import { Provider } from 'react-redux';
 import { App } from './App';
 import { Layout } from './components/layout/layout';
-import { store } from './redux/store';
+import { persistor, store } from './redux/store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +21,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate>
       </Provider>
     </>
   </React.StrictMode>
