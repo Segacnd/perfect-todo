@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import './App.css';
-import { Categories } from './components/Categories/Categories';
+import { Categories } from './components/categories/categories';
 import { TodosContainer } from './components/todos-container/todos-container';
 import { Modal } from './ui/pop-up/modal/modal';
 import { useAppSelector } from './redux/store';

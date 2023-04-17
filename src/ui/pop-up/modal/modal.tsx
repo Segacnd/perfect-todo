@@ -25,7 +25,14 @@ export const Modal: FC = () => {
           <CloseButton click={closeModal} />
         </div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, eveniet?</p>
-        <Input value={value} labelText='' placeholder={t('input_add_category_placeholder')} change={setValue} />
+        <Input
+          value={value}
+          labelText=''
+          placeholder={t('input_add_category_placeholder')}
+          change={setValue}
+          isLabelOpen={false}
+          setIsLabelOpen={() => {}}
+        />
         <Button text={t('button_text_create')} buttonClick={() => {}} buttonType='submit' />
       </div>
     </div>,
