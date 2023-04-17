@@ -16,6 +16,19 @@
   --fweight-big: 700;
   --fweight-medium: 500;
   --fweight-small: 300;
+
+  --border-clr: #2323234b;
+  --preview-bg: #fdfdff;
+}
+[data-theme='dark'] {
+  --bg-clr: #414141;
+  --text-clr: #ededed;
+  --clr-white: #202020;
+  --preview-bg: #414141;
+  --clr-blue: #346ed0;
+  --border-clr: #414141;
+  --box-shadow: -1px 2px 10px 1px rgba(189, 179, 179, 0.096);
+  --box-shadow-active: -1px 2px 10px 1px rgba(108, 108, 108, 0.31);
 }
 * {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -26,7 +39,11 @@
   margin: 0;
 }
 
-h1,h2,h3,h4,h5{
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-weight: var(--fweight-medium);
   margin: 0;
 }
@@ -38,28 +55,43 @@ a:hover {
   color: var(--clr-blue);
 }
 
+.themeSwitcherButton {
+  position: absolute;
+  left: 1%;
+  top: 2%;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  outline: transparent;
+  border: transparent;
+  background-color: transparent;
+}
+
+.themeSwitcherButton img {
+  width: 100%;
+  height: 100%;
+}
+
 ul {
   margin: 0;
   padding: 0;
 }
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--bg-clr);
-}
-footer{
-  margin-top: 20px;
+
+footer {
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
 }
 .App {
   width: 100%;
+  margin: 0;
   min-height: 100vh;
+  min-width: 320px;
+  background-color: var(--bg-clr);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 .app-title {
@@ -81,31 +113,47 @@ header {
   height: 10%;
   background-color: var(--clr-blue);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  gap: 10px;
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
+  padding-inline: 1%;
 }
-main{
+header p{
+  font-size: var(--font-medium);
+  font-weight: var(--fweight-medium);
+}
+header button{
+  border: transparent;
+  background-color: transparent;
+  outline: transparent;
+  padding: 0;
+
+}
+header button img{
+  width: 24px;
+  height: 24px;
+}
+main {
   width: 100%;
   height: 90%;
   display: flex;
-
 }
-aside{
+aside {
   height: 100%;
   width: 200px;
-  border-right: 1px solid #2323234b;
+  border-right: 1px solid var(--border-clr);
   padding: 10px 14px;
 }
 
-.category-header{
+.category-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.addButton{
+.addButton {
   border: transparent;
   outline: transparent;
   background-color: transparent;
@@ -122,21 +170,20 @@ aside{
   font-weight: var(--fweight-medium);
 }
 
-
-.addButton:hover{
+.addButton:hover {
   color: var(--clr-white);
 }
 
-aside li{
+aside li {
   font-weight: var(--fweight-medium);
   margin-block: 4px;
   padding-left: 14px;
   cursor: pointer;
 }
-aside li:hover{
+aside li:hover {
   color: var(--clr-blue);
 }
-.todos-container{
+.todos-container {
   width: 100%;
   height: 100%;
   padding: 10px 10px;
@@ -145,25 +192,24 @@ aside li:hover{
   gap: 20px;
 }
 
-.todos-header{
+.todos-header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
- padding-left: 10px;
+  padding-left: 10px;
 }
 
-.todos-header h3{
+.todos-header h3 {
   flex-grow: 1;
 }
-.todos-wrapper{
+.todos-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
   overflow: auto;
   padding: 4px 28px;
 }
-
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -176,8 +222,37 @@ aside li:hover{
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--clr-blue);
-  
+
   border-radius: 4px;
 }
 
+.changeLanguageWrapper {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+}
 
+.changeLanguageWrapper button {
+  /* margin-inline: 6px; */
+  font-size: var(--font-small);
+  font-weight: var(--fweight-small);
+  width: 32px;
+  height: 32px;
+  padding-inline: 4px;
+  outline: transparent;
+  border: 1px solid var(--border-clr);
+  background-color: var(--clr-white);
+  /* background-color: transparent;
+  border: 1px solid; */
+  text-transform: uppercase;
+}
+.changeLanguageWrapper button:nth-child(1) {
+  border-radius: 4px 0 0 4px;
+}
+.changeLanguageWrapper button:nth-child(2) {
+  border-radius: 0 4px 4px 0;
+}
+
+.changeLanguageWrapper button:disabled {
+  background-color: var(--clr-blue);
+}
