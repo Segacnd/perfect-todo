@@ -4,10 +4,12 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import { ViewController } from './slices/view-controller-slice';
 import { CategoryReducer } from './slices/category-slice';
+import { AddTodoReducer } from './slices/add-todo-slice';
 
 const rootReducer = combineReducers({
   ViewController,
   CategoryReducer,
+  AddTodoReducer,
 });
 
 const persistConfig = {

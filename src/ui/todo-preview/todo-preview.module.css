@@ -30,7 +30,7 @@
   word-wrap: nowrap;
   -webkit-box-orient: vertical;
   box-orient: vertical;
-
+  line-height: 1.8;
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
 }
