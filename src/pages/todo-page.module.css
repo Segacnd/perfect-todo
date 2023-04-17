@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   width: 50%;
-  padding: 5px;
+  padding: 4px;
   border-radius: 4px;
   text-align: center;
 }
@@ -18,16 +18,9 @@
 }
 .noteInput::placeholder {
   text-indent: 10px;
-  font-weight: 500;
+  font-weight: var(--fweight-medium);
 }
 
-.addNote {
-  border: 1px solid var(--text-clr);
-  border-radius: 4px;
-  padding: 6px 12px;
-  cursor: pointer;
-  width: 41%;
-}
 .cardDescription {
   width: 20%;
 }
@@ -45,7 +38,7 @@
   flex-direction: column;
   overflow-y: hidden;
   overflow-x: scroll;
-  gap: 35px;
+  gap: 34px;
   width: 100%;
   padding: 20px;
 }
@@ -67,13 +60,10 @@
 }
 .container {
   display: flex;
-  margin: 15px;
+  margin: 14px;
   gap: 50px;
 }
-.completeBtn {
-}
-.deleteBtn {
-}
+
 .buttonsContainer {
   display: flex;
   flex-direction: column;
