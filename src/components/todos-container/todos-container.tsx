@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
-import { useAppSelector } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { viewControllerSelector } from '../../redux/selectors';
+import { addTodoActions } from '../../redux/slices/add-todo-slice';
 
 type ToDo = {
   userId: number;
@@ -17,6 +18,7 @@ export const TodosContainer: FC = () => {
   const { t } = useTranslation();
   const [todos, setTodos] = useState<ToDo[]>([]);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
@@ -29,7 +31,11 @@ export const TodosContainer: FC = () => {
       <div className='todos-header'>
         <h3>Home</h3>
         <ViewToggler />
-        <AddButton tooltipText={t('tooltip_add_todo')} text='+' click={() => {}} />
+        <AddButton
+          tooltipText={t('tooltip_add_todo')}
+          text='+'
+          click={() => dispatch(addTodoActions.addTodoModalToggler(true))}
+        />
       </div>
       <div className='todos-wrapper'>
         {todos &&
