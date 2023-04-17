@@ -13,7 +13,7 @@ export const Layout: FC = () => {
         </main>
       </div>
 
-      <footer>created by Bergei and Rentin</footer>
+      <footer>created by Bergei </footer>
     </div>
   );
 };
