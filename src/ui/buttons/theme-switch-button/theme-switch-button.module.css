@@ -1,0 +1,16 @@
+.themeSwitcherButton {
+  position: absolute;
+  left: 1%;
+  top: 2%;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  outline: transparent;
+  border: transparent;
+  background-color: transparent;
+}
+
+.themeSwitcherButton img {
+  width: 100%;
+  height: 100%;
+}

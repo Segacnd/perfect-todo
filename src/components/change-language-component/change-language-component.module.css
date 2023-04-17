@@ -1,0 +1,27 @@
+.changeLanguageWrapper {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+}
+
+.changeLanguageWrapper button {
+  font-size: var(--font-small);
+  font-weight: var(--fweight-small);
+  width: 32px;
+  height: 32px;
+  padding-inline: 4px;
+  outline: transparent;
+  border: 1px solid var(--border-clr);
+  background-color: var(--clr-white);
+  text-transform: uppercase;
+}
+.changeLanguageWrapper button:nth-child(1) {
+  border-radius: 4px 0 0 4px;
+}
+.changeLanguageWrapper button:nth-child(2) {
+  border-radius: 0 4px 4px 0;
+}
+
+.changeLanguageWrapper button:disabled {
+  background-color: var(--clr-blue);
+}

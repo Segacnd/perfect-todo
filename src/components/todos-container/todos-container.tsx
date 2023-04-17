@@ -1,4 +1,5 @@
 import { useEffect, useState, FC } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
@@ -6,6 +7,7 @@ import { ViewToggler } from '../view-toggler/view-toggler';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { viewControllerSelector } from '../../redux/selectors';
 import { addTodoActions } from '../../redux/slices/add-todo-slice';
+import styles from './todos-container.module.css';
 
 type ToDo = {
   userId: number;
@@ -27,8 +29,8 @@ export const TodosContainer: FC = () => {
   }, []);
 
   return (
-    <section className='todos-container'>
-      <div className='todos-header'>
+    <section className={styles.todosContainer}>
+      <div className={styles.todosHeader}>
         <h3>Home</h3>
         <ViewToggler />
         <AddButton
@@ -37,11 +39,15 @@ export const TodosContainer: FC = () => {
           click={() => dispatch(addTodoActions.addTodoModalToggler(true))}
         />
       </div>
-      <div className='todos-wrapper'>
+      <div className={styles.todosWrapper}>
         {todos &&
           todos
             .filter((el) => (todoPreviewType === 'completed' ? el.completed : !el.completed))
-            .map((el) => <TodoPreview key={el.id} text={el.title} completeTodo={() => {}} deleteTodo={() => {}} />)}
+            .map((el) => (
+              <Link to='/todo/:id' key={el.id}>
+                <TodoPreview text={el.title} completeTodo={() => {}} deleteTodo={() => {}} />
+              </Link>
+            ))}
       </div>
     </section>
   );

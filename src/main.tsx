@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { App } from './App';
 import { Layout } from './components/layout/layout';
 import { TodoPage } from './pages/todo-page';
+import { store, persistor } from './redux/store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
