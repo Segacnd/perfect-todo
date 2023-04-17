@@ -28,13 +28,15 @@
   cursor: pointer;
   width: 41%;
 }
+.cardDescription {
+  width: 20%;
+}
 .todoContent {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 10px;
   padding-top: 10px;
-  margin: 15px;
-  width: 730px;
+  width: 60%;
 }
 
 .noteContainer {
@@ -43,8 +45,9 @@
   flex-direction: column;
   overflow-y: hidden;
   overflow-x: scroll;
-  gap: 15px;
+  gap: 35px;
   width: 100%;
+  padding: 20px;
 }
 .note {
   border: 1px solid var(--text-clr);
@@ -62,13 +65,22 @@
 .note:hover {
   box-shadow: var(--box-shadow-active);
 }
-
-.completeBtn {
+.container {
   display: flex;
-  align-items: center;
+  margin: 15px;
+  gap: 50px;
+}
+.completeBtn {
 }
 .deleteBtn {
+}
+.buttonsContainer {
   display: flex;
-  align-items: center;
-  order: 3;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cardButtonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
