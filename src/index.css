@@ -76,8 +76,14 @@ ul {
   margin: 0;
   padding: 0;
 }
-
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-clr);
+}
 footer {
+  margin-top: 20px;
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
 }
@@ -120,18 +126,17 @@ header {
   font-weight: var(--fweight-small);
   padding-inline: 1%;
 }
-header p{
+header p {
   font-size: var(--font-medium);
   font-weight: var(--fweight-medium);
 }
-header button{
+header button {
   border: transparent;
   background-color: transparent;
   outline: transparent;
   padding: 0;
-
 }
-header button img{
+header button img {
   width: 24px;
   height: 24px;
 }
@@ -213,6 +218,7 @@ aside li:hover {
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {

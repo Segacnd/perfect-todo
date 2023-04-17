@@ -7,12 +7,13 @@ import './i18n';
 import { Provider } from 'react-redux';
 import { App } from './App';
 import { Layout } from './components/layout/layout';
-import { persistor, store } from './redux/store';
+import { TodoPage } from './pages/todo-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route path='/' element={<App />} />
+      <Route path='/todo/:id' element={<TodoPage />} />
     </Route>
   )
 );

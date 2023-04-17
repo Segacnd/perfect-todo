@@ -1,0 +1,14 @@
+.button {
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+}
+.redirect {
+  background-color: var(--clr-yelow);
+}
+.delete {
+  background-color: rgba(245, 53, 53, 0.801);
+}
+.complete {
+  background-color: rgba(130, 192, 130, 0.979);
+}
