@@ -121,4 +121,8 @@ main {
   border-radius: 4px;
 }
 
-
+@media screen and (max-width: 400px) {
+  header p {
+    font-size: var(--font-small);
+  }
+}

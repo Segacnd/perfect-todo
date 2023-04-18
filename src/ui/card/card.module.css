@@ -43,3 +43,9 @@
   background-color: var(--clr-blue);
   cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+  .note{
+    height: fit-content;
+  }
+}
