@@ -7,11 +7,7 @@ export const Card: FC = () => {
   return (
     <div className={styles.note}>
       <p className={styles.noteText}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam deleniti placeat inventore eius ipsa
-        reiciendis nihil. Beatae maiores consectetur molestias recusandae quam, incidunt iure natus, quas, assumenda
-        blanditiis perferendis pariatur? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam deleniti
-        placeat inventore eius ipsa reiciendis nihil. Beatae maiores consectetur molestias recusandae quam, incidunt
-        iure natus, quas, assumenda blanditiis perferendis pariatur?
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi aspernatur reprehenderit, cum
       </p>
       <img src={pinSvg} alt='pin' className={styles.pin} />
       <div className={styles.closeNote}>
