@@ -24,3 +24,9 @@
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
 }
+
+@media screen and (max-width: 560px){
+  .input{
+    min-width: 100%;
+  }
+}

@@ -20,8 +20,6 @@ export const Layout: FC = () => {
         <main>
           <Outlet />
         </main>
-        <ThemeSwitchButton />
-        <ChangeLanguageComponent />
       </div>
       <footer>{t('app_author')}</footer>
     </div>

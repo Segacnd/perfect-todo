@@ -59,7 +59,7 @@
 .inputWrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   height: 80px;
   width: 100%;
@@ -68,4 +68,74 @@
   display: flex;
   align-items: center;
   padding-right: 10px;
+}
+
+@media screen and (max-width: 1470px) {
+  .noteContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 1145px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 24px;
+    overflow: auto;
+    gap: 12px;
+  }
+  .todoInfo {
+    order: 2;
+    border: none;
+  }
+  .buttonsContainer {
+    order: 1;
+    border-bottom: 1px solid var(--border-clr);
+  }
+  .todoContent {
+    order: 3;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .noteContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .inputWrapper {
+    flex-direction: column;
+    gap: 10px;
+    height: fit-content;
+  }
+  .iwrapper {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 630px) {
+  .todoInfo {
+    order: 1;
+    border: none;
+  }
+  .buttonsContainer {
+    order: 3;
+    height: 100px;
+    border-bottom: 1px solid var(--border-clr);
+    margin-bottom: 10px;
+  }
+  .todoContent {
+    order: 2;
+  }
+}
+@media screen and (max-width: 610px) {
+  .noteContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .inputWrapper p {
+    font-size: var(--font-small);
+  }
+  .container h1 {
+    font-size: var(--font-medium);
+    font-weight: var(--fweight-small);
+  }
 }

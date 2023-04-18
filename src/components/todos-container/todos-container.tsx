@@ -7,7 +7,9 @@ import { ViewToggler } from '../view-toggler/view-toggler';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { viewControllerSelector } from '../../redux/selectors';
 import { addTodoActions } from '../../redux/slices/add-todo-slice';
+import burgerIcon from '../../assets/burger-icon.svg';
 import styles from './todos-container.module.css';
+import { categoryActions } from '../../redux/slices/category-slice';
 
 type ToDo = {
   userId: number;
@@ -32,13 +34,23 @@ export const TodosContainer: FC = () => {
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>
         <h3>Home</h3>
-        <ViewToggler />
-        <AddButton
-          tooltipText={t('tooltip_add_todo')}
-          text='+'
-          click={() => dispatch(addTodoActions.addTodoModalToggler(true))}
-        />
+        <div className={styles.rightSide}>
+          <ViewToggler />
+          <AddButton
+            tooltipText={t('tooltip_add_todo')}
+            text='+'
+            click={() => dispatch(addTodoActions.addTodoModalToggler(true))}
+          />
+          <button
+            type='button'
+            onClick={() => dispatch(categoryActions.mobileToggler(true))}
+            className={styles.burgerWrapper}
+          >
+            <img src={burgerIcon} alt='burger' />
+          </button>
+        </div>
       </div>
+
       <div className={styles.todosWrapper}>
         {todos &&
           todos
