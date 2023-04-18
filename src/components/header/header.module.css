@@ -1,0 +1,9 @@
+.leftSide{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+}
+.rightSide{
+    display: flex;
+    gap: 10px;
+}

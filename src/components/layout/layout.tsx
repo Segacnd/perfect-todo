@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '../header/Header';
 import { useAppSelector } from '../../redux/store';
 import { viewControllerSelector } from '../../redux/selectors';
-import { ChangeLanguageComponent } from '../change-language-component/change-language-component';
-import { ThemeSwitchButton } from '../../ui/buttons/theme-switch-button/theme-switch-button';
 import styles from './layout.module.css';
 
 export const Layout: FC = () => {
@@ -20,8 +18,6 @@ export const Layout: FC = () => {
         <main>
           <Outlet />
         </main>
-        <ThemeSwitchButton />
-        <ChangeLanguageComponent />
       </div>
       <footer>{t('app_author')}</footer>
     </div>

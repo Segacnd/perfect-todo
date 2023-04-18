@@ -1,23 +1,24 @@
 .note {
-  width: 35%;
+  width: 100%;
+  height: 140px;
   border-radius: 4px;
-  position: relative;
   background-color: var(--clr-yelow);
   box-shadow: var(--box-shadow);
+  position: relative;
 }
 .noteText {
-  height: 150px;
-  padding: 10px;
+  padding: 4px 6px;
   text-overflow: ellipsis;
   overflow: hidden;
   word-wrap: break-word;
 }
 .pin {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   position: absolute;
-  top: -20px;
+  top: -16px;
   left: 40%;
+  transform: rotate(5deg);
 }
 .closeNote {
   display: none;
@@ -34,11 +35,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   position: absolute;
-  top: -20px;
-  left: 90%;
+  top: -18px;
+  right: -16px;
   background-color: var(--clr-blue);
   cursor: pointer;
 }
