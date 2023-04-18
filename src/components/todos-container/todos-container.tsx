@@ -5,9 +5,10 @@ import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { viewControllerSelector } from '../../redux/selectors';
+import { viewControllerSelector, todosSelector } from '../../redux/selectors';
 import { addTodoActions } from '../../redux/slices/add-todo-slice';
 import styles from './todos-container.module.css';
+import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
 
 type ToDo = {
   userId: number;
@@ -18,15 +19,13 @@ type ToDo = {
 
 export const TodosContainer: FC = () => {
   const { t } = useTranslation();
-  const [todos, setTodos] = useState<ToDo[]>([]);
+  const { todos } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-      .then((data) => data.json())
-      .then((data) => setTodos(data));
-  }, []);
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   return (
     <section className={styles.todosContainer}>
@@ -44,7 +43,7 @@ export const TodosContainer: FC = () => {
           todos
             .filter((el) => (todoPreviewType === 'completed' ? el.completed : !el.completed))
             .map((el) => (
-              <Link to='/todo/:id' key={el.id}>
+              <Link to={`/todo/${el.id}`} key={el.id}>
                 <TodoPreview text={el.title} completeTodo={() => {}} deleteTodo={() => {}} />
               </Link>
             ))}

@@ -1,19 +1,26 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './todo-page.module.css';
 import { Card } from '../ui/card/card';
 import { Input } from '../ui/inputs/default-input/input';
 import { CardButton } from '../ui/buttons/card-button/card-button';
+import { useAppSelector } from '../redux/store';
+import { todosSelector } from '../redux/selectors';
 
 export const TodoPage: FC = () => {
   const placeholderValue = 'write a note';
   const [noteValue, setNoteValue] = useState<string>('');
   const [isLabelOpen, setIsLabelOpen] = useState<boolean>(false);
+  const { todos } = useAppSelector(todosSelector);
+  const { id } = useParams();
+  const index = Number(id);
+  console.log(index);
+  console.log(todos);
   return (
     <div className={styles.container}>
       <div className={styles.todoContent}>
         <div className={styles.topContent}>
-          <h1 className={styles.title}>Title</h1>
+          <h1 className={styles.title}>{todos[index - 1]?.title}</h1>
 
           <Input
             placeholder={placeholderValue}
