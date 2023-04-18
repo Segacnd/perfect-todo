@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styles from './todo-page.module.css';
 import { Card } from '../ui/card/card';
 import { Input } from '../ui/inputs/default-input/input';
-import { CardButton } from '../ui/buttons/card-button/card-button';
 import { Button } from '../ui/buttons/default-button/button';
 
 export const TodoPage: FC = () => {
