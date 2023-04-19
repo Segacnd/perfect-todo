@@ -16,6 +16,12 @@
 }
 
 .button:focus {
-    color: var(--clr-white);
-    background-color: var(--clr-blue);
-  }
+  color: var(--clr-white);
+  background-color: var(--clr-blue);
+}
+.button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  background-color: var(--clr-yelow);
+  color: var(--text-clr);
+}

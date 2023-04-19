@@ -8,9 +8,10 @@
 }
 .content {
   background-color: var(--clr-white);
-  padding: 24px 12px;
+  padding: 24px;
   border-radius: 6px;
   position: relative;
+  width: 400px;
 }
 .buttonWrapper {
   position: absolute;
