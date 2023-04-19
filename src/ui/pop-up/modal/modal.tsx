@@ -31,7 +31,7 @@ export const Modal: FC = () => {
 
   return ReactDOM.createPortal(
     <div className={styles.modal}>
-      <div className={styles.modalWrapper}>
+      <form onSubmit={formik.handleSubmit} className={styles.modalWrapper}>
         <div className={styles.modalHeader}>
           <h3>{t('modal_add_new_category_title')}</h3>
           <CloseButton click={closeModal} />
@@ -51,7 +51,7 @@ export const Modal: FC = () => {
           buttonClick={() => {}}
           buttonType='submit'
         />
-      </div>
+      </form>
     </div>,
     document.getElementById('modal') as Element
   );

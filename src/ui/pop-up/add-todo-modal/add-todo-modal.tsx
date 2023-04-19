@@ -28,7 +28,7 @@ export const AddTodoModal: FC = () => {
   });
   return ReactDOM.createPortal(
     <div className={styles.modalWrapper}>
-      <div className={styles.modalContainer}>
+      <form onSubmit={formik.handleSubmit} className={styles.modalContainer}>
         <div className={styles.closeButton}>
           <CloseButton click={() => dispatch(addTodoActions.addTodoModalToggler(false))} />
         </div>
@@ -61,7 +61,7 @@ export const AddTodoModal: FC = () => {
           />
         </div>
         <Button disabled={!formik.isValid ? true : false} text='add' buttonClick={() => {}} buttonType='submit' />
-      </div>
+      </form>
     </div>,
     document.getElementById('add-modal') as Element
   );
