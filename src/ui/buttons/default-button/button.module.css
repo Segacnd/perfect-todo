@@ -7,6 +7,8 @@
   font-size: var(--font-medium);
   font-weight: var(--fweight-medium);
   box-shadow: var(--box-shadow);
+  min-width: fit-content;
+  width: 100%;
 }
 .button:hover {
   color: var(--clr-white);
@@ -14,6 +16,12 @@
 }
 
 .button:focus {
-    color: var(--clr-white);
-    background-color: var(--clr-blue);
-  }
+  color: var(--clr-white);
+  background-color: var(--clr-blue);
+}
+.button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  background-color: var(--clr-yelow);
+  color: var(--text-clr);
+}

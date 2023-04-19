@@ -19,6 +19,7 @@
 
   --border-clr: #2323234b;
   --preview-bg: #fdfdff;
+  --clr-error: rgb(185, 71, 71);
 }
 [data-theme='dark'] {
   --bg-clr: #414141;
@@ -121,4 +122,8 @@ main {
   border-radius: 4px;
 }
 
-
+@media screen and (max-width: 400px) {
+  header p {
+    font-size: var(--font-small);
+  }
+}
