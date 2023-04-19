@@ -1,16 +1,18 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Input } from '../../ui/inputs/default-input/input';
 import { Button } from '../../ui/buttons/default-button/button';
 
 export const Register: FC = () => {
+  const { t } = useTranslation();
   return (
     <div>
-      <h2>Registration</h2>
+      <h2>{t('registration_title')}</h2>
       <form action=''>
         <Input
           value=''
-          placeholder='create Login'
+          placeholder={t('registration_login_input')}
           labelText=''
           isLabelOpen={false}
           change={() => {}}
@@ -18,7 +20,7 @@ export const Register: FC = () => {
         />
         <Input
           value=''
-          placeholder='your First Name'
+          placeholder={t('registration_fname_input')}
           labelText=''
           isLabelOpen={false}
           change={() => {}}
@@ -26,16 +28,16 @@ export const Register: FC = () => {
         />
         <Input
           value=''
-          placeholder='your Second Name'
+          placeholder={t('registration_lname_input')}
           labelText=''
           isLabelOpen={false}
           change={() => {}}
           setIsLabelOpen={() => {}}
         />
-        <Button text='submit' buttonClick={() => {}} buttonType='submit' />
+        <Button text={t('registration_button_text')} buttonClick={() => {}} buttonType='submit' />
       </form>
       <p>
-        Already have account? <br /> <Link to='/auth'>Log in</Link>
+        {t('registration_redirect_text')} <br /> <Link to='/auth'>{t('registration_link_text')}</Link>
       </p>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
 import './i18n';
