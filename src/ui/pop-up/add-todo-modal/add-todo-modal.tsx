@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import styles from './add-todo-modal.module.css';
 import { Button } from '../../buttons/default-button/button';
 import { CloseButton } from '../../buttons/close-button/close-button';
-import { useAppDispatch } from '../../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { addTodoActions } from '../../../redux/slices/add-todo-slice';
+import { todosSelector } from '../../../redux/selectors';
 
 export const AddTodoModal: FC = () => {
   const dispatch = useAppDispatch();
+  const { activeCategory } = useAppSelector(todosSelector);
   return ReactDOM.createPortal(
     <div className={styles.modalWrapper}>
       <div className={styles.modalContainer}>
@@ -17,7 +19,7 @@ export const AddTodoModal: FC = () => {
         <div className={styles.modalHeader}>
           <h3>Add Todo</h3>
           <p className={styles.categoryText}>
-            for category: <span>Home</span>
+            for category: <span>{activeCategory}</span>
           </p>
         </div>
         <div className={styles.box}>

@@ -6,12 +6,14 @@ import { ViewController } from './slices/view-controller-slice';
 import { CategoryReducer } from './slices/category-slice';
 import { AddTodoReducer } from './slices/add-todo-slice';
 import { TodosReducer } from './slices/fetch-todos-slice';
+import { TodoReducer } from './slices/fetch-todo-slice';
 
 const rootReducer = combineReducers({
   ViewController,
   CategoryReducer,
   AddTodoReducer,
   TodosReducer,
+  TodoReducer,
 });
 
 const persistConfig = {

@@ -12,9 +12,11 @@ import { store, persistor } from './redux/store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<Layout />}>
-      <Route path='/' element={<App />} />
-      <Route path='/todo/:id' element={<TodoPage />} />
+    <Route>
+      <Route path='/' element={<Layout />}>
+        <Route path='/' element={<App />} />
+        <Route path='/todo/:id' element={<TodoPage />} />
+      </Route>
     </Route>
   )
 );

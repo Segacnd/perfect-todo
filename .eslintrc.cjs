@@ -26,6 +26,12 @@ module.exports = {
       },
     },
     {
+      files: ['**/*.tsx'],
+      rules: {
+        'react/require-default-props': 'off',
+      },
+    },
+    {
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -33,7 +39,7 @@ module.exports = {
       },
       extends: ['plugin:@typescript-eslint/recommended'],
       files: ['*.ts', '*.tsx'], // Your TypeScript files extension
-    }
+    },
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['react', '@typescript-eslint', 'prettier'],

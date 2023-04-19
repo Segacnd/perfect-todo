@@ -6,7 +6,7 @@ export type ButtonTypes = 'submit' | 'button';
 type ButtonProps = {
   text: string;
   buttonType: ButtonTypes;
-  buttonClick: () => void;
+  buttonClick?: () => void;
 };
 
 export const Button: FC<ButtonProps> = ({ text, buttonType = 'button', buttonClick }) => {

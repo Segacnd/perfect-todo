@@ -6,10 +6,9 @@ import completeIcon from '../../assets/complete-circle.svg';
 
 type TodopreviewProps = {
   text: string;
-  completeTodo: () => void;
-  deleteTodo: (id: number) => void;
+  completeTodo?: () => void;
+  deleteTodo?: (id: number) => void;
 };
-
 export const TodoPreview: FC<TodopreviewProps> = ({ text, completeTodo, deleteTodo }) => {
   const id = useId();
 

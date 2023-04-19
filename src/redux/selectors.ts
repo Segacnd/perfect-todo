@@ -4,3 +4,4 @@ export const viewControllerSelector = (state: RootState) => state.ViewController
 export const categorySelector = (state: RootState) => state.CategoryReducer;
 export const addTodoSelector = (state: RootState) => state.AddTodoReducer;
 export const todosSelector = (state: RootState) => state.TodosReducer;
+export const todoSelector = (state: RootState) => state.TodoReducer;
