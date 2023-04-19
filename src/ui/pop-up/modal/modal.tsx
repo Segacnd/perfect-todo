@@ -1,17 +1,29 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import styles from './modal.module.css';
 import { CloseButton } from '../../buttons/close-button/close-button';
 import { Button } from '../../buttons/default-button/button';
-import { Input } from '../../inputs/default-input/input';
 import { useAppDispatch } from '../../../redux/store';
 import { categoryActions } from '../../../redux/slices/category-slice';
+import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
 
 export const Modal: FC = () => {
   const { t } = useTranslation();
+  const formik = useFormik({
+    initialValues: {
+      categoryName: '',
+    },
+    validationSchema: yup.object({
+      categoryName: yup.string().required(`${t('form_errors_require')}`),
+    }),
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values, null, 2));
+    },
+  });
   const dispatch = useAppDispatch();
-  const [value, setValue] = useState<string>('');
 
   const closeModal = (): void => {
     dispatch(categoryActions.modalToggler(false));
@@ -19,22 +31,27 @@ export const Modal: FC = () => {
 
   return ReactDOM.createPortal(
     <div className={styles.modal}>
-      <div className={styles.modalWrapper}>
+      <form onSubmit={formik.handleSubmit} className={styles.modalWrapper}>
         <div className={styles.modalHeader}>
           <h3>{t('modal_add_new_category_title')}</h3>
           <CloseButton click={closeModal} />
         </div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, eveniet?</p>
-        <Input
-          value={value}
-          labelText=''
+        <FormInput
+          onChange={formik.handleChange}
+          value={formik.values.categoryName}
           placeholder={t('input_add_category_placeholder')}
-          change={setValue}
-          isLabelOpen={false}
-          setIsLabelOpen={() => {}}
+          name='categoryName'
+          errortext={formik.touched.categoryName ? formik.errors.categoryName : ''}
+          onBlur={formik.handleBlur}
         />
-        <Button text={t('button_text_create')} buttonClick={() => {}} buttonType='submit' />
-      </div>
+        <Button
+          disabled={formik.errors.categoryName ? true : false}
+          text={t('button_text_create')}
+          buttonClick={() => {}}
+          buttonType='submit'
+        />
+      </form>
     </div>,
     document.getElementById('modal') as Element
   );

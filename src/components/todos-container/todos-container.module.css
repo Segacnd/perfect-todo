@@ -45,6 +45,7 @@
 @media screen and (max-width: 670px) {
   .todosWrapper {
     grid-template-columns: 1fr;
+    padding-inline: 12px;
   }
 
 }
@@ -58,7 +59,9 @@
     width: 100%;
     justify-content: space-around;
   }
-    
+  .todosHeader p{
+    font-size: var(--font-small);
+  }
   
 }
 @media screen and (max-width: 900px) {

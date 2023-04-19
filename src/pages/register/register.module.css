@@ -1,0 +1,19 @@
+.registerTitle{
+    text-align: center;
+    font-size: var(--font-big);
+    font-weight: var(--fweight-big);
+}
+
+.registerForm{
+    margin-block: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.registerSubTitle{
+    font-size: var(--font-small);
+    font-weight: var(--fweight-medium);
+}
+.registerSubTitle a {
+    font-weight: var(--fweight-small);
+}

@@ -138,4 +138,9 @@
     font-size: var(--font-medium);
     font-weight: var(--fweight-small);
   }
+  .buttonsContainer{
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 10px;
+  }
 }
