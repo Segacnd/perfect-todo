@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +10,7 @@ import { CloseButton } from '../../buttons/close-button/close-button';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { addTodoActions } from '../../../redux/slices/add-todo-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
+import { todosSelector } from '../../../redux/selectors';
 
 export const AddTodoModal: FC = () => {
   const { t } = useTranslation();
@@ -17,13 +19,22 @@ export const AddTodoModal: FC = () => {
   const formik = useFormik({
     initialValues: {
       title: '',
-      description: '',
+      text: '',
+      categories: '',
+      dateStarted: new Date().toISOString(),
+      dateEnded: null,
+      notes: [],
+      userId: 12345,
     },
     validationSchema: yup.object({
       title: yup.string().required(`${t('form_errors_require')}`),
-      description: yup.string().required(`${t('form_errors_require')}`),
+      text: yup.string().required(`${t('form_errors_require')}`),
+      categories: yup.string().required(`${t('form_errors_require')}`),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      console.log(values);
+      const { data } = await axios.post('https://64368e963e4d2b4a12d57f98.mockapi.io/todos', values);
+      console.log(data);
       console.log(JSON.stringify(values, null, 2));
     },
   });
@@ -35,9 +46,17 @@ export const AddTodoModal: FC = () => {
         </div>
         <div className={styles.modalHeader}>
           <h3>Add Todo</h3>
-          <p className={styles.categoryText}>
-            for category: <span>{activeCategory}</span>
-          </p>
+        </div>
+        <div className={styles.box}>
+          <p>{t('form_add_todo_category')}</p>
+          <FormInput
+            onChange={formik.handleChange}
+            value={formik.values.categories}
+            placeholder={t('form_add_todo_category_placeholder')}
+            name='categories'
+            errortext={formik.touched.categories ? formik.errors.categories : ''}
+            onBlur={formik.handleBlur}
+          />
         </div>
         <div className={styles.box}>
           <p>{t('form_add_todo_title')}</p>
@@ -54,10 +73,10 @@ export const AddTodoModal: FC = () => {
           <p>{t('form_add_todo_description')}</p>
           <FormInput
             onChange={formik.handleChange}
-            value={formik.values.description}
+            value={formik.values.text}
             placeholder={t('form_add_todo_description_placeholder')}
-            name='description'
-            errortext={formik.touched.description ? formik.errors.description : ''}
+            name='text'
+            errortext={formik.touched.text ? formik.errors.text : ''}
             onBlur={formik.handleBlur}
           />
         </div>

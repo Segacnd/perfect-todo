@@ -4,13 +4,17 @@ import errorIcon from '../../assets/warning-circle-icon.svg';
 import closeIcon from '../../assets/close-action-active-icon.svg';
 import styles from './alert.module.css';
 
-export const Alert: FC = () => {
+interface IAlert {
+  className: string;
+  alertText: string;
+}
+export const Alert: FC<IAlert> = ({ alertText, className }) => {
   return (
-    <div className={`${styles.alertWrapper} ${styles.succesWrapper}`}>
+    <div className={`${styles[className]} `}>
       <div className={styles.icon}>
         <img src={errorIcon} alt='icon' />
       </div>
-      <p className={styles.title}>Error</p>
+      <p className={styles.title}>{alertText}</p>
       <button type='button'>
         <img src={closeIcon} alt='close' />
       </button>

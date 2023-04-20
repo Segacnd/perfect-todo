@@ -7,6 +7,8 @@ import { Button } from '../ui/buttons/default-button/button';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { todoSelector } from '../redux/selectors';
 import { fetchTodoById } from '../redux/slices/fetch-todo-slice';
+import { INote } from '../redux/slices/fetch-todos-slice';
+import { Alert } from '../ui/alert/alert';
 
 export const TodoPage: FC = () => {
   const placeholderValue = 'write a note';
@@ -16,11 +18,24 @@ export const TodoPage: FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const index = Number(id);
+  const [notes, setNotes] = useState<INote[]>([]);
 
   useEffect(() => {
     dispatch(fetchTodoById(index));
   }, [dispatch, index]);
+  useEffect(() => {
+    if (todo[0]) {
+      setNotes(todo[0].notes);
+    }
+  }, [todo]);
 
+  const addNewNote = (note: string, e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setNotes([...notes, { id: notes.length + 1, note }]);
+  };
+  console.log(notes);
+  console.log(notes.length);
   return (
     <div className={styles.container}>
       <div className={styles.todoInfo}>
@@ -44,15 +59,17 @@ export const TodoPage: FC = () => {
               value={noteValue}
               isLabelOpen={isLabelOpen}
               setIsLabelOpen={setIsLabelOpen}
+              addNewNote={addNewNote}
             />
           </div>
         </div>
         <div className={styles.noteContainer}>
-          {todo[0]?.notes.length ? (
-            todo[0].notes.map((el) => <Card noteText={el.note} key={el.id + el.note} />)
+          {notes.length <= 8 ? (
+            notes.map((el) => <Card noteText={el.note} key={el.id + el.note} />)
           ) : (
-            <p>Пока что нет заметок</p>
+            <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' />
           )}
+          {notes.length === 0 && <p>Пока что нет заметок</p>}
         </div>
       </div>
       <div className={styles.buttonsContainer}>

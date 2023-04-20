@@ -30,11 +30,10 @@ export const Categories: FC = () => {
             <CloseButton click={() => dispatch(categoryActions.mobileToggler(false))} />
           </div>
           <h3>{t('categories')}</h3>
-          <AddButton tooltipText='add new category' text='+' click={openCategory} />
         </div>
         <ul>
           {categoryList.map((category) => (
-            <button type='button' key={category} onClick={() => sortTodos(category)}>
+            <button type='button' key={category + Date.now()} onClick={() => sortTodos(category)}>
               {category}
             </button>
           ))}

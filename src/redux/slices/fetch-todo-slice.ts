@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ITodo } from './fetch-todos-slice';
+import { INote, ITodo } from './fetch-todos-slice';
 
 export const fetchTodoById = createAsyncThunk('todo/fetchTodoById', async (id: number) => {
   const { data } = await axios.get<ITodo[]>(`https://64368e963e4d2b4a12d57f98.mockapi.io/todos?id=${id}`);
@@ -9,12 +9,13 @@ export const fetchTodoById = createAsyncThunk('todo/fetchTodoById', async (id: n
 interface ITodoState {
   todo: ITodo[];
   status: string;
+  notes: INote[];
 }
 const initialState: ITodoState = {
   todo: [],
   status: '',
+  notes: [],
 };
-
 const todoSlice = createSlice({
   name: 'todo',
   initialState,
