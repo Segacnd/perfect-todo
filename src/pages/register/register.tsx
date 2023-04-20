@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Button } from '../../ui/buttons/default-button/button';
 import styles from './register.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
@@ -12,29 +13,25 @@ export const Register: FC = () => {
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues: {
-      login: '',
-      firstName: '',
-      lastName: '',
+      email: '',
+      password: '',
     },
     validationSchema: yup.object({
-      login: yup
+      email: yup
         .string()
         .required(`${t('form_errors_require')}`)
         .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
-      firstName: yup
-        .string()
-        .required(`${t('form_errors_require')}`)
-        .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
-      lastName: yup
+      password: yup
         .string()
         .required(`${t('form_errors_require')}`)
         .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
     }),
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      console.log(values);
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, values.email, values.password).then();
     },
   });
-  console.log(formik.errors);
 
   return (
     <>
@@ -42,27 +39,21 @@ export const Register: FC = () => {
       <form autoComplete='off' onSubmit={formik.handleSubmit} className={styles.registerForm}>
         <FormInput
           onChange={formik.handleChange}
-          value={formik.values.login}
-          placeholder={t('registration_login_input')}
-          name='login'
-          errortext={formik.touched.login ? formik.errors.login : ''}
+          value={formik.values.email}
+          placeholder='enter your email'
+          name='email'
+          errortext={formik.touched.email ? formik.errors.email : ''}
           onBlur={formik.handleBlur}
+          type='email'
         />
         <FormInput
           onChange={formik.handleChange}
-          value={formik.values.firstName}
-          placeholder={t('registration_fname_input')}
-          name='firstName'
+          value={formik.values.password}
+          placeholder='enter your password'
+          name='password'
+          errortext={formik.touched.password ? formik.errors.password : ''}
           onBlur={formik.handleBlur}
-          errortext={formik.touched.firstName ? formik.errors.firstName : ''}
-        />
-        <FormInput
-          onChange={formik.handleChange}
-          value={formik.values.lastName}
-          placeholder={t('registration_lname_input')}
-          name='lastName'
-          errortext={formik.touched.lastName ? formik.errors.lastName : ''}
-          onBlur={formik.handleBlur}
+          type='password'
         />
         <Button
           disabled={!formik.isValid ? true : false}

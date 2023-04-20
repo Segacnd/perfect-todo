@@ -7,6 +7,7 @@ import { CategoryReducer } from './slices/category-slice';
 import { AddTodoReducer } from './slices/add-todo-slice';
 import { TodosReducer } from './slices/fetch-todos-slice';
 import { TodoReducer } from './slices/fetch-todo-slice';
+import { UserReducer } from './slices/user-slice';
 
 const rootReducer = combineReducers({
   ViewController,
@@ -14,12 +15,13 @@ const rootReducer = combineReducers({
   AddTodoReducer,
   TodosReducer,
   TodoReducer,
+  UserReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['ViewController'],
+  whitelist: ['ViewController', 'UserReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,13 +1,17 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import accountIconBlack from '../../assets/acount-icon-black.svg';
 import accountIconWhite from '../../assets/account-icon-white.svg';
-import { useAppSelector } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { viewControllerSelector } from '../../redux/selectors';
 import { ChangeLanguageComponent } from '../change-language-component/change-language-component';
 import { ThemeSwitchButton } from '../../ui/buttons/theme-switch-button/theme-switch-button';
 import styles from './header.module.css';
+import { Button } from '../../ui/buttons/default-button/button';
+import { userActions } from '../../redux/slices/user-slice';
 
 export const Header: FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
   const { colorTheme } = useAppSelector(viewControllerSelector);
   return (
     <header>
@@ -17,9 +21,21 @@ export const Header: FC = () => {
       </div>
       <div className={styles.rightSide}>
         <p>John Doe!</p>
-        <button type='button'>
+        <button type='button' onClick={() => setIsModalOpen((prev) => !prev)}>
           <img src={colorTheme === 'dark' ? accountIconWhite : accountIconBlack} alt='user avatar' />
         </button>
+        {isModalOpen && (
+          <div className={styles.accountModal}>
+            <p>account</p>
+            <Button
+              buttonType='button'
+              buttonClick={() => {
+                dispatch(userActions.removeUser());
+              }}
+              text='end session'
+            />
+          </div>
+        )}
       </div>
     </header>
   );
