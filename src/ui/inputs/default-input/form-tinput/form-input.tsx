@@ -7,15 +7,24 @@ interface IFormInputProps extends Omit<IInputProps, 'change' | 'labelText' | 'se
   onChange: (e: ChangeEvent) => void;
   onBlur?: (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => void;
   errortext?: string;
+  type?: string;
 }
 
-export const FormInput: FC<IFormInputProps> = ({ placeholder, onChange, value, name, errortext, onBlur }) => {
+export const FormInput: FC<IFormInputProps> = ({
+  placeholder,
+  onChange,
+  value,
+  name,
+  errortext,
+  onBlur,
+  type = 'string',
+}) => {
   return (
     <div className={classNames(styles.inputWrapper, { [styles.error]: errortext })}>
       <input
         onBlur={onBlur}
         id={name}
-        type='text'
+        type={type}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
