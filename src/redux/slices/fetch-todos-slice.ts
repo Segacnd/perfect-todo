@@ -1,31 +1,41 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { deleteDoc, doc as docc, getDocs } from 'firebase/firestore';
 import { Status } from '../../enums/enums';
+import { db, todosCollection } from '../../firebase-config';
+import { Note } from '../../types';
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-  const { data } = await axios.get<ITodo[]>('https://64368e963e4d2b4a12d57f98.mockapi.io/todos');
-  return data;
+  const res = await getDocs(todosCollection).then((querySnapshot) => {
+    const data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    console.log(data);
+    return data;
+  });
+  return res;
+});
+export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id: string) => {
+  const todoDoc = docc(db, 'todos', id);
+  await deleteDoc(todoDoc);
+  console.log('ss');
 });
 export interface ITodo {
-  id: number;
-  userId: number;
-  categories: string;
+  id: string;
+  user: string;
   title: string;
-  text: string;
-  notes: INote[];
+  category: string;
+  dateEnded: string;
+  dateStarted: string;
+  description: string;
+  notes: Note[];
 }
 
-export interface INote {
-  id: number;
-  note: string;
-}
-export interface IState {
+export interface ITodosState {
   todos: ITodo[];
-  status: string;
+  status: Status;
   activeCategory: string;
   categoryList: string[];
 }
-const initialState: IState = {
+const initialState: ITodosState = {
   todos: [],
   status: Status.INIT,
   activeCategory: 'all',
@@ -48,8 +58,14 @@ const todosSlice = createSlice({
     });
     builder.addCase(fetchTodos.fulfilled, (state, action: PayloadAction<ITodo[]>) => {
       state.todos = action.payload;
-      state.categoryList = state.todos.map((todo) => todo.categories);
       state.status = Status.SUCCESS;
+      console.log('todos payload', action.payload);
+    });
+    builder.addCase(deleteTodo.fulfilled, (state) => {
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(deleteTodo.pending, (state) => {
+      state.status = Status.INIT;
     });
     builder.addCase(fetchTodos.rejected, (state) => {
       state.todos = [];

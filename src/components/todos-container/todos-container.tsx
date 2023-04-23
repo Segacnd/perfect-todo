@@ -1,6 +1,7 @@
-import { useEffect, useState, FC } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, FC, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { deleteDoc, doc } from 'firebase/firestore';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
@@ -12,6 +13,7 @@ import styles from './todos-container.module.css';
 import { categoryActions } from '../../redux/slices/category-slice';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
 import { Status } from '../../enums/enums';
+import { db } from '../../firebase-config';
 
 type ToDo = {
   userId: number;
@@ -25,43 +27,52 @@ export const TodosContainer: FC = () => {
   const { todos, activeCategory, status } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchTodos());
   }, [dispatch]);
+  // useEffect(() => {
+  //   if (todos && status === Status.SUCCESS) {
+  //     dispatch(fetchTodos());
+  //   }
+  //   console.log(status);
+  // }, [dispatch, status]);
+
+  console.log(todos);
+  console.log(status);
+
   return (
-    status === Status.SUCCESS && (
-      <section className={styles.todosContainer}>
-        <div className={styles.todosHeader}>
-          <h3>Home</h3>
-          <div className={styles.rightSide}>
-            <ViewToggler />
-            <AddButton
-              tooltipText={t('tooltip_add_todo')}
-              text='+'
-              click={() => dispatch(addTodoActions.addTodoModalToggler(true))}
-            />
-            <button
-              type='button'
-              onClick={() => dispatch(categoryActions.mobileToggler(true))}
-              className={styles.burgerWrapper}
-            >
-              <img src={burgerIcon} alt='burger' />
-            </button>
-          </div>
+    <section className={styles.todosContainer}>
+      <div className={styles.todosHeader}>
+        <h3>Home</h3>
+        <div className={styles.rightSide}>
+          <ViewToggler />
+          <AddButton
+            tooltipText={t('tooltip_add_todo')}
+            text='+'
+            click={() => dispatch(addTodoActions.addTodoModalToggler(true))}
+          />
+          <button
+            type='button'
+            onClick={() => dispatch(categoryActions.mobileToggler(true))}
+            className={styles.burgerWrapper}
+          >
+            <img src={burgerIcon} alt='burger' />
+          </button>
         </div>
-        <div className={styles.todosWrapper}>
-          {todos &&
-            todos
-              // .filter((el) => (todoPreviewType === 'completed' ? el.completed : !el.completed))
-              .filter((todo) => (activeCategory === 'all' ? todo : todo.categories === activeCategory))
-              .map((el) => (
-                <Link to={`/todo/${el.id}`} key={el.id}>
-                  <TodoPreview text={el.title} />
-                </Link>
-              ))}
-        </div>
-      </section>
-    )
+      </div>
+      <div className={styles.todosWrapper}>
+        {todos &&
+          todos
+            // .filter((el) => (todoPreviewType === 'completed' ? el.completed : !el.completed))
+            .filter((todo) => (activeCategory === 'all' ? todo : todo.category === activeCategory))
+            .map((el) => (
+              <button type='button' onClick={() => navigate(`/todo/${el.id}`)} key={el.description}>
+                <TodoPreview text={el.title} key={el.id} index={el.id} />
+              </button>
+            ))}
+      </div>
+    </section>
   );
 };

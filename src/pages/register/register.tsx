@@ -27,7 +27,6 @@ export const Register: FC = () => {
         .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
     }),
     onSubmit: (values) => {
-      console.log(values);
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, values.email, values.password).then();
     },

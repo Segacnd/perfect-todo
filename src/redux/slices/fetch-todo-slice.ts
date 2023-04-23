@@ -1,20 +1,25 @@
-import axios from 'axios';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { INote, ITodo } from './fetch-todos-slice';
+import { doc, getDoc } from 'firebase/firestore';
+import { todosCollection } from '../../firebase-config';
+import { ITodo } from './fetch-todos-slice';
+import { Status } from '../../enums/enums';
 
-export const fetchTodoById = createAsyncThunk('todo/fetchTodoById', async (id: number) => {
-  const { data } = await axios.get<ITodo[]>(`https://64368e963e4d2b4a12d57f98.mockapi.io/todos?id=${id}`);
-  return data;
+export const fetchTodoById = createAsyncThunk('todo/fetchTodoById', async (id: string) => {
+  const docRef = doc(todosCollection, id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const todo = { id: docSnap.id, ...docSnap.data() };
+    return todo;
+  }
+  return undefined;
 });
 interface ITodoState {
-  todo: ITodo[];
-  status: string;
-  notes: INote[];
+  todo: ITodo | undefined;
+  status: Status;
 }
 const initialState: ITodoState = {
-  todo: [],
-  status: '',
-  notes: [],
+  todo: undefined,
+  status: Status.INIT,
 };
 const todoSlice = createSlice({
   name: 'todo',
@@ -22,16 +27,16 @@ const todoSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTodoById.pending, (state) => {
-      state.todo = [];
-      state.status = 'loading';
+      state.todo = undefined;
+      state.status = Status.LOADING;
     });
-    builder.addCase(fetchTodoById.fulfilled, (state, action: PayloadAction<ITodo[]>) => {
+    builder.addCase(fetchTodoById.fulfilled, (state, action: PayloadAction<ITodo | undefined>) => {
       state.todo = action.payload;
-      state.status = 'success';
+      state.status = Status.SUCCESS;
     });
     builder.addCase(fetchTodoById.rejected, (state) => {
-      state.todo = [];
-      state.status = 'error';
+      state.todo = undefined;
+      state.status = Status.ERROR;
     });
   },
 });

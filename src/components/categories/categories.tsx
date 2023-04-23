@@ -13,32 +13,27 @@ export const Categories: FC = () => {
   const { t } = useTranslation();
   const { isMobileModalOpen } = useAppSelector(categorySelector);
   const dispatch = useAppDispatch();
-  const { categoryList, status } = useAppSelector(todosSelector);
-  const openCategory = () => {
-    dispatch(categoryActions.modalToggler(true));
-  };
+  const { categoryList } = useAppSelector(todosSelector);
 
   const sortTodos = (category: string) => {
     dispatch(todosActions.sortTodos(category));
   };
 
   return (
-    status === Status.SUCCESS && (
-      <aside className={isMobileModalOpen ? styles.mobileVersion : ''}>
-        <div className={styles.categoryHeader}>
-          <div className={styles.buttonWrapper}>
-            <CloseButton click={() => dispatch(categoryActions.mobileToggler(false))} />
-          </div>
-          <h3>{t('categories')}</h3>
+    <aside className={isMobileModalOpen ? styles.mobileVersion : ''}>
+      <div className={styles.categoryHeader}>
+        <div className={styles.buttonWrapper}>
+          <CloseButton click={() => dispatch(categoryActions.mobileToggler(false))} />
         </div>
-        <ul>
-          {categoryList.map((category) => (
-            <button type='button' key={category + Date.now()} onClick={() => sortTodos(category)}>
-              {category}
-            </button>
-          ))}
-        </ul>
-      </aside>
-    )
+        <h3>{t('categories')}</h3>
+      </div>
+      <ul>
+        {categoryList.map((category) => (
+          <button type='button' key={category + Date.now()} onClick={() => sortTodos(category)}>
+            {category}
+          </button>
+        ))}
+      </ul>
+    </aside>
   );
 };
