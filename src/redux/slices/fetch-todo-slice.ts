@@ -10,7 +10,7 @@ export const fetchTodoById = createAsyncThunk('todo/fetchTodoById', async (id: s
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     const todo = { ...docSnap.data(), id: docSnap.id };
-
+    console.log(todo);
     return todo;
   }
   return undefined;
@@ -31,12 +31,10 @@ export const addNewNote = createAsyncThunk(
 interface ITodoState {
   todo: ITodo | undefined;
   status: Status;
-  notes: Note[] | undefined;
 }
 const initialState: ITodoState = {
   todo: undefined,
   status: Status.INIT,
-  notes: [],
 };
 const todoSlice = createSlice({
   name: 'todo',
@@ -49,7 +47,6 @@ const todoSlice = createSlice({
     });
     builder.addCase(fetchTodoById.fulfilled, (state, action: PayloadAction<ITodo | undefined>) => {
       state.todo = action.payload;
-      state.notes = state.todo?.notes;
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchTodoById.rejected, (state) => {

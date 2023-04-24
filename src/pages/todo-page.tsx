@@ -6,20 +6,16 @@ import { Input } from '../ui/inputs/default-input/input';
 import { Button } from '../ui/buttons/default-button/button';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { todoSelector } from '../redux/selectors';
-import { addNewNote, addNewNotee, fetchTodoById } from '../redux/slices/fetch-todo-slice';
+import { addNewNote, fetchTodoById } from '../redux/slices/fetch-todo-slice';
 import { INote, deleteTodo } from '../redux/slices/fetch-todos-slice';
 import { Alert } from '../ui/alert/alert';
 import { NotesForm } from '../components/notes-form/notes-form';
 import { Note } from '../types';
 
 export const TodoPage: FC = () => {
-  const placeholderValue = 'write a note';
-  const [noteValue, setNoteValue] = useState<string>('');
-  const [isLabelOpen, setIsLabelOpen] = useState<boolean>(false);
   const { todo } = useAppSelector(todoSelector);
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const { notes } = useAppSelector(todoSelector);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   useEffect(() => {
     if (id) {
@@ -47,11 +43,8 @@ export const TodoPage: FC = () => {
     } else {
       setShowAlert(true);
     }
-    console.log(todo?.notes.length);
   };
-  if (todo) {
-    console.log(todo);
-  }
+
   const navigate = useNavigate();
   const deleteCurrentTodo = (index: string) => {
     dispatch(deleteTodo(index));
@@ -61,7 +54,13 @@ export const TodoPage: FC = () => {
   const completeCurrentTodo = (index: string) => {
     // dispatch(completeTodo(index));
   };
-
+  const deleteNote = (index: string) => {
+    if (todo && id) {
+      const newArr = todo.notes.filter((item) => item.id !== index);
+      dispatch(fetchTodoById(id));
+      dispatch(addNewNote({ updatedNotes: newArr, id }));
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.todoInfo}>
@@ -76,12 +75,15 @@ export const TodoPage: FC = () => {
           </div>
         </div>
         <div className={styles.noteContainer}>
-          {notes?.map((el) => (
-            <Card noteText={el.note} key={el.id + el.note} />
-          ))}
+          {todo &&
+            todo.notes?.map((el) => (
+              <Card noteText={el.note} key={el.id + el.note} index={el.id} deleteNote={deleteNote} />
+            ))}
 
-          {showAlert && <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' />}
-          {notes?.length === 0 && <p>Пока что нет заметок</p>}
+          {showAlert && (
+            <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' setShowAlert={setShowAlert} />
+          )}
+          {todo && todo.notes?.length === 0 && <p>Пока что нет заметок</p>}
         </div>
       </div>
       <div className={styles.buttonsContainer}>
@@ -89,8 +91,12 @@ export const TodoPage: FC = () => {
           Back to main page
         </Link>
         <div className={styles.mainButtons}>
-          <Button text='delete todo' buttonType='button' buttonClick={() => deleteCurrentTodo(todo!.id)} />
-          <Button text='complete todo' buttonType='button' buttonClick={() => completeCurrentTodo(todo!.id)} />
+          <Button text='delete todo' buttonType='button' buttonClick={() => deleteCurrentTodo(todo ? todo.id : '')} />
+          <Button
+            text='complete todo'
+            buttonType='button'
+            buttonClick={() => completeCurrentTodo(todo ? todo.id : '')}
+          />
         </div>
       </div>
     </div>
