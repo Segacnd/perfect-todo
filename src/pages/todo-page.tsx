@@ -1,14 +1,16 @@
 import { FC, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './todo-page.module.css';
 import { Card } from '../ui/card/card';
 import { Input } from '../ui/inputs/default-input/input';
 import { Button } from '../ui/buttons/default-button/button';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { todoSelector } from '../redux/selectors';
-import { fetchTodoById } from '../redux/slices/fetch-todo-slice';
-import { INote } from '../redux/slices/fetch-todos-slice';
+import { addNewNote, addNewNotee, fetchTodoById } from '../redux/slices/fetch-todo-slice';
+import { INote, deleteTodo } from '../redux/slices/fetch-todos-slice';
 import { Alert } from '../ui/alert/alert';
+import { NotesForm } from '../components/notes-form/notes-form';
+import { Note } from '../types';
 
 export const TodoPage: FC = () => {
   const placeholderValue = 'write a note';
@@ -17,29 +19,49 @@ export const TodoPage: FC = () => {
   const { todo } = useAppSelector(todoSelector);
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const [notes, setNotes] = useState<INote[]>([]);
+  const { notes } = useAppSelector(todoSelector);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   useEffect(() => {
     if (id) {
       dispatch(fetchTodoById(id));
     }
   }, [dispatch, id]);
-  // useEffect(() => {
-  //   if (todo[0]) {
-  //     setNotes(todo[0].notes);
-  //   }
-  // }, [todo]);
-  console.log(todo?.title);
-  const addNewNote = (note: string, e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setNoteValue('');
-    if (notes.length === 8) {
-      setShowAlert(true);
-      return 0;
+  const updateNotes = (newNote: Note): Note[] => {
+    if (!todo) {
+      return [];
     }
-    return setNotes([...notes, { id: notes.length + 1, note }]);
+    const currentNotes: Note[] = [...todo?.notes];
+    return [...currentNotes, newNote];
   };
-  console.log(todo);
+  const createNote = (text: string): Note => {
+    return { note: text, id: (todo?.notes.length || 0).toString() };
+  };
+
+  const addNote = (note: string) => {
+    const newNote = createNote(note);
+    const newArr = updateNotes(newNote);
+    if (todo && todo.notes?.length <= 7 && id) {
+      const obj = { updatedNotes: newArr, id };
+      dispatch(fetchTodoById(id));
+      dispatch(addNewNote(obj));
+    } else {
+      setShowAlert(true);
+    }
+    console.log(todo?.notes.length);
+  };
+  if (todo) {
+    console.log(todo);
+  }
+  const navigate = useNavigate();
+  const deleteCurrentTodo = (index: string) => {
+    dispatch(deleteTodo(index));
+    navigate('/');
+  };
+
+  const completeCurrentTodo = (index: string) => {
+    // dispatch(completeTodo(index));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.todoInfo}>
@@ -50,24 +72,16 @@ export const TodoPage: FC = () => {
         <div className={styles.inputWrapper}>
           <p className={styles.subtitle}>You can add new note</p>
           <div className={styles.iwrapper}>
-            <Input
-              placeholder={placeholderValue}
-              labelText='press Enter to add a note'
-              change={(value) => setNoteValue(value)}
-              value={noteValue}
-              isLabelOpen={isLabelOpen}
-              setIsLabelOpen={setIsLabelOpen}
-              addNewNote={addNewNote}
-            />
+            <NotesForm handleSubmit={addNote} />
           </div>
         </div>
         <div className={styles.noteContainer}>
-          {notes.map((el) => (
+          {notes?.map((el) => (
             <Card noteText={el.note} key={el.id + el.note} />
           ))}
 
           {showAlert && <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' />}
-          {notes.length === 0 && <p>Пока что нет заметок</p>}
+          {notes?.length === 0 && <p>Пока что нет заметок</p>}
         </div>
       </div>
       <div className={styles.buttonsContainer}>
@@ -75,8 +89,8 @@ export const TodoPage: FC = () => {
           Back to main page
         </Link>
         <div className={styles.mainButtons}>
-          <Button text='delete todo' buttonType='button' />
-          <Button text='complete todo' buttonType='button' />
+          <Button text='delete todo' buttonType='button' buttonClick={() => deleteCurrentTodo(todo!.id)} />
+          <Button text='complete todo' buttonType='button' buttonClick={() => completeCurrentTodo(todo!.id)} />
         </div>
       </div>
     </div>

@@ -1,16 +1,19 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './button.module.css';
+import { useAppDispatch } from '../../../redux/store';
+import { deleteTodo } from '../../../redux/slices/fetch-todos-slice';
 
 export type ButtonTypes = 'submit' | 'button';
 
 type ButtonProps = {
   text: string;
   buttonType: ButtonTypes;
-  buttonClick: () => void;
   disabled?: boolean;
+  buttonClick: () => void;
 };
 
-export const Button: FC<ButtonProps> = ({ text, buttonType = 'button', buttonClick, disabled }) => {
+export const Button: FC<ButtonProps> = ({ text, buttonType = 'button', disabled, buttonClick }) => {
   return (
     <button
       disabled={disabled}

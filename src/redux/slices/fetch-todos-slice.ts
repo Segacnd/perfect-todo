@@ -8,7 +8,6 @@ import { Note } from '../../types';
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   const res = await getDocs(todosCollection).then((querySnapshot) => {
     const data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    console.log(data);
     return data;
   });
   return res;
@@ -16,7 +15,6 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
 export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id: string) => {
   const todoDoc = docc(db, 'todos', id);
   await deleteDoc(todoDoc);
-  console.log('ss');
 });
 export interface ITodo {
   id: string;
@@ -58,10 +56,7 @@ const todosSlice = createSlice({
     });
     builder.addCase(fetchTodos.fulfilled, (state, action: PayloadAction<ITodo[]>) => {
       state.todos = action.payload;
-      state.status = Status.SUCCESS;
-      console.log('todos payload', action.payload);
-    });
-    builder.addCase(deleteTodo.fulfilled, (state) => {
+      state.categoryList = state.todos.map((todo) => todo.category);
       state.status = Status.SUCCESS;
     });
     builder.addCase(deleteTodo.pending, (state) => {

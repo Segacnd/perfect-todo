@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { addTodoActions } from '../../../redux/slices/add-todo-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
 import { todosSelector } from '../../../redux/selectors';
-import { fetchTodos } from '../../../redux/slices/fetch-todos-slice';
+import { fetchTodos, todosActions } from '../../../redux/slices/fetch-todos-slice';
 
 // import { ITodo } from '../../../redux/slices/fetch-todos-slice';
 // import { Note } from '../../../types';

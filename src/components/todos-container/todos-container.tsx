@@ -15,33 +15,18 @@ import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
 import { Status } from '../../enums/enums';
 import { db } from '../../firebase-config';
 
-type ToDo = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-};
-
 export const TodosContainer: FC = () => {
   const { t } = useTranslation();
-  const { todos, activeCategory, status } = useAppSelector(todosSelector);
+  const { todos, activeCategory, status, categoryList } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchTodos());
+    console.log('aa');
   }, [dispatch]);
-  // useEffect(() => {
-  //   if (todos && status === Status.SUCCESS) {
-  //     dispatch(fetchTodos());
-  //   }
-  //   console.log(status);
-  // }, [dispatch, status]);
-
   console.log(todos);
-  console.log(status);
-
   return (
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>

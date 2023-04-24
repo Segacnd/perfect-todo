@@ -1,6 +1,8 @@
 import { FC, useId } from 'react';
 import styles from './input.module.css';
 import { Alert } from '../../alert/alert';
+import { useAppDispatch } from '../../../redux/store';
+import { addNewNotee } from '../../../redux/slices/fetch-todo-slice';
 
 export interface IInputProps {
   name?: string;
@@ -10,7 +12,6 @@ export interface IInputProps {
   value: string;
   change: (value: string) => void;
   setIsLabelOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  addNewNote: (note: string, e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const Input: FC<IInputProps> = ({
@@ -21,31 +22,27 @@ export const Input: FC<IInputProps> = ({
   setIsLabelOpen,
   isLabelOpen,
   name,
-  addNewNote,
 }) => {
+  const dispatch = useAppDispatch();
   const inputId = useId();
 
   return (
     <div className={styles.inputWrapper}>
-      <form onSubmit={(e) => addNewNote(value, e)} className={styles.notesForm}>
-        <input
-          name={name}
-          id={inputId}
-          value={value}
-          placeholder={placeholder}
-          className={styles.input}
-          onChange={(e) => change(e.target.value)}
-          onFocus={() => setIsLabelOpen(true)}
-          onBlur={() => setIsLabelOpen(false)}
-          maxLength={100}
-        />
-        {value.length >= 100 && <p className={styles.inputAlert}>текст не должен содержать более 100 символов</p>}
-        {labelText && isLabelOpen && value.length < 100 && (
-          <label className={styles.label} htmlFor={inputId}>
-            {labelText}
-          </label>
-        )}
-      </form>
+      <input
+        name={name}
+        id={inputId}
+        value={value}
+        placeholder={placeholder}
+        className={styles.input}
+        onChange={(e) => change(e.target.value)}
+        onFocus={() => setIsLabelOpen(true)}
+        onBlur={() => setIsLabelOpen(false)}
+      />
+      {labelText && isLabelOpen && (
+        <label className={styles.label} htmlFor={inputId}>
+          {labelText}
+        </label>
+      )}
     </div>
   );
 };

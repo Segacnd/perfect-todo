@@ -20,20 +20,22 @@ export const Categories: FC = () => {
   };
 
   return (
-    <aside className={isMobileModalOpen ? styles.mobileVersion : ''}>
-      <div className={styles.categoryHeader}>
-        <div className={styles.buttonWrapper}>
-          <CloseButton click={() => dispatch(categoryActions.mobileToggler(false))} />
+    categoryList.length > 0 && (
+      <aside className={isMobileModalOpen ? styles.mobileVersion : ''}>
+        <div className={styles.categoryHeader}>
+          <div className={styles.buttonWrapper}>
+            <CloseButton click={() => dispatch(categoryActions.mobileToggler(false))} />
+          </div>
+          <h3>{t('categories')}</h3>
         </div>
-        <h3>{t('categories')}</h3>
-      </div>
-      <ul>
-        {categoryList.map((category) => (
-          <button type='button' key={category + Date.now()} onClick={() => sortTodos(category)}>
-            {category}
-          </button>
-        ))}
-      </ul>
-    </aside>
+        <ul>
+          {categoryList.map((category) => (
+            <button type='button' key={category + Date.now()} onClick={() => sortTodos(category)}>
+              {category}
+            </button>
+          ))}
+        </ul>
+      </aside>
+    )
   );
 };
