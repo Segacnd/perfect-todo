@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './button.module.css';
 import { useAppDispatch } from '../../../redux/store';
-import { deleteTodo } from '../../../redux/slices/fetch-todos-slice';
 
 export type ButtonTypes = 'submit' | 'button';
 

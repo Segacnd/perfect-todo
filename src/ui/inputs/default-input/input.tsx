@@ -1,8 +1,5 @@
 import { FC, useId } from 'react';
 import styles from './input.module.css';
-import { Alert } from '../../alert/alert';
-import { useAppDispatch } from '../../../redux/store';
-import { addNewNotee } from '../../../redux/slices/fetch-todo-slice';
 
 export interface IInputProps {
   name?: string;
@@ -23,7 +20,6 @@ export const Input: FC<IInputProps> = ({
   isLabelOpen,
   name,
 }) => {
-  const dispatch = useAppDispatch();
   const inputId = useId();
 
   return (
