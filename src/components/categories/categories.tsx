@@ -7,7 +7,6 @@ import styles from './categories.module.css';
 import { CloseButton } from '../../ui/buttons/close-button/close-button';
 import { categorySelector, todosSelector } from '../../redux/selectors';
 import { todosActions } from '../../redux/slices/fetch-todos-slice';
-import { Status } from '../../enums/enums';
 
 export const Categories: FC = () => {
   const { t } = useTranslation();
@@ -29,6 +28,9 @@ export const Categories: FC = () => {
           <h3>{t('categories')}</h3>
         </div>
         <ul>
+          <button type='button' onClick={() => sortTodos('all')}>
+            all
+          </button>
           {categoryList.map((category) => (
             <button type='button' key={category + Date.now()} onClick={() => sortTodos(category)}>
               {category}

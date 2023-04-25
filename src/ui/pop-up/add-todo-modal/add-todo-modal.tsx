@@ -11,7 +11,7 @@ import { CloseButton } from '../../buttons/close-button/close-button';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { addTodoActions } from '../../../redux/slices/add-todo-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
-import { todosSelector } from '../../../redux/selectors';
+import { todosSelector, userSelector } from '../../../redux/selectors';
 import { fetchTodos, todosActions } from '../../../redux/slices/fetch-todos-slice';
 
 // import { ITodo } from '../../../redux/slices/fetch-todos-slice';
@@ -20,7 +20,7 @@ import { fetchTodos, todosActions } from '../../../redux/slices/fetch-todos-slic
 export const AddTodoModal: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { activeCategory } = useAppSelector(todosSelector);
+  const { id } = useAppSelector(userSelector);
   const createTodo = async (values: any) => {
     await addDoc(todosCollection, values);
     console.log(db);
@@ -35,7 +35,7 @@ export const AddTodoModal: FC = () => {
       dateStarted: new Date().toISOString(),
       dateEnded: null,
       notes: [],
-      user: '',
+      user: id,
     },
     validationSchema: yup.object({
       title: yup.string().required(`${t('form_errors_require')}`),

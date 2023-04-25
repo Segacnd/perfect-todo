@@ -1,5 +1,7 @@
 import { useFormik } from 'formik';
 import { FC } from 'react';
+import * as yup from 'yup';
+import { t } from 'i18next';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
 
 type NotesFormProps = {
@@ -11,8 +13,13 @@ export const NotesForm: FC<NotesFormProps> = ({ handleSubmit }) => {
     initialValues: {
       note: '',
     },
+    validationSchema: yup.object({
+      note: yup.string().max(100, `${t('form_add_new_note')}`),
+    }),
     onSubmit: (values) => {
-      handleSubmit(values.note);
+      if (values.note) {
+        handleSubmit(values.note);
+      }
       formik.resetForm({ values: { note: '' } });
     },
   });
@@ -23,7 +30,7 @@ export const NotesForm: FC<NotesFormProps> = ({ handleSubmit }) => {
         onChange={formik.handleChange}
         value={formik.values.note}
         name='note'
-        errortext={formik.touched.note ? formik.errors.note : ''}
+        errortext={formik.errors.note}
         onBlur={formik.handleBlur}
         type='string'
       />

@@ -40,6 +40,7 @@ i18next
           form_add_todo_category: 'Todo category',
           form_add_todo_category_placeholder: 'Example:home, work, etc.',
           form_add_todo_description_placeholder: 'Description...',
+          form_add_new_note: 'length must not exceed 100 characters',
         },
       },
       ru: {
@@ -76,6 +77,7 @@ i18next
           form_add_todo_description_placeholder: 'Описание...',
           form_add_todo_category: 'Категория',
           form_add_todo_category_placeholder: 'Например: дом, работа и тд.',
+          form_add_new_note: 'длина не должна превышать 100 символов',
         },
       },
     },

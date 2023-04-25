@@ -51,15 +51,21 @@
   border-radius: 50%;
   position: relative;
   align-self: center;
-
+  width: 18px;
+  height: 18px;
+}
+.completeTodo img {
+  width: 100%;
+  height: 100%;
 }
 .completeTodo label img:active {
   border-radius: 50%;
   background-color: var(--clr-blue);
 }
+
 .deleteTodo {
-    position: relative;
-    align-self: center;
+  position: relative;
+  align-self: center;
 }
 
 .deleteTodo button {
@@ -74,10 +80,7 @@
   width: var(--font-medium);
 }
 
-.completeTodo input {
-  display: none;
-}
-
-.completeTodo label {
+.completeTodo button {
+  display: contents;
   cursor: pointer;
 }

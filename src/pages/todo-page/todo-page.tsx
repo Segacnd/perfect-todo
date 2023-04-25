@@ -1,22 +1,22 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './todo-page.module.css';
-import { Card } from '../ui/card/card';
-import { Input } from '../ui/inputs/default-input/input';
-import { Button } from '../ui/buttons/default-button/button';
-import { useAppDispatch, useAppSelector } from '../redux/store';
-import { todoSelector } from '../redux/selectors';
-import { addNewNote, fetchTodoById } from '../redux/slices/fetch-todo-slice';
-import { INote, deleteTodo } from '../redux/slices/fetch-todos-slice';
-import { Alert } from '../ui/alert/alert';
-import { NotesForm } from '../components/notes-form/notes-form';
-import { Note } from '../types';
+import { Card } from '../../ui/card/card';
+import { Input } from '../../ui/inputs/default-input/input';
+import { Button } from '../../ui/buttons/default-button/button';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { alertSelector, todoSelector } from '../../redux/selectors';
+import { addNewNote, fetchTodoById, completeTodo, deleteTodo } from '../../redux/slices/fetch-todo-slice';
+import { Alert } from '../../ui/alert/alert';
+import { NotesForm } from '../../components/notes-form/notes-form';
+import { Note } from '../../types';
+import { alertActions } from '../../redux/slices/alert-slice';
 
 export const TodoPage: FC = () => {
   const { todo } = useAppSelector(todoSelector);
+  const { isAlertOpen } = useAppSelector(alertSelector);
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const [showAlert, setShowAlert] = useState<boolean>(false);
   useEffect(() => {
     if (id) {
       dispatch(fetchTodoById(id));
@@ -41,18 +41,24 @@ export const TodoPage: FC = () => {
       dispatch(fetchTodoById(id));
       dispatch(addNewNote(obj));
     } else {
-      setShowAlert(true);
+      dispatch(alertActions.setAlertStatus(true));
     }
   };
 
   const navigate = useNavigate();
-  const deleteCurrentTodo = (index: string) => {
-    dispatch(deleteTodo(index));
-    navigate('/');
+  const deleteCurrentTodo = () => {
+    if (id) {
+      dispatch(deleteTodo(id));
+      navigate('/');
+    }
   };
 
-  const completeCurrentTodo = (index: string) => {
-    // dispatch(completeTodo(index));
+  const completeCurrentTodo = () => {
+    if (id) {
+      dispatch(fetchTodoById(id));
+      dispatch(completeTodo(id));
+      dispatch(alertActions.setAlertStatus(true));
+    }
   };
   const deleteNote = (index: string) => {
     if (todo && id) {
@@ -79,9 +85,8 @@ export const TodoPage: FC = () => {
             todo.notes?.map((el) => (
               <Card noteText={el.note} key={el.id + el.note} index={el.id} deleteNote={deleteNote} />
             ))}
-
-          {showAlert && (
-            <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' setShowAlert={setShowAlert} />
+          {isAlertOpen && todo?.dateEnded === null && (
+            <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' flag='error' />
           )}
           {todo && todo.notes?.length === 0 && <p>Пока что нет заметок</p>}
         </div>
@@ -90,13 +95,12 @@ export const TodoPage: FC = () => {
         <Link className={styles.goBackLink} to='/'>
           Back to main page
         </Link>
+        {todo?.dateEnded && isAlertOpen && (
+          <Alert className='noteSuccessAlert' alertText='congs,this todo is finished!' flag='success' />
+        )}
         <div className={styles.mainButtons}>
-          <Button text='delete todo' buttonType='button' buttonClick={() => deleteCurrentTodo(todo ? todo.id : '')} />
-          <Button
-            text='complete todo'
-            buttonType='button'
-            buttonClick={() => completeCurrentTodo(todo ? todo.id : '')}
-          />
+          <Button text='delete todo' buttonType='button' buttonClick={() => deleteCurrentTodo()} />
+          <Button text='complete todo' buttonType='button' buttonClick={() => completeCurrentTodo()} />
         </div>
       </div>
     </div>

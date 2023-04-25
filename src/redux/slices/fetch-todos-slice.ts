@@ -12,10 +12,7 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   });
   return res;
 });
-export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id: string) => {
-  const todoDoc = docc(db, 'todos', id);
-  await deleteDoc(todoDoc);
-});
+
 export interface ITodo {
   id: string;
   user: string;
@@ -58,9 +55,6 @@ const todosSlice = createSlice({
       state.todos = action.payload;
       state.categoryList = state.todos.map((todo) => todo.category);
       state.status = Status.SUCCESS;
-    });
-    builder.addCase(deleteTodo.pending, (state) => {
-      state.status = Status.INIT;
     });
     builder.addCase(fetchTodos.rejected, (state) => {
       state.todos = [];

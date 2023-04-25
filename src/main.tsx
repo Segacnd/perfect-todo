@@ -7,7 +7,7 @@ import './i18n';
 import { Provider } from 'react-redux';
 import { App } from './App';
 import { Layout } from './components/layout/layout';
-import { TodoPage } from './pages/todo-page';
+import { TodoPage } from './pages/todo-page/todo-page';
 import { store, persistor } from './redux/store';
 import { FormLayout } from './components/form-layout/form-layout';
 import { Auth } from './pages/auth/auth';

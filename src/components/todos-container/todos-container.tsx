@@ -17,16 +17,15 @@ import { db } from '../../firebase-config';
 
 export const TodosContainer: FC = () => {
   const { t } = useTranslation();
-  const { todos, activeCategory, status, categoryList } = useAppSelector(todosSelector);
+  const { todos, activeCategory } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchTodos());
-    console.log('aa');
   }, [dispatch]);
-  console.log(todos);
+
   return (
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>
@@ -50,11 +49,16 @@ export const TodosContainer: FC = () => {
       <div className={styles.todosWrapper}>
         {todos &&
           todos
-            // .filter((el) => (todoPreviewType === 'completed' ? el.completed : !el.completed))
+            .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
             .filter((todo) => (activeCategory === 'all' ? todo : todo.category === activeCategory))
             .map((el) => (
-              <button type='button' onClick={() => navigate(`/todo/${el.id}`)} key={el.description}>
-                <TodoPreview text={el.title} key={el.id} index={el.id} />
+              <button
+                type='button'
+                onClick={() => navigate(`/todo/${el.id}`)}
+                key={el.description}
+                className={styles.navButton}
+              >
+                <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
               </button>
             ))}
       </div>

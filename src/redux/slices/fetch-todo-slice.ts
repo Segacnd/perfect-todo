@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, todosCollection } from '../../firebase-config';
 import { ITodo } from './fetch-todos-slice';
 import { Status } from '../../enums/enums';
@@ -10,11 +10,11 @@ export const fetchTodoById = createAsyncThunk('todo/fetchTodoById', async (id: s
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     const todo = { ...docSnap.data(), id: docSnap.id };
-    console.log(todo);
     return todo;
   }
   return undefined;
 });
+
 export const addNewNote = createAsyncThunk(
   'todo/addNewNote',
   async ({ updatedNotes, id }: { updatedNotes: Note[]; id: string }) => {
@@ -23,11 +23,29 @@ export const addNewNote = createAsyncThunk(
       notes: updatedNotes,
     };
     await updateDoc(todoDoc, newFields);
-
-    console.log(todoDoc);
-    console.log('sss');
   }
 );
+
+export const completeTodo = createAsyncThunk('todo/completeTodo', async (id: string) => {
+  const todoDoc = doc(db, 'todos', id);
+  const newFields = {
+    dateEnded: new Date().toISOString(),
+  };
+  await updateDoc(todoDoc, newFields);
+
+  console.log(todoDoc);
+  console.log('sss');
+});
+
+export const deleteTodo = createAsyncThunk('todo/deleteTodo', async (id: string) => {
+  const todoDoc = doc(db, 'todos', id);
+
+  await deleteDoc(todoDoc);
+
+  console.log(todoDoc);
+  console.log('sss');
+});
+
 interface ITodoState {
   todo: ITodo | undefined;
   status: Status;
