@@ -1,4 +1,6 @@
-ToDo app with best practice and code lmao
+This is try to create perfect App
+
+Work with <a href="https://github.com/harmmselution">Roman</a>
 
 About EsLint
 In this project we use Air BnB config, also couple my personal cofiguration https://www.npmjs.com/package/eslint-config-airbnb
@@ -15,4 +17,3 @@ Use only even numbers for aditing properties sized.
 Use only arrow function.  
 U need create full types for functions.  
 #### I add localization - all text like title, description etc. we write in special file (i18n.ts) on two languages.
-## WARNING look at my code examles in layout for understanding how to add text in components

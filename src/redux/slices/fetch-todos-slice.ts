@@ -1,8 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { deleteDoc, doc as docc, getDocs } from 'firebase/firestore';
+import { doc as docc, getDocs } from 'firebase/firestore';
 import { Status } from '../../enums/enums';
-import { db, todosCollection } from '../../firebase-config';
+import { todosCollection } from '../../firebase-config';
 import { Note } from '../../types';
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
@@ -53,7 +52,7 @@ const todosSlice = createSlice({
     });
     builder.addCase(fetchTodos.fulfilled, (state, action: PayloadAction<ITodo[]>) => {
       state.todos = action.payload;
-      state.categoryList = state.todos.map((todo) => todo.category);
+      state.categoryList = [...new Set(state.todos.map((todo) => todo.category.toLowerCase()))];
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchTodos.rejected, (state) => {
