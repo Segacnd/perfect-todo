@@ -5,28 +5,39 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { categoryActions } from '../../redux/slices/category-slice';
 import styles from './categories.module.css';
 import { CloseButton } from '../../ui/buttons/close-button/close-button';
-import { categorySelector } from '../../redux/selectors';
+import { categorySelector, todosSelector } from '../../redux/selectors';
+import { todosActions } from '../../redux/slices/fetch-todos-slice';
 
 export const Categories: FC = () => {
   const { t } = useTranslation();
   const { isMobileModalOpen } = useAppSelector(categorySelector);
   const dispatch = useAppDispatch();
-  const openCategory = () => {
-    dispatch(categoryActions.modalToggler(true));
+  const { categoryList } = useAppSelector(todosSelector);
+
+  const sortTodos = (category: string) => {
+    dispatch(todosActions.sortTodos(category));
   };
-  return (
+
+  return categoryList.length > 0 ? (
     <aside className={isMobileModalOpen ? styles.mobileVersion : ''}>
       <div className={styles.categoryHeader}>
         <div className={styles.buttonWrapper}>
           <CloseButton click={() => dispatch(categoryActions.mobileToggler(false))} />
         </div>
         <h3>{t('categories')}</h3>
-        <AddButton tooltipText='add new category' text='+' click={openCategory} />
       </div>
       <ul>
-        <li>home</li>
-        <li>work</li>
+        <button type='button' onClick={() => sortTodos('all')}>
+          all
+        </button>
+        {categoryList.map((category) => (
+          <button type='button' key={category + Date.now()} onClick={() => sortTodos(category)}>
+            {category}
+          </button>
+        ))}
       </ul>
     </aside>
+  ) : (
+    <></>
   );
 };

@@ -19,6 +19,18 @@
 .input:focus {
   border-bottom: 3px solid var(--clr-yelow);
 }
+.notesForm {
+  max-width: 400px;
+  display: inline-flex;
+  flex-direction: column;
+}
+.inputAlert {
+  color: #f42c4f;
+  position: absolute;
+  left: 0px;
+  top: 40px;
+}
+
 .label {
   margin-left: 10px;
   width: 100%;
@@ -26,8 +38,8 @@
   font-weight: var(--fweight-small);
 }
 
-@media screen and (max-width: 560px){
-  .input{
+@media screen and (max-width: 560px) {
+  .input {
     min-width: 100%;
   }
 }

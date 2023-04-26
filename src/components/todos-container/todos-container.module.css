@@ -14,7 +14,9 @@
   gap: 20px;
   padding-left: 10px;
 }
-
+.navButton {
+  display: contents;
+}
 .todosHeader h3 {
   flex-grow: 1;
 }
@@ -28,7 +30,7 @@
 .burgerWrapper {
   display: none;
 }
-.rightSide{
+.rightSide {
   display: flex;
   gap: 10px;
 }
@@ -47,22 +49,20 @@
     grid-template-columns: 1fr;
     padding-inline: 12px;
   }
-
 }
 @media screen and (max-width: 470px) {
-  .todosHeader{
+  .todosHeader {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
   }
-  .rightSide{
+  .rightSide {
     width: 100%;
     justify-content: space-around;
   }
-  .todosHeader p{
+  .todosHeader p {
     font-size: var(--font-small);
   }
-  
 }
 @media screen and (max-width: 900px) {
   .burgerWrapper {

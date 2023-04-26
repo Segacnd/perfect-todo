@@ -5,13 +5,19 @@ import storage from 'redux-persist/lib/storage';
 import { ViewController } from './slices/view-controller-slice';
 import { CategoryReducer } from './slices/category-slice';
 import { AddTodoReducer } from './slices/add-todo-slice';
+import { TodosReducer } from './slices/fetch-todos-slice';
+import { TodoReducer } from './slices/fetch-todo-slice';
 import { UserReducer } from './slices/user-slice';
+import { AlertReducer } from './slices/alert-slice';
 
 const rootReducer = combineReducers({
   ViewController,
   CategoryReducer,
   AddTodoReducer,
+  TodosReducer,
+  TodoReducer,
   UserReducer,
+  AlertReducer,
 });
 
 const persistConfig = {

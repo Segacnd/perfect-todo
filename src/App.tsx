@@ -11,17 +11,6 @@ import { AddTodoModal } from './ui/pop-up/add-todo-modal/add-todo-modal';
 import { todosCollection } from './firebase-config';
 
 export const App: FC = () => {
-  const fetchPost = async () => {
-    await getDocs(todosCollection).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
-      console.log(newData);
-    });
-  };
-
-  useEffect(() => {
-    fetchPost();
-  }, []);
-
   const { modalIsOpen } = useAppSelector(categorySelector);
   const { isAddTodoModalOpen } = useAppSelector(addTodoSelector);
   return (

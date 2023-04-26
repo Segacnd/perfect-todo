@@ -9,9 +9,14 @@ import { Button } from '../../buttons/default-button/button';
 import { useAppDispatch } from '../../../redux/store';
 import { categoryActions } from '../../../redux/slices/category-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
+import { fetchTodos } from '../../../redux/slices/fetch-todos-slice';
 
 export const Modal: FC = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const closeModal = (): void => {
+    dispatch(categoryActions.modalToggler(false));
+  };
   const formik = useFormik({
     initialValues: {
       categoryName: '',
@@ -19,15 +24,8 @@ export const Modal: FC = () => {
     validationSchema: yup.object({
       categoryName: yup.string().required(`${t('form_errors_require')}`),
     }),
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-    },
+    onSubmit: (values) => {},
   });
-  const dispatch = useAppDispatch();
-
-  const closeModal = (): void => {
-    dispatch(categoryActions.modalToggler(false));
-  };
 
   return ReactDOM.createPortal(
     <div className={styles.modal}>

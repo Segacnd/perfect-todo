@@ -6,7 +6,7 @@ export interface IInputProps {
   placeholder: string;
   labelText: string | undefined;
   isLabelOpen: boolean;
-  value: string | undefined;
+  value: string;
   change: (value: string) => void;
   setIsLabelOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -26,7 +26,6 @@ export const Input: FC<IInputProps> = ({
     <div className={styles.inputWrapper}>
       <input
         name={name}
-        type='text'
         id={inputId}
         value={value}
         placeholder={placeholder}

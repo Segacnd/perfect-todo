@@ -1,34 +1,30 @@
-import { useEffect, useState, FC } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, FC, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { deleteDoc, doc } from 'firebase/firestore';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { viewControllerSelector } from '../../redux/selectors';
+import { viewControllerSelector, todosSelector } from '../../redux/selectors';
 import { addTodoActions } from '../../redux/slices/add-todo-slice';
 import burgerIcon from '../../assets/burger-icon.svg';
 import styles from './todos-container.module.css';
 import { categoryActions } from '../../redux/slices/category-slice';
-
-type ToDo = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-};
+import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
+import { Status } from '../../enums/enums';
+import { db } from '../../firebase-config';
 
 export const TodosContainer: FC = () => {
   const { t } = useTranslation();
-  const [todos, setTodos] = useState<ToDo[]>([]);
+  const { todos, activeCategory } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-      .then((data) => data.json())
-      .then((data) => setTodos(data));
-  }, []);
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   return (
     <section className={styles.todosContainer}>
@@ -50,15 +46,20 @@ export const TodosContainer: FC = () => {
           </button>
         </div>
       </div>
-
       <div className={styles.todosWrapper}>
         {todos &&
           todos
-            .filter((el) => (todoPreviewType === 'completed' ? el.completed : !el.completed))
+            .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
+            .filter((todo) => (activeCategory === 'all' ? todo : todo.category === activeCategory))
             .map((el) => (
-              <Link to='/todo/:id' key={el.id}>
-                <TodoPreview text={el.title} completeTodo={() => {}} deleteTodo={() => {}} />
-              </Link>
+              <button
+                type='button'
+                onClick={() => navigate(`/todo/${el.id}`)}
+                key={el.description}
+                className={styles.navButton}
+              >
+                <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
+              </button>
             ))}
       </div>
     </section>
