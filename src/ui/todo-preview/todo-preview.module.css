@@ -33,6 +33,7 @@
   line-height: 1.8;
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
+  text-transform: capitalize;
 }
 
 @keyframes show {

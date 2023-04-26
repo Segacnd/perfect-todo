@@ -1,7 +1,6 @@
-import { useEffect, useState, FC, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { deleteDoc, doc } from 'firebase/firestore';
 import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
@@ -12,8 +11,6 @@ import burgerIcon from '../../assets/burger-icon.svg';
 import styles from './todos-container.module.css';
 import { categoryActions } from '../../redux/slices/category-slice';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
-import { Status } from '../../enums/enums';
-import { db } from '../../firebase-config';
 
 export const TodosContainer: FC = () => {
   const { t } = useTranslation();
@@ -29,7 +26,7 @@ export const TodosContainer: FC = () => {
   return (
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>
-        <h3>Home</h3>
+        <h3>{activeCategory}</h3>
         <div className={styles.rightSide}>
           <ViewToggler />
           <AddButton
@@ -50,7 +47,7 @@ export const TodosContainer: FC = () => {
         {todos &&
           todos
             .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
-            .filter((todo) => (activeCategory === 'all' ? todo : todo.category === activeCategory))
+            .filter((todo) => (activeCategory === 'all' ? todo : todo.category.toLowerCase() === activeCategory))
             .map((el) => (
               <button
                 type='button'

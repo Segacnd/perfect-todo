@@ -15,19 +15,37 @@ aside li {
   margin-block: 4px;
   padding-left: 14px;
   cursor: pointer;
+  list-style: inside;
+  width: 100%;
 }
 
 aside li:hover {
   color: var(--clr-blue);
 }
-.buttonWrapper{
+.buttonWrapper {
   display: none;
 }
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.categoryList button {
+  border: transparent;
+  text-transform: capitalize;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.categoryList li:hover button {
+  color: var(--clr-blue);
+}
+
 @media screen and (max-width: 900px) {
   aside {
     display: none;
   }
-  .buttonWrapper{
+  .buttonWrapper {
     display: block;
     background-color: var(--clr-blue);
   }
@@ -41,21 +59,34 @@ aside li:hover {
     z-index: 3;
     text-align: center;
     background-color: var(--bg-clr);
+    padding: 0;
   }
-  .categoryHeader{
+  .categoryHeader {
     flex-direction: row-reverse;
+    padding: 6px 12px 0 12px;
   }
-  .categoryHeader h3{
+  .categoryHeader h3 {
     flex: 1;
     text-align: center;
   }
-  .mobileVersion li{
+  .mobileVersion li {
     border-bottom: 1px solid var(--border-clr);
-    padding-block: 6px;
+
     text-transform: uppercase;
+    width: 100%;
+    text-align: start;
+    list-style: none;
+    margin: 0;
+    padding-block: 6px;
   }
-  .mobileVersion li:hover{
+  .mobileVersion li button {
+    font-size: var(--font-medium);
+    font-weight: var(--fweight-medium);
+  }
+  .mobileVersion li:hover button {
+    color: var(--clr-blue);
+  }
+  .mobileVersion li:hover {
     border-bottom: 1px solid var(--clr-blue);
   }
 }
-

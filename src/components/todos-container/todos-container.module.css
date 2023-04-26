@@ -19,6 +19,7 @@
 }
 .todosHeader h3 {
   flex-grow: 1;
+  text-transform: capitalize;
 }
 .todosWrapper {
   display: grid;
