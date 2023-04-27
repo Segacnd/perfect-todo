@@ -1,9 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import ReactDOM from 'react-dom';
 import { addDoc } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { todosCollection, db } from '../../../firebase-config';
 import styles from './add-todo-modal.module.css';
@@ -15,7 +15,7 @@ import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
 import { todosSelector, userSelector } from '../../../redux/selectors';
 import { fetchTodos, todosActions } from '../../../redux/slices/fetch-todos-slice';
 
-interface Option {
+interface Options {
   value: string;
   label: string;
 }
@@ -55,15 +55,25 @@ export const AddTodoModal: FC = () => {
     },
   });
 
-  const categoryOptions = categoryList.map((category) => {
+  const categoryOptions: Options[] = categoryList.map((category) => {
     return { value: category, label: category };
   });
 
-  const handleSelectChange = (selectedOption: Option | null) => {
+  const handleSelectChange = (selectedOption: Options | null) => {
     formik.setFieldValue('category', selectedOption?.value);
   };
 
-  console.log(formik.values.category);
+  type IsMulti = false;
+
+  const customStyles: StylesConfig<Options, IsMulti> = {
+    control: (provided, state) => ({
+      ...provided,
+      border: 'none',
+      borderBottom: ' 1.5px solid var(--text-clr)',
+      backgroundColor: '#2323230f',
+    }),
+  };
+
   return ReactDOM.createPortal(
     <div className={styles.modalWrapper}>
       <form onSubmit={formik.handleSubmit} className={styles.modalContainer}>
@@ -77,7 +87,9 @@ export const AddTodoModal: FC = () => {
           options={categoryOptions}
           onChange={handleSelectChange}
           placeholder='you can choose an existed category'
-          className={styles.reactSelect}
+          styles={customStyles}
+          defaultValue={null}
+          defaultInputValue=''
         />
         <div className={styles.box}>
           <p>{t('form_add_todo_category')}</p>
