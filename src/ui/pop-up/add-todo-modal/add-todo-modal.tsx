@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { addDoc } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { todosCollection, db } from '../../../firebase-config';
 import styles from './add-todo-modal.module.css';
@@ -14,13 +15,16 @@ import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
 import { todosSelector, userSelector } from '../../../redux/selectors';
 import { fetchTodos, todosActions } from '../../../redux/slices/fetch-todos-slice';
 
-// import { ITodo } from '../../../redux/slices/fetch-todos-slice';
-// import { Note } from '../../../types';
+interface Option {
+  value: string;
+  label: string;
+}
 
 export const AddTodoModal: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(userSelector);
+  const { categoryList } = useAppSelector(todosSelector);
   const createTodo = async (values: any) => {
     await addDoc(todosCollection, values);
     console.log(db);
@@ -44,11 +48,22 @@ export const AddTodoModal: FC = () => {
     }),
     onSubmit: async (values) => {
       createTodo(values);
-      dispatch(fetchTodos());
+      if (id) {
+        dispatch(fetchTodos(id));
+      }
       dispatch(addTodoActions.addTodoModalToggler(false));
     },
   });
 
+  const categoryOptions = categoryList.map((category) => {
+    return { value: category, label: category };
+  });
+
+  const handleSelectChange = (selectedOption: Option | null) => {
+    formik.setFieldValue('category', selectedOption?.value);
+  };
+
+  console.log(formik.values.category);
   return ReactDOM.createPortal(
     <div className={styles.modalWrapper}>
       <form onSubmit={formik.handleSubmit} className={styles.modalContainer}>
@@ -56,8 +71,14 @@ export const AddTodoModal: FC = () => {
           <CloseButton click={() => dispatch(addTodoActions.addTodoModalToggler(false))} />
         </div>
         <div className={styles.modalHeader}>
-          <h3>Add Todo</h3>
+          <h3>{t('add_todo')}</h3>
         </div>
+        <Select
+          options={categoryOptions}
+          onChange={handleSelectChange}
+          placeholder='you can choose an existed category'
+          className={styles.reactSelect}
+        />
         <div className={styles.box}>
           <p>{t('form_add_todo_category')}</p>
           <FormInput
@@ -91,7 +112,12 @@ export const AddTodoModal: FC = () => {
             onBlur={formik.handleBlur}
           />
         </div>
-        <Button disabled={!formik.isValid ? true : false} text='add' buttonClick={() => {}} buttonType='submit' />
+        <Button
+          disabled={!formik.isValid ? true : false}
+          text={t('button_add_todo')}
+          buttonClick={() => {}}
+          buttonType='submit'
+        />
       </form>
     </div>,
     document.getElementById('add-modal') as Element

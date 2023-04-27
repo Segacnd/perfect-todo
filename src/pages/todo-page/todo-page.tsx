@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { t } from 'i18next';
 import styles from './todo-page.module.css';
 import { Card } from '../../ui/card/card';
 import { Input } from '../../ui/inputs/default-input/input';
@@ -75,9 +76,9 @@ export const TodoPage: FC = () => {
       </div>
       <div className={styles.todoContent}>
         <div className={styles.inputWrapper}>
-          <p className={styles.subtitle}>You can add new note</p>
+          <p className={styles.subtitle}>{t('add_note')}</p>
           <div className={styles.iwrapper}>
-            <NotesForm handleSubmit={addNote} />
+            <NotesForm handleSubmit={addNote} disabled={todo?.dateEnded ? true : false} />
           </div>
         </div>
         <div className={styles.noteContainer}>
@@ -88,19 +89,24 @@ export const TodoPage: FC = () => {
           {isAlertOpen && todo?.dateEnded === null && (
             <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' flag='error' />
           )}
-          {todo && todo.notes?.length === 0 && <p>Пока что нет заметок</p>}
+          {todo && todo.notes?.length === 0 && <p>{t('no_notes')}</p>}
         </div>
       </div>
       <div className={styles.buttonsContainer}>
         <Link className={styles.goBackLink} to='/'>
-          Back to main page
+          {t('to_main_page')}
         </Link>
         {todo?.dateEnded && isAlertOpen && (
           <Alert className='noteSuccessAlert' alertText='congs,this todo is finished!' flag='success' />
         )}
         <div className={styles.mainButtons}>
-          <Button text='delete todo' buttonType='button' buttonClick={() => deleteCurrentTodo()} />
-          <Button text='complete todo' buttonType='button' buttonClick={() => completeCurrentTodo()} />
+          <Button text={t('delete_todo')} buttonType='button' buttonClick={() => deleteCurrentTodo()} />
+          <Button
+            text={t('complete_todo')}
+            buttonType='button'
+            buttonClick={() => completeCurrentTodo()}
+            disabled={todo?.dateEnded ? true : false}
+          />
         </div>
       </div>
     </div>

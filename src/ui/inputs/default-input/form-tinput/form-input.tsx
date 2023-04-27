@@ -8,6 +8,7 @@ interface IFormInputProps extends Omit<IInputProps, 'change' | 'labelText' | 'se
   onBlur?: (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => void;
   errortext?: string;
   type?: string;
+  disabled?: boolean;
 }
 
 export const FormInput: FC<IFormInputProps> = ({
@@ -18,9 +19,10 @@ export const FormInput: FC<IFormInputProps> = ({
   errortext,
   onBlur,
   type = 'string',
+  disabled,
 }) => {
   return (
-    <div className={classNames(styles.inputWrapper, { [styles.error]: errortext })}>
+    <div className={classNames(styles.inputWrapper, { [styles.error]: errortext, disabled })}>
       <input
         onBlur={onBlur}
         id={name}
@@ -29,6 +31,7 @@ export const FormInput: FC<IFormInputProps> = ({
         onChange={onChange}
         value={value}
         name={name}
+        disabled={disabled}
       />
       <label htmlFor={name}>{errortext}</label>
     </div>
