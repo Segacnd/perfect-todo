@@ -13,7 +13,7 @@
   bottom: -330%;
   right: -10%;
   background-color: var(--clr-white);
-  z-index: 1000;
+  z-index: 4;
   width: 200px;
   padding: 8px 16px;
   display: flex;
