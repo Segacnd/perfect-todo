@@ -1,8 +1,10 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from 'i18next-xhr-backend';
 
 i18next
+  .use(Backend)
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
@@ -38,9 +40,19 @@ i18next
           form_add_todo_placeholder: 'Title...',
           form_add_todo_description: 'Todo description',
           form_add_todo_category: 'Todo category',
-          form_add_todo_category_placeholder: 'Example:home, work, etc.',
+          form_add_todo_category_placeholder: 'or create new category',
           form_add_todo_description_placeholder: 'Description...',
           form_add_new_note: 'length must not exceed 100 characters',
+          no_todos_text: 'No tasks yet',
+          add_todo: 'Add Todo',
+          button_add_todo: 'add',
+          add_note: 'add new note',
+          no_notes: 'No notes yet',
+          notes_input_placeholder: 'write a note',
+          to_main_page: 'Back to main page',
+          delete_todo: 'delete todo',
+          complete_todo: 'complete todo',
+          notes_input_prompt: 'press Enter to add a note',
         },
       },
       ru: {
@@ -76,12 +88,23 @@ i18next
           form_add_todo_description: 'Описание задачи',
           form_add_todo_description_placeholder: 'Описание...',
           form_add_todo_category: 'Категория',
-          form_add_todo_category_placeholder: 'Например: дом, работа и тд.',
+          form_add_todo_category_placeholder: 'или добавить новую категорию',
           form_add_new_note: 'длина не должна превышать 100 символов',
+          no_todos_text: 'Задач пока что нет',
+          add_todo: 'Добавить задачу',
+          button_add_todo: 'Добавить',
+          add_note: 'добавить новую заметку',
+          no_notes: 'Пока что нет заметок',
+          notes_input_placeholder: 'введите заметку',
+          to_main_page: 'Назад на главную страницу',
+          delete_todo: 'удалить задачу',
+          complete_todo: 'выполнить задачу',
+          notes_input_prompt: 'нажмите Enter чтобы добавить заметку',
         },
       },
     },
     fallbackLng: 'en',
+    preload: ['en', 'ru'],
     interpolation: {
       escapeValue: false,
     },

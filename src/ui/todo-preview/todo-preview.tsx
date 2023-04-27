@@ -3,9 +3,10 @@ import styles from './todo-preview.module.css';
 import deleteIcon from '../../assets/delete-icon.svg';
 import completeIcon from '../../assets/complete-circle.svg';
 import completedIcon from '../../assets/success-icon.svg';
-import { useAppDispatch } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { completeTodo, deleteTodo } from '../../redux/slices/fetch-todo-slice';
 import { ITodo, fetchTodos } from '../../redux/slices/fetch-todos-slice';
+import { userSelector } from '../../redux/selectors';
 
 type TodopreviewProps = {
   text: string;
@@ -13,16 +14,22 @@ type TodopreviewProps = {
   todo: ITodo;
 };
 export const TodoPreview: FC<TodopreviewProps> = ({ text, index, todo }) => {
+  const userState = useAppSelector(userSelector);
+  const userId = userState.id;
   const id = useId();
   const dispatch = useAppDispatch();
   const deleteCurrentTodo = (e: React.MouseEvent) => {
     e.stopPropagation();
-    dispatch(fetchTodos());
+    if (userId) {
+      dispatch(fetchTodos(userId));
+    }
     dispatch(deleteTodo(index));
   };
   const completeCurrentTodo = (e: React.MouseEvent) => {
     e.stopPropagation();
-    dispatch(fetchTodos());
+    if (userId) {
+      dispatch(fetchTodos(userId));
+    }
     dispatch(completeTodo(index));
   };
 

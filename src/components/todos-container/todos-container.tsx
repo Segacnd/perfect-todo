@@ -5,7 +5,7 @@ import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { viewControllerSelector, todosSelector } from '../../redux/selectors';
+import { viewControllerSelector, todosSelector, userSelector } from '../../redux/selectors';
 import { addTodoActions } from '../../redux/slices/add-todo-slice';
 import burgerIcon from '../../assets/burger-icon.svg';
 import styles from './todos-container.module.css';
@@ -16,17 +16,20 @@ export const TodosContainer: FC = () => {
   const { t } = useTranslation();
   const { todos, activeCategory } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
+  const { id } = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
-
+    if (id) {
+      dispatch(fetchTodos(id));
+    }
+  }, [dispatch, id]);
+  console.log(todos);
   return (
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>
-        <h3>{activeCategory}</h3>
+        <h3>{todos.length ? activeCategory : ''}</h3>
         <div className={styles.rightSide}>
           <ViewToggler />
           <AddButton
@@ -44,7 +47,7 @@ export const TodosContainer: FC = () => {
         </div>
       </div>
       <div className={styles.todosWrapper}>
-        {todos &&
+        {todos.length ? (
           todos
             .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
             .filter((todo) => (activeCategory === 'all' ? todo : todo.category.toLowerCase() === activeCategory))
@@ -57,7 +60,10 @@ export const TodosContainer: FC = () => {
               >
                 <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
               </button>
-            ))}
+            ))
+        ) : (
+          <p className={styles.noTodosText}>{t('no_todos_text')}</p>
+        )}
       </div>
     </section>
   );

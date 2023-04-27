@@ -1,15 +1,15 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { doc as docc, getDocs } from 'firebase/firestore';
+import { getDocs } from 'firebase/firestore';
 import { Status } from '../../enums/enums';
 import { todosCollection } from '../../firebase-config';
 import { Note } from '../../types';
 
-export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
+export const fetchTodos = createAsyncThunk('todos/fetchTodos', async (id: string) => {
   const res = await getDocs(todosCollection).then((querySnapshot) => {
     const data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     return data;
   });
-  return res;
+  return res.filter((el) => el.user === id);
 });
 
 export interface ITodo {
