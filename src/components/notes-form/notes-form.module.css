@@ -1,0 +1,7 @@
+.notesForm {
+  position: relative;
+}
+.inputPrompt {
+  position: absolute;
+  bottom: 0;
+}

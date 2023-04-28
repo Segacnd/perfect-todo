@@ -18,10 +18,13 @@
   border-radius: 6px;
   position: relative;
 }
-.modalHeader{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.reactSelect {
+  border: 1.5px solid var(--text-clr);
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .modalContainer p {
   font-size: var(--font-medium);
@@ -46,12 +49,12 @@
   font-weight: var(--fweight-medium);
 }
 
-.box{
-    width: 350px;
+.box {
+  width: 350px;
 }
 
-.closeButton{
-    position: absolute;
-    top: 3%;
-    right: 3%;
+.closeButton {
+  position: absolute;
+  top: 3%;
+  right: 3%;
 }

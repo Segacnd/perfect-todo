@@ -3,12 +3,14 @@ import { FC } from 'react';
 import * as yup from 'yup';
 import { t } from 'i18next';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
+import styles from './notes-form.module.css';
 
 type NotesFormProps = {
   handleSubmit: (note: string) => void;
+  disabled?: boolean;
 };
 
-export const NotesForm: FC<NotesFormProps> = ({ handleSubmit }) => {
+export const NotesForm: FC<NotesFormProps> = ({ handleSubmit, disabled }) => {
   const formik = useFormik({
     initialValues: {
       note: '',
@@ -24,16 +26,18 @@ export const NotesForm: FC<NotesFormProps> = ({ handleSubmit }) => {
     },
   });
   return (
-    <form autoComplete='off' onSubmit={formik.handleSubmit}>
+    <form autoComplete='off' onSubmit={formik.handleSubmit} className={styles.notesForm}>
       <FormInput
-        placeholder='write a note'
+        placeholder={t('notes_input_placeholder')}
         onChange={formik.handleChange}
         value={formik.values.note}
         name='note'
         errortext={formik.errors.note}
         onBlur={formik.handleBlur}
         type='string'
+        disabled={disabled}
       />
+      {formik.dirty && <p className={styles.inputPrompt}>{t('notes_input_prompt')}</p>}
     </form>
   );
 };

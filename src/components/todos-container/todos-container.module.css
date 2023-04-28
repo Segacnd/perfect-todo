@@ -6,7 +6,12 @@
   flex-direction: column;
   gap: 20px;
 }
-
+.noTodosText {
+  position: absolute;
+  left: 42%;
+  top: 45%;
+  font-size: xx-large;
+}
 .todosHeader {
   display: flex;
   justify-content: flex-start;

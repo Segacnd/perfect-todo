@@ -25,11 +25,11 @@ export const TodosContainer: FC = () => {
       dispatch(fetchTodos(id));
     }
   }, [dispatch, id]);
-
+  console.log(todos);
   return (
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>
-        <h3>{activeCategory}</h3>
+        <h3>{todos.length ? activeCategory : ''}</h3>
         <div className={styles.rightSide}>
           <ViewToggler />
           <AddButton
@@ -47,7 +47,7 @@ export const TodosContainer: FC = () => {
         </div>
       </div>
       <div className={styles.todosWrapper}>
-        {todos &&
+        {todos.length ? (
           todos
             .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
             .filter((todo) => (activeCategory === 'all' ? todo : todo.category.toLowerCase() === activeCategory))
@@ -60,7 +60,10 @@ export const TodosContainer: FC = () => {
               >
                 <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
               </button>
-            ))}
+            ))
+        ) : (
+          <p className={styles.noTodosText}>{t('no_todos_text')}</p>
+        )}
       </div>
     </section>
   );
