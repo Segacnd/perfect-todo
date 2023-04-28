@@ -33,7 +33,6 @@ export const Auth: FC = () => {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, values.email, values.password).then(({ user }) => {
         dispatch(userActions.setUser({ email: user.email, id: user.uid, token: user.refreshToken }));
-        console.log(user);
       });
     },
   });

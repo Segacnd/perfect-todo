@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import accountIconBlack from '../../assets/acount-icon-black.svg';
 import accountIconWhite from '../../assets/account-icon-white.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
@@ -26,7 +27,7 @@ export const Header: FC = () => {
         </button>
         {isModalOpen && (
           <div className={styles.accountModal}>
-            <p>account</p>
+            <Link to='/profile'>Profile</Link>
             <Button
               buttonType='button'
               buttonClick={() => {

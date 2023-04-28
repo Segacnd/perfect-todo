@@ -1,0 +1,27 @@
+.root{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.graphWrapper{
+    height: 300px;
+    width: 500px;
+    padding-bottom: 50px;
+    /* box-shadow: var(--box-shadow); */
+    background-color: var(--preview-bg);
+}
+.pieWrapper{
+    height: 180px;
+    width: 180px;
+    /* box-shadow: var(--box-shadow); */
+    background-color: var(--preview-bg);
+}
+.container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px;
+    
+}
