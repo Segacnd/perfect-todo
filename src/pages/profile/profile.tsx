@@ -1,7 +1,5 @@
 import { FC, useEffect } from 'react';
 import {
-  Bar,
-  BarChart,
   Brush,
   CartesianGrid,
   Legend,
@@ -14,13 +12,6 @@ import {
   Line,
   PieChart,
   Pie,
-  RadarChart,
-  PolarGrid,
-  PolarRadiusAxis,
-  PolarAngleAxis,
-  Radar,
-  RadialBarChart,
-  RadialBar,
   Cell,
 } from 'recharts';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
