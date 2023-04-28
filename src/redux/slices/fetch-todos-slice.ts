@@ -4,12 +4,12 @@ import { Status } from '../../enums/enums';
 import { todosCollection } from '../../firebase-config';
 import { Note } from '../../types';
 
-export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
+export const fetchTodos = createAsyncThunk('todos/fetchTodos', async (userId: string) => {
   const res = await getDocs(todosCollection).then((querySnapshot) => {
     const data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     return data;
   });
-  return res;
+  return res.filter((todo) => todo.user === userId);
 });
 
 export interface ITodo {

@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { CollectionReference, DocumentData, collection, getFirestore } from 'firebase/firestore';
+import { CollectionReference, DocumentData, collection, getFirestore, getDocs } from 'firebase/firestore';
 import { Todo, User } from './types';
+import { UserState } from './redux/slices/user-slice';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,3 +27,5 @@ export const createCollection = <T = DocumentData>(collectionName: string) => {
 };
 
 export const todosCollection = createCollection<Todo>('todos');
+export const userCollection = createCollection<UserState>('users');
+console.log(userCollection);

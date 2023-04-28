@@ -5,7 +5,7 @@ import { AddButton } from '../../ui/buttons/add-button/add-button';
 import { TodoPreview } from '../../ui/todo-preview/todo-preview';
 import { ViewToggler } from '../view-toggler/view-toggler';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { viewControllerSelector, todosSelector } from '../../redux/selectors';
+import { viewControllerSelector, todosSelector, userSelector } from '../../redux/selectors';
 import { addTodoActions } from '../../redux/slices/add-todo-slice';
 import burgerIcon from '../../assets/burger-icon.svg';
 import styles from './todos-container.module.css';
@@ -16,12 +16,15 @@ export const TodosContainer: FC = () => {
   const { t } = useTranslation();
   const { todos, activeCategory } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
+  const { id } = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
+    if (id) {
+      dispatch(fetchTodos(id));
+    }
+  }, [dispatch, id]);
 
   return (
     <section className={styles.todosContainer}>

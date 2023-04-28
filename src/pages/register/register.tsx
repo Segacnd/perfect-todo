@@ -1,18 +1,22 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { doc, setDoc, collection, addDoc } from 'firebase/firestore';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Button } from '../../ui/buttons/default-button/button';
 import styles from './register.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
 import { loginRules } from '../../validation/form-validation-schemes';
+import { db, userCollection } from '../../firebase-config';
 
 export const Register: FC = () => {
   const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: {
+      login: '',
       email: '',
       password: '',
     },
@@ -26,16 +30,30 @@ export const Register: FC = () => {
         .required(`${t('form_errors_require')}`)
         .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const auth = getAuth();
-      createUserWithEmailAndPassword(auth, values.email, values.password).then();
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      if (auth.currentUser) {
+        updateProfile(auth.currentUser, {
+          displayName: formik.values.login,
+        }).then(() => console.log(auth.currentUser));
+      }
+      console.log(auth.currentUser);
     },
   });
-
   return (
     <>
       <h2 className={styles.registerTitle}>{t('registration_title')}</h2>
       <form autoComplete='off' onSubmit={formik.handleSubmit} className={styles.registerForm}>
+        <FormInput
+          onChange={formik.handleChange}
+          value={formik.values.login}
+          placeholder='enter your login'
+          name='login'
+          errortext={formik.touched.login ? formik.errors.login : ''}
+          onBlur={formik.handleBlur}
+          type='text'
+        />
         <FormInput
           onChange={formik.handleChange}
           value={formik.values.email}
