@@ -1,6 +1,6 @@
 .buttonWrapper {
   position: relative;
-  z-index: 500;
+  z-index: 2;
 }
 .addButton {
   border: transparent;
