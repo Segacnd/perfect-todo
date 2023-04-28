@@ -98,11 +98,21 @@ export const Profile: FC = () => {
 
   return (
     <div className={styles.root}>
-      <div>
-        <div>Count of completed todos: {completedTodos.length}</div>
-        <div>Count of non completed todos: {nonCompleted.length}</div>
-        <div>Todos createdd for the last 7 days: </div>
-      </div>
+      {/* <div className={styles.goalsWrapper}>
+        <div className={styles.goalWrapper}>
+          <p className={styles.emoji}>0</p>
+          <p className={styles.goalCard}>
+            Count of completed todos <span> {completedTodos.length} </span>
+          </p>
+        </div>
+        <div className={styles.goalWrapper}>
+          <p className={styles.emoji}>0</p>
+          <p className={styles.goalCard}>
+            Count of non completed todos <span> {nonCompleted.length} </span>
+          </p>
+        </div> */}
+      {/* <div className={styles.goalCard}>Todos createdd for the last 7 days: </div> */}
+      {/* </div> */}
       <div className={styles.container}>
         <div className={styles.graphWrapper}>
           <h2 style={{ textAlign: 'center' }}>Progress in this month</h2>
@@ -113,12 +123,12 @@ export const Profile: FC = () => {
               data={array}
               margin={{
                 top: 5,
-                right: 40,
+                right: 20,
                 left: 0,
                 bottom: 5,
               }}
             >
-              <CartesianGrid vertical={false} strokeDasharray='10 10' fill='#212A3E' />
+              <CartesianGrid vertical={false} strokeDasharray='10 10' fill='#d7dde9' />
               <XAxis dataKey='day' />
               <YAxis dataKey='during' domain={[0, 'dataMax + 2']} tickCount={6} />
               <Tooltip />
@@ -132,13 +142,14 @@ export const Profile: FC = () => {
           </ResponsiveContainer>
         </div>
         <div className={styles.pieWrapper}>
+          <h2>Сategory usage rating</h2>
           <ResponsiveContainer width='100%' height='100%'>
             <PieChart>
               <Pie
                 data={readyToShow}
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius={80}
+                outerRadius={120}
                 fill='#212A3E'
                 dataKey='count'
               >
@@ -146,6 +157,7 @@ export const Profile: FC = () => {
                   <Cell key={`cell-${entry}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
+              <Legend />
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>

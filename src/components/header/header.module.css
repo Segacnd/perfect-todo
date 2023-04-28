@@ -24,3 +24,11 @@
   box-shadow: var(--box-shadow);
   border-radius: 6px;
 }
+.appTitle {
+  font-size: var(--font-big);
+  font-weight: var(--fweight-big);
+  color: var(--text-clr);
+}
+.appTitle:hover {
+  color: var(--text-clr);
+}

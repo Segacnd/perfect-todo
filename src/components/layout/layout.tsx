@@ -20,9 +20,6 @@ export const Layout: FC = () => {
 
   return (
     <div className={styles.app} data-theme={colorTheme}>
-      <Link to='/' className={styles.appTitle}>
-        {t('app_title')}
-      </Link>
       <div className={styles.container}>
         <Header />
         <main>
