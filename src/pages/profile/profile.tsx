@@ -73,7 +73,6 @@ export const Profile: FC = () => {
     };
   });
 
-
   const COLORS = ['#8884d8', '#ff7300', '#FFBB28', '#FF8042'];
 
   const RADIAN = Math.PI / 180;
