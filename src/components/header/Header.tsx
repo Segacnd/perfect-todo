@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import accountIconBlack from '../../assets/acount-icon-black.svg';
 import accountIconWhite from '../../assets/account-icon-white.svg';
@@ -16,6 +16,11 @@ export const Header: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { colorTheme } = useAppSelector(viewControllerSelector);
+  const navigate = useNavigate();
+  const profileButtonHandler = () => {
+    setIsModalOpen(false);
+    navigate('/profile');
+  };
   return (
     <header>
       <div className={styles.leftSide}>
@@ -32,7 +37,7 @@ export const Header: FC = () => {
         </button>
         {isModalOpen && (
           <div className={styles.accountModal}>
-            <Link to='/profile'>Profile</Link>
+            <Button buttonType='button' text='Profile' buttonClick={profileButtonHandler} />
             <Button
               buttonType='button'
               buttonClick={() => {

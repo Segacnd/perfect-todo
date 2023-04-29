@@ -1,5 +1,4 @@
 .changeLanguageWrapper {
-
 }
 
 .changeLanguageWrapper button {
@@ -12,6 +11,7 @@
   border: 1px solid var(--border-clr);
   background-color: var(--clr-white);
   text-transform: uppercase;
+  color: var(--text-clr);
 }
 .changeLanguageWrapper button:nth-child(1) {
   border-radius: 4px 0 0 4px;

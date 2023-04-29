@@ -20,12 +20,12 @@ const router = createBrowserRouter(
       <Route path='/' element={<Layout />}>
         <Route index element={<App />} />
         <Route path='/todo/:id' element={<TodoPage />} />
-        <Route path='/profile' element={<Profile />} />
       </Route>
       <Route element={<FormLayout />}>
         <Route path='/auth' element={<Auth />} />
         <Route path='/registration' element={<Register />} />
       </Route>
+      <Route path='/profile' element={<Profile />} />
     </Route>
   )
 );
