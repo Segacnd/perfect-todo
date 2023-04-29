@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useRef, ChangeEvent, ChangeEventHandler, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { doc, setDoc, collection, addDoc } from 'firebase/firestore';
@@ -10,6 +10,7 @@ import styles from './register.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
 import { loginRules } from '../../validation/form-validation-schemes';
 import { db, userCollection } from '../../firebase-config';
+import addPhotoSvg from '../../assets/add-photo.svg';
 
 export const Register: FC = () => {
   const { t } = useTranslation();
@@ -29,6 +30,10 @@ export const Register: FC = () => {
         .string()
         .required(`${t('form_errors_require')}`)
         .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
+      login: yup
+        .string()
+        .required(`${t('form_errors_require')}`)
+        .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
     }),
     onSubmit: async (values) => {
       const auth = getAuth();
@@ -41,6 +46,25 @@ export const Register: FC = () => {
       console.log(auth.currentUser);
     },
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const handlePreview = useCallback(() => {
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  }, [selectedFile]);
+
+  function handleFileInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedFile(event.target.files ? event.target.files[0] : null);
+  }
+  console.log(selectedFile, previewUrl);
+  useEffect(() => {
+    handlePreview();
+  }, [handlePreview]);
   return (
     <>
       <h2 className={styles.registerTitle}>{t('registration_title')}</h2>
@@ -72,6 +96,28 @@ export const Register: FC = () => {
           onBlur={formik.handleBlur}
           type='password'
         />
+        {/* <FormInput
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          placeholder='enter your password'
+          name='file'
+          onBlur={formik.handleBlur}
+          type='file'
+          labelText='choose a photo'
+          accept='.jpg, .jpeg, .png'
+        /> */}
+
+        <div className={styles.file}>
+          <img src={addPhotoSvg} alt='addPhoto' />
+          <input
+            type='file'
+            id='image_uploads'
+            name='image_uploads'
+            accept='.jpg, .jpeg, .png'
+            onChange={handleFileInputChange}
+          />
+          {previewUrl ? <img src={previewUrl} alt='Preview' /> : <span> Choose your image</span>}
+        </div>
         <Button
           disabled={!formik.isValid ? true : false}
           text={t('registration_button_text')}
