@@ -1,4 +1,6 @@
 import { FC, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import accountIconBlack from '../../assets/acount-icon-black.svg';
 import accountIconWhite from '../../assets/account-icon-white.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
@@ -10,16 +12,25 @@ import { Button } from '../../ui/buttons/default-button/button';
 import { userActions } from '../../redux/slices/user-slice';
 
 export const Header: FC = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { colorTheme } = useAppSelector(viewControllerSelector);
   const { login } = useAppSelector(userSelector);
+  const navigate = useNavigate();
+  const profileButtonHandler = () => {
+    setIsModalOpen(false);
+    navigate('/profile');
+  };
   return (
     <header>
       <div className={styles.leftSide}>
         <ChangeLanguageComponent />
         <ThemeSwitchButton />
       </div>
+      <Link to='/' className={styles.appTitle}>
+        {t('app_title')}
+      </Link>
       <div className={styles.rightSide}>
         <p>{login}</p>
         <button type='button' onClick={() => setIsModalOpen((prev) => !prev)}>
@@ -27,7 +38,7 @@ export const Header: FC = () => {
         </button>
         {isModalOpen && (
           <div className={styles.accountModal}>
-            <p>account</p>
+            <Button buttonType='button' text='Profile' buttonClick={profileButtonHandler} />
             <Button
               buttonType='button'
               buttonClick={() => {

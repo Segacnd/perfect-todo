@@ -25,7 +25,6 @@ export const TodosContainer: FC = () => {
       dispatch(fetchTodos(id));
     }
   }, [dispatch, id]);
-  console.log(todos);
   return (
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>

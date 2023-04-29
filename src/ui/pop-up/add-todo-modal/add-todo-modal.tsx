@@ -76,7 +76,7 @@ export const AddTodoModal: FC = () => {
 
   return ReactDOM.createPortal(
     <div className={styles.modalWrapper}>
-      <form onSubmit={formik.handleSubmit} className={styles.modalContainer}>
+      <form autoComplete='off' onSubmit={formik.handleSubmit} className={styles.modalContainer}>
         <div className={styles.closeButton}>
           <CloseButton click={() => dispatch(addTodoActions.addTodoModalToggler(false))} />
         </div>
