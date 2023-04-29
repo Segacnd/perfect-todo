@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Header } from '../header/Header';
 import { useAppSelector } from '../../redux/store';
@@ -20,7 +20,6 @@ export const Layout: FC = () => {
 
   return (
     <div className={styles.app} data-theme={colorTheme}>
-      <h1 className={styles.appTitle}>{t('app_title')}</h1>
       <div className={styles.container}>
         <Header />
         <main>

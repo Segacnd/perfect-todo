@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addDoc, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, todosCollection } from '../../firebase-config';
 import { ITodo } from './fetch-todos-slice';
 import { Status } from '../../enums/enums';
@@ -32,18 +32,12 @@ export const completeTodo = createAsyncThunk('todo/completeTodo', async (id: str
     dateEnded: new Date().toISOString(),
   };
   await updateDoc(todoDoc, newFields);
-
-  console.log(todoDoc);
-  console.log('sss');
 });
 
 export const deleteTodo = createAsyncThunk('todo/deleteTodo', async (id: string) => {
   const todoDoc = doc(db, 'todos', id);
 
   await deleteDoc(todoDoc);
-
-  console.log(todoDoc);
-  console.log('sss');
 });
 
 interface ITodoState {

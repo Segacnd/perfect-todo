@@ -12,6 +12,7 @@ import { store, persistor } from './redux/store';
 import { FormLayout } from './components/form-layout/form-layout';
 import { Auth } from './pages/auth/auth';
 import { Register } from './pages/register/register';
+import { Profile } from './pages/profile/profile';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
         <Route path='/auth' element={<Auth />} />
         <Route path='/registration' element={<Register />} />
       </Route>
+      <Route path='/profile' element={<Profile />} />
     </Route>
   )
 );
