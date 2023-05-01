@@ -17,7 +17,7 @@ export type ObjecType = {
 };
 
 export const Profile: FC = () => {
-  const { id, email } = useAppSelector(userSelector);
+  const { id, email, login, photoUrl } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
   const { colorTheme } = useAppSelector(viewControllerSelector);
   const dispatch = useAppDispatch();
@@ -70,8 +70,8 @@ export const Profile: FC = () => {
           </div>
           <div className={styles.profileData}>
             <div className={styles.rightSide}>
-              <img src={userMockImgBlack} alt='' />
-              <p> {email} </p>
+              <img src={photoUrl ? photoUrl : userMockImgBlack} alt='' />
+              <p> {login} </p>
             </div>
             <div className={styles.leftSide}>
               <ChangeLanguageComponent />

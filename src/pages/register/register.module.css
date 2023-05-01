@@ -17,33 +17,3 @@
 .registerSubTitle a {
   font-weight: var(--fweight-small);
 }
-.file {
-  position: relative;
-  display: flex;
-  gap: 50px;
-  align-items: center;
-}
-.file img:nth-of-type(2) {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-.file span {
-  font-weight: var(--fweight-medium);
-  color: var(--text-clr);
-}
-.file img:nth-of-type(1) {
-  width: 30px;
-  height: 30px;
-}
-.file input[type='file'] {
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  opacity: 0;
-  width: 100%;
-}
-/* .file img {
-  width: 30px;
-  height: 30px;
-} */

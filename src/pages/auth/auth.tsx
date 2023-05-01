@@ -38,6 +38,7 @@ export const Auth: FC = () => {
             email: user.email,
             id: user.uid,
             token: user.refreshToken,
+            photoUrl: auth.currentUser?.photoURL,
           })
         );
 
@@ -53,7 +54,7 @@ export const Auth: FC = () => {
         <FormInput
           onChange={formik.handleChange}
           value={formik.values.email}
-          placeholder={t('auth_input_placeholder')}
+          placeholder={t('auth_input_placeholder_login')}
           name='email'
           errortext={formik.errors.email}
           type='email'
@@ -61,7 +62,7 @@ export const Auth: FC = () => {
         <FormInput
           onChange={formik.handleChange}
           value={formik.values.password}
-          placeholder='enter your password'
+          placeholder={t('auth_input_placeholder_password')}
           name='password'
           errortext={formik.touched.password ? formik.errors.password : ''}
           onBlur={formik.handleBlur}

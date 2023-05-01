@@ -1,0 +1,24 @@
+.file {
+  position: relative;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+.file label img {
+  width: 30px;
+  height: 30px;
+  border-radius: 0%;
+}
+.file img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.file span {
+  font-weight: var(--fweight-medium);
+  color: var(--text-clr);
+}
+
+.file input[type='file'] {
+  display: none;
+}

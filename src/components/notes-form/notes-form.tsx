@@ -37,7 +37,7 @@ export const NotesForm: FC<NotesFormProps> = ({ handleSubmit, disabled }) => {
         type='string'
         disabled={disabled}
       />
-      {formik.dirty && <p className={styles.inputPrompt}>{t('notes_input_prompt')}</p>}
+      {formik.dirty && !formik.errors.note && <p className={styles.inputPrompt}>{t('notes_input_prompt')}</p>}
     </form>
   );
 };

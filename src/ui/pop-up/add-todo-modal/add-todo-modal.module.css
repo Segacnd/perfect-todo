@@ -10,7 +10,7 @@
 }
 .modalContainer {
   background-color: var(--preview-bg);
-  color: var(--preview-bg);
+  color: var(--text-clr);
   padding: 30px 28px;
   display: flex;
   flex-direction: column;

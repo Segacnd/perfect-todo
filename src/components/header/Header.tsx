@@ -16,7 +16,7 @@ export const Header: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { colorTheme } = useAppSelector(viewControllerSelector);
-  const { login } = useAppSelector(userSelector);
+  const { login, photoUrl } = useAppSelector(userSelector);
   const navigate = useNavigate();
   const profileButtonHandler = () => {
     setIsModalOpen(false);
@@ -34,7 +34,11 @@ export const Header: FC = () => {
       <div className={styles.rightSide}>
         <p>{login}</p>
         <button type='button' onClick={() => setIsModalOpen((prev) => !prev)}>
-          <img src={colorTheme === 'dark' ? accountIconWhite : accountIconBlack} alt='user avatar' />
+          {photoUrl ? (
+            <img src={photoUrl} alt='user avatar' />
+          ) : (
+            <img src={colorTheme === 'dark' ? accountIconWhite : accountIconBlack} alt='user avatar' />
+          )}
         </button>
         {isModalOpen && (
           <div className={styles.accountModal}>

@@ -2,7 +2,7 @@ import { userSelector } from '../redux/selectors';
 import { useAppSelector } from '../redux/store';
 
 export const useAuth = () => {
-  const { email, id, token, login } = useAppSelector(userSelector);
+  const { email, id, token, login, photoUrl } = useAppSelector(userSelector);
 
   return {
     isAuth: !!email,
@@ -10,5 +10,6 @@ export const useAuth = () => {
     token,
     id,
     login,
+    photoUrl,
   };
 };
