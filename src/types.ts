@@ -6,7 +6,7 @@ export type Todo = {
   user: string;
   title: string;
   category: string;
-  dateEnded: string;
+  dateEnded: string | null;
   dateStarted: string;
   description: string;
   notes: Note[];

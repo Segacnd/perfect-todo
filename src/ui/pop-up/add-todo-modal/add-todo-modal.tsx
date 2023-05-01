@@ -13,7 +13,8 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { addTodoActions } from '../../../redux/slices/add-todo-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
 import { todosSelector, userSelector } from '../../../redux/selectors';
-import { fetchTodos, todosActions } from '../../../redux/slices/fetch-todos-slice';
+import { fetchTodos } from '../../../redux/slices/fetch-todos-slice';
+import { addTodo } from '../../../redux/slices/fetch-todo-slice';
 
 interface Options {
   value: string;
@@ -25,10 +26,6 @@ export const AddTodoModal: FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(userSelector);
   const { categoryList } = useAppSelector(todosSelector);
-  const createTodo = async (values: any) => {
-    await addDoc(todosCollection, values);
-    console.log(db);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +36,7 @@ export const AddTodoModal: FC = () => {
       dateStarted: new Date().toISOString(),
       dateEnded: null,
       notes: [],
-      user: id,
+      user: id!,
     },
     validationSchema: yup.object({
       title: yup.string().required(`${t('form_errors_require')}`),
@@ -47,7 +44,7 @@ export const AddTodoModal: FC = () => {
       category: yup.string().required(`${t('form_errors_require')}`),
     }),
     onSubmit: async (values) => {
-      createTodo(values);
+      dispatch(addTodo(values));
       if (id) {
         dispatch(fetchTodos(id));
       }
