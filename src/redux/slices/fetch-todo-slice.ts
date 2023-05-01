@@ -40,7 +40,7 @@ export const deleteTodo = createAsyncThunk('todo/deleteTodo', async (id: string)
   await deleteDoc(todoDoc);
 });
 
-export const addTodo = createAsyncThunk('todo/addTodo', async (values: Todo) => {
+export const addTodo = createAsyncThunk('todo/addTodo', async (values: ITodo) => {
   await addDoc(todosCollection, values);
 });
 
