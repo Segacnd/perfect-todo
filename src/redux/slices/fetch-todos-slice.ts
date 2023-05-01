@@ -14,10 +14,10 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async (id: string
 
 export interface ITodo {
   id: string;
-  user: string;
+  user: string | null;
   title: string;
   category: string;
-  dateEnded: string;
+  dateEnded: string | null;
   dateStarted: string;
   description: string;
   notes: Note[];

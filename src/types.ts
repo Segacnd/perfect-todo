@@ -3,10 +3,10 @@ export type Note = {
   note: string;
 };
 export type Todo = {
-  user: string;
+  user: string | null;
   title: string;
   category: string;
-  dateEnded: string;
+  dateEnded: string | null;
   dateStarted: string;
   description: string;
   notes: Note[];

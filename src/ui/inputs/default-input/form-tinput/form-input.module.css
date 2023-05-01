@@ -3,6 +3,9 @@
   flex-direction: column;
   min-height: 62px;
 }
+.inputWrapper input[type='file'] {
+}
+
 .inputWrapper input {
   min-width: 250px;
   max-width: 100%;
@@ -15,8 +18,8 @@
   font-weight: var(--fweight-medium);
   border-bottom: 2px solid var(--clr-blue);
 }
-.error input{
-    border-bottom: 2px solid var(--clr-error); 
+.error input {
+  border-bottom: 2px solid var(--clr-error);
 }
 .inputWrapper label {
   margin-left: 10px;

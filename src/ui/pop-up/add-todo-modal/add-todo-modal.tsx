@@ -1,11 +1,9 @@
 import { FC } from 'react';
 import ReactDOM from 'react-dom';
-import { addDoc } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Select, { StylesConfig } from 'react-select';
 import { useTranslation } from 'react-i18next';
-import { todosCollection, db } from '../../../firebase-config';
 import styles from './add-todo-modal.module.css';
 import { Button } from '../../buttons/default-button/button';
 import { CloseButton } from '../../buttons/close-button/close-button';
@@ -14,6 +12,7 @@ import { addTodoActions } from '../../../redux/slices/add-todo-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
 import { todosSelector, userSelector } from '../../../redux/selectors';
 import { fetchTodos } from '../../../redux/slices/fetch-todos-slice';
+import { addTodo } from '../../../redux/slices/fetch-todo-slice';
 
 interface Options {
   value: string;
@@ -25,9 +24,6 @@ export const AddTodoModal: FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(userSelector);
   const { categoryList } = useAppSelector(todosSelector);
-  const createTodo = async (values: any) => {
-    await addDoc(todosCollection, values);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +42,7 @@ export const AddTodoModal: FC = () => {
       category: yup.string().required(`${t('form_errors_require')}`),
     }),
     onSubmit: async (values) => {
-      createTodo(values);
+      dispatch(addTodo(values));
       if (id) {
         dispatch(fetchTodos(id));
       }
@@ -65,7 +61,7 @@ export const AddTodoModal: FC = () => {
   type IsMulti = false;
 
   const customStyles: StylesConfig<Options, IsMulti> = {
-    control: (provided, state) => ({
+    control: (provided) => ({
       ...provided,
       border: 'none',
       borderBottom: ' 1.5px solid var(--text-clr)',

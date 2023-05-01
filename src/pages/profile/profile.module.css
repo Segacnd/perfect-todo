@@ -98,11 +98,13 @@
 .rightSide img {
   width: 62px;
   height: 62px;
+  border-radius: 50%;
 }
 .rightSide {
   font-size: var(--font-big);
   font-weight: var(--fweight-medium);
   display: flex;
+  align-items: center;
   flex-direction: row-reverse;
   gap: 20px;
 }

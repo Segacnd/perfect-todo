@@ -9,6 +9,8 @@ interface IFormInputProps extends Omit<IInputProps, 'change' | 'labelText' | 'se
   errortext?: string;
   type?: string;
   disabled?: boolean;
+  labelText?: string;
+  accept?: string;
 }
 
 export const FormInput: FC<IFormInputProps> = ({
@@ -18,8 +20,10 @@ export const FormInput: FC<IFormInputProps> = ({
   name,
   errortext,
   onBlur,
-  type = 'string',
+  type,
   disabled,
+  labelText,
+  accept,
 }) => {
   return (
     <div className={classNames(styles.inputWrapper, { [styles.error]: errortext, disabled })}>
@@ -32,8 +36,10 @@ export const FormInput: FC<IFormInputProps> = ({
         value={value}
         name={name}
         disabled={disabled}
+        accept={accept}
       />
       <label htmlFor={name}>{errortext}</label>
+      <label htmlFor='file'>{labelText}</label>
     </div>
   );
 };

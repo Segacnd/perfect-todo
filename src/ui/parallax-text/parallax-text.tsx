@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, FC } from 'react';
 import {
   motion,
   useScroll,
@@ -16,7 +16,7 @@ interface ParallaxProps {
   baseVelocity: number;
 }
 
-export const ParallaxText = ({ children, baseVelocity = 100 }: ParallaxProps) => {
+export const ParallaxText: FC<ParallaxProps> = ({ children, baseVelocity = 100 }) => {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);

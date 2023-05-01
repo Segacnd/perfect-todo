@@ -1,6 +1,6 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { CollectionReference, DocumentData, collection, getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 import { Todo } from './types';
 
 const firebaseConfig = {
@@ -13,7 +13,6 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
@@ -22,3 +21,4 @@ export const createCollection = <T = DocumentData>(collectionName: string) => {
 };
 
 export const todosCollection = createCollection<Todo>('todos');
+export const storage = getStorage(app);

@@ -11,10 +11,12 @@ import burgerIcon from '../../assets/burger-icon.svg';
 import styles from './todos-container.module.css';
 import { categoryActions } from '../../redux/slices/category-slice';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
+import { Loader } from '../../ui/loader/loader';
+import { Status } from '../../enums/enums';
 
 export const TodosContainer: FC = () => {
   const { t } = useTranslation();
-  const { todos, activeCategory } = useAppSelector(todosSelector);
+  const { todos, activeCategory, status } = useAppSelector(todosSelector);
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
   const { id } = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
@@ -25,6 +27,9 @@ export const TodosContainer: FC = () => {
       dispatch(fetchTodos(id));
     }
   }, [dispatch, id]);
+  if (status === Status.LOADING) {
+    return <Loader />;
+  }
   return (
     <section className={styles.todosContainer}>
       <div className={styles.todosHeader}>
@@ -46,7 +51,7 @@ export const TodosContainer: FC = () => {
         </div>
       </div>
       <div className={styles.todosWrapper}>
-        {todos.length ? (
+        {todos &&
           todos
             .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
             .filter((todo) => (activeCategory === 'all' ? todo : todo.category.toLowerCase() === activeCategory))
@@ -59,9 +64,12 @@ export const TodosContainer: FC = () => {
               >
                 <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
               </button>
-            ))
-        ) : (
+            ))}
+        {todoPreviewType === 'inProgress' && todos.filter((todo) => !todo.dateEnded) && (
           <p className={styles.noTodosText}>{t('no_todos_text')}</p>
+        )}
+        {todoPreviewType === 'completed' && todos.filter((todo) => todo.dateEnded).length === 0 && (
+          <p className={styles.noTodosText}>{t('no_completed_todos_text')}</p>
         )}
       </div>
     </section>
