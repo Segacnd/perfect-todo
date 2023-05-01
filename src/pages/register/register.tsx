@@ -66,7 +66,6 @@ export const Register: FC = () => {
   };
   useEffect(() => {
     handlePreview();
-    console.log('11');
   }, [handlePreview]);
   return (
     <>

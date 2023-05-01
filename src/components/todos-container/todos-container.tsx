@@ -27,7 +27,6 @@ export const TodosContainer: FC = () => {
       dispatch(fetchTodos(id));
     }
   }, [dispatch, id]);
-  console.log(todoPreviewType);
   if (status === Status.LOADING) {
     return <Loader />;
   }

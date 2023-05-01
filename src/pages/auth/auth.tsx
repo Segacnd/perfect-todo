@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Button } from '../../ui/buttons/default-button/button';
 import styles from './auth.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
@@ -41,8 +41,6 @@ export const Auth: FC = () => {
             photoUrl: auth.currentUser?.photoURL,
           })
         );
-
-        console.log(user);
       });
     },
   });

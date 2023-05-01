@@ -23,7 +23,7 @@ export const Modal: FC = () => {
     validationSchema: yup.object({
       categoryName: yup.string().required(`${t('form_errors_require')}`),
     }),
-    onSubmit: (values) => {},
+    onSubmit: () => {},
   });
 
   return ReactDOM.createPortal(

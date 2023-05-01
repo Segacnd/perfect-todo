@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { CollectionReference, DocumentData, collection, getFirestore, getDocs } from 'firebase/firestore';
+import { CollectionReference, DocumentData, collection, getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { Todo } from './types';
 

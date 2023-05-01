@@ -1,11 +1,9 @@
 import { FC } from 'react';
 import ReactDOM from 'react-dom';
-import { addDoc } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Select, { StylesConfig } from 'react-select';
 import { useTranslation } from 'react-i18next';
-import { todosCollection, db } from '../../../firebase-config';
 import styles from './add-todo-modal.module.css';
 import { Button } from '../../buttons/default-button/button';
 import { CloseButton } from '../../buttons/close-button/close-button';
@@ -36,7 +34,7 @@ export const AddTodoModal: FC = () => {
       dateStarted: new Date().toISOString(),
       dateEnded: null,
       notes: [],
-      user: id!,
+      user: id,
     },
     validationSchema: yup.object({
       title: yup.string().required(`${t('form_errors_require')}`),
@@ -63,7 +61,7 @@ export const AddTodoModal: FC = () => {
   type IsMulti = false;
 
   const customStyles: StylesConfig<Options, IsMulti> = {
-    control: (provided, state) => ({
+    control: (provided) => ({
       ...provided,
       border: 'none',
       borderBottom: ' 1.5px solid var(--text-clr)',

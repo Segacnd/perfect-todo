@@ -3,7 +3,7 @@ export type Note = {
   note: string;
 };
 export type Todo = {
-  user: string;
+  user: string | null;
   title: string;
   category: string;
   dateEnded: string | null;

@@ -17,7 +17,7 @@ export type ObjecType = {
 };
 
 export const Profile: FC = () => {
-  const { id, email, login, photoUrl } = useAppSelector(userSelector);
+  const { id, login, photoUrl } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
   const { colorTheme } = useAppSelector(viewControllerSelector);
   const navigate = useNavigate();
