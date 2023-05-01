@@ -15,7 +15,6 @@ export const Categories: FC = () => {
   const sortTodos = (category: string) => {
     dispatch(todosActions.sortTodos(category));
   };
-  console.log(categoryList);
   return categoryList.length > 0 ? (
     <aside className={isMobileModalOpen ? styles.mobileVersion : ''}>
       <div className={styles.categoryHeader}>

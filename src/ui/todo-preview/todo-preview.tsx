@@ -1,4 +1,4 @@
-import React, { FC, useId, useRef } from 'react';
+import React, { FC, useId } from 'react';
 import styles from './todo-preview.module.css';
 import deleteIcon from '../../assets/delete-icon.svg';
 import completeIcon from '../../assets/complete-circle.svg';

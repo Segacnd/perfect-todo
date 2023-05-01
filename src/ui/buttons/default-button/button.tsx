@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './button.module.css';
-import { useAppDispatch } from '../../../redux/store';
 
 export type ButtonTypes = 'submit' | 'button';
 
