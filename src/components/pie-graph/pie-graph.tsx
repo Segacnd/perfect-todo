@@ -19,7 +19,6 @@ export const PieGrap: FC<{ array: DataArray[] }> = ({ array }) => {
     innerRadius,
     outerRadius,
     percent,
-    index,
   }: {
     cx: number;
     cy: number;

@@ -1,9 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { t } from 'i18next';
 import styles from './todo-page.module.css';
 import { Card } from '../../ui/card/card';
-import { Input } from '../../ui/inputs/default-input/input';
 import { Button } from '../../ui/buttons/default-button/button';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { alertSelector, todoSelector } from '../../redux/selectors';

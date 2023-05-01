@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { addTodoActions } from '../../../redux/slices/add-todo-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
 import { todosSelector, userSelector } from '../../../redux/selectors';
-import { fetchTodos, todosActions } from '../../../redux/slices/fetch-todos-slice';
+import { fetchTodos } from '../../../redux/slices/fetch-todos-slice';
 
 interface Options {
   value: string;
@@ -27,7 +27,6 @@ export const AddTodoModal: FC = () => {
   const { categoryList } = useAppSelector(todosSelector);
   const createTodo = async (values: any) => {
     await addDoc(todosCollection, values);
-    console.log(db);
   };
 
   const formik = useFormik({

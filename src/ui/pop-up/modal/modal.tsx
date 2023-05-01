@@ -9,7 +9,6 @@ import { Button } from '../../buttons/default-button/button';
 import { useAppDispatch } from '../../../redux/store';
 import { categoryActions } from '../../../redux/slices/category-slice';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
-import { fetchTodos } from '../../../redux/slices/fetch-todos-slice';
 
 export const Modal: FC = () => {
   const dispatch = useAppDispatch();
