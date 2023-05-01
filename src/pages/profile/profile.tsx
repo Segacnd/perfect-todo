@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
@@ -20,6 +20,7 @@ export const Profile: FC = () => {
   const { id, email, login, photoUrl } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
   const { colorTheme } = useAppSelector(viewControllerSelector);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const nonCompleted = todos.filter((el) => el.dateEnded === null);
   const completedTodos = todos.filter((el) => el.dateEnded !== null);
@@ -61,9 +62,9 @@ export const Profile: FC = () => {
       <div className={styles.widthContainer}>
         <div className={styles.headerContentWrapper}>
           <div className={styles.goalWrapper}>
-            <p className={styles.goalCard}>
-              <Link to='/'>Back to main page</Link>
-            </p>
+            <button type='button' onClick={() => navigate('/')} className={styles.goalCard}>
+              Back to main page
+            </button>
             <button type='button' className={styles.goalCard}>
               Change user information
             </button>
@@ -81,7 +82,7 @@ export const Profile: FC = () => {
         </div>
         <div className={styles.section}>
           <ParallaxText baseVelocity={5}>{`Count of completed todos: ${completedTodos.length}`}</ParallaxText>
-          <ParallaxText baseVelocity={-5}>{`Count of uncompleted todos: ${nonCompleted.length}`}</ParallaxText>
+          <ParallaxText baseVelocity={-5}>{`Count of todos in progress: ${nonCompleted.length}`}</ParallaxText>
         </div>
         <div className={styles.container}>
           <div className={styles.graphWrapper}>

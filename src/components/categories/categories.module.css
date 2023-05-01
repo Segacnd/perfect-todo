@@ -31,10 +31,15 @@ aside li:hover {
   align-items: flex-start;
 }
 .categoryList button {
+  text-align: start;
   border: transparent;
   text-transform: capitalize;
   cursor: pointer;
   background-color: transparent;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  width: 80%; 
+  white-space: nowrap;
 }
 
 .categoryList li:hover button {
@@ -82,6 +87,8 @@ aside li:hover {
   .mobileVersion li button {
     font-size: var(--font-medium);
     font-weight: var(--fweight-medium);
+    width: 100%;
+    padding-right: 5%;
   }
   .mobileVersion li:hover button {
     color: var(--clr-blue);

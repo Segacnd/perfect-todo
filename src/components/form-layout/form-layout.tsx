@@ -9,7 +9,6 @@ export const FormLayout: FC = () => {
   const { isAuth } = useAuth();
   useEffect(() => {
     if (isAuth) {
-      console.log('im here');
       navigate('/');
     }
   }, [isAuth, navigate]);
