@@ -1,8 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { CollectionReference, DocumentData, collection, getFirestore, getDocs } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
-import { Todo, User } from './types';
-import { UserState } from './redux/slices/user-slice';
+import { Todo } from './types';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
