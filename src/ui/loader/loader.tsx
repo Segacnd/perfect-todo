@@ -1,10 +1,13 @@
+import Lottie from 'lottie-react';
 import styles from './loader.module.css';
-import loader from '../../assets/loader.svg';
+import loadingAnimation from './loader-animation.json';
 
 export const Loader: React.FC = () => {
   return (
     <div className={styles.loader} data-test-id='loader'>
-      <img src={loader} alt='loader' className={styles.imageLoader} />
+      <div className={styles.container}>
+        <Lottie animationData={loadingAnimation} loop />
+      </div>
     </div>
   );
 };

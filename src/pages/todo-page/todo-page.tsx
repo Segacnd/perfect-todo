@@ -85,9 +85,6 @@ export const TodoPage: FC = () => {
             todo.notes?.map((el) => (
               <Card noteText={el.note} key={el.id + el.note} index={el.id} deleteNote={deleteNote} />
             ))}
-          {isAlertOpen && todo?.dateEnded === null && (
-            <Alert alertText='больше 8 карточек нельзя!' className='notesAlert' flag='error' />
-          )}
           {todo && todo.notes?.length === 0 && <p>{t('no_notes')}</p>}
         </div>
       </div>
@@ -95,9 +92,6 @@ export const TodoPage: FC = () => {
         <Link className={styles.goBackLink} to='/'>
           {t('to_main_page')}
         </Link>
-        {todo?.dateEnded && isAlertOpen && (
-          <Alert className='noteSuccessAlert' alertText='congs,this todo is finished!' flag='success' />
-        )}
         <div className={styles.mainButtons}>
           <Button text={t('delete_todo')} buttonType='button' buttonClick={() => deleteCurrentTodo()} />
           <Button
@@ -108,6 +102,8 @@ export const TodoPage: FC = () => {
           />
         </div>
       </div>
+      {todo?.dateEnded && isAlertOpen && <Alert type='success' alertText='congs,this todo is finished!' />}
+      {isAlertOpen && todo?.dateEnded === null && <Alert alertText='больше 8 карточек нельзя!' type='error' />}
     </div>
   );
 };

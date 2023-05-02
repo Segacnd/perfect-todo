@@ -2,12 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--text-clr);
 }
 aside {
   height: 100%;
   width: 200px;
   border-right: 1px solid var(--border-clr);
   padding: 10px 14px;
+  color: var(--text-clr);
 }
 
 aside li {
@@ -17,6 +19,7 @@ aside li {
   cursor: pointer;
   list-style: inside;
   width: 100%;
+  color: var(--text-clr);
 }
 
 aside li:hover {
@@ -40,6 +43,7 @@ aside li:hover {
   overflow: hidden; 
   width: 80%; 
   white-space: nowrap;
+  color: var(--text-clr);
 }
 
 .categoryList li:hover button {

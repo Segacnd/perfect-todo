@@ -13,6 +13,7 @@
   text-align: start;
   position: relative;
   border: transparent;
+  color: var(--text-clr);
 }
 .todo {
   flex-grow: 1;
