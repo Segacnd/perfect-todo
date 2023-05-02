@@ -53,52 +53,28 @@
 .headerContentWrapper {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
 }
-.goalWrapper {
-  display: flex;
-  gap: 20px;
-  height: 120px;
-}
-.goalCard {
-  font-size: var(--font-medium);
-  font-weight: var(--fweight-small);
-  box-shadow: var(--box-shadow);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 10px 20px;
-  background-color: var(--profile-theme-clr);
-  color: #f4f4f4;
-  outline: transparent;
-  border: transparent;
-  text-align: center;
-  cursor: pointer;
-}
-.goalCard a {
-  color: #f4f4f4;
-  width: 100%;
-}
-.goalCard a:hover {
-  color: var(--clr-blue);
-}
-
 .profileData {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
   justify-content: space-between;
+  flex-wrap: wrap;
   box-shadow: var(--box-shadow);
   flex: 1;
   background-color: var(--profile-theme-clr);
-  padding: 20px;
+  padding: 12px 20px;
   color: #f4f4f4;
+  max-height: 100px;
 }
 .rightSide img {
-  width: 62px;
-  height: 62px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  margin-top: auto;
+}
+.rightSide p{
+  margin-top: auto;
 }
 .rightSide {
   font-size: var(--font-big);
@@ -107,6 +83,17 @@
   align-items: center;
   flex-direction: row-reverse;
   gap: 20px;
+  height: 100%;
+}
+.goBack {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.leftSide button {
+  aspect-ratio: 1 / 1;
+  width: 32px;
+  padding: 0;
 }
 .leftSide {
   display: flex;
@@ -118,6 +105,42 @@
   box-shadow: var(--box-shadow);
   background-color: var(--profile-theme-clr);
   color: #f4f4f4;
+}
+.buttons {
+  display: flex;
+  padding-inline: 6px;
+  gap: 12px;
+}
+.backWrapper {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-medium);
+}
+.backWrapper a {
+  color: var(--text-clr);
+}
+.backWrapper:hover {
+  color: var(--text-clr);
+}
+.backWrapper img {
+  width: 14px;
+}
+
+.editProfile{
+  background-color: transparent;
+  border: transparent;
+  outline: transparent;
+  padding: 0;
+  margin: 0;
+  margin-top: auto;
+}
+.editProfile img{
+  width: 24px;
+}
+.userNameWrapper{
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
 }
 @media only screen and (max-width: 1080px) {
   .widthContainer {

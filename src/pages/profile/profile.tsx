@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
@@ -11,6 +11,8 @@ import userMockImgBlack from '../../assets/acount-icon-black.svg';
 import { ChangeLanguageComponent } from '../../components/change-language-component/change-language-component';
 import { ThemeSwitchButton } from '../../ui/buttons/theme-switch-button/theme-switch-button';
 import { ParallaxText } from '../../ui/parallax-text/parallax-text';
+import arrow from '../../assets/arrow-icon.svg';
+import edit from '../../assets/edit-profile-icon.svg';
 
 export type ObjecType = {
   [key: string]: number;
@@ -20,7 +22,6 @@ export const Profile: FC = () => {
   const { id, login, photoUrl } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
   const { colorTheme } = useAppSelector(viewControllerSelector);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const nonCompleted = todos.filter((el) => el.dateEnded === null);
   const completedTodos = todos.filter((el) => el.dateEnded !== null);
@@ -61,22 +62,27 @@ export const Profile: FC = () => {
     <div className={styles.root} data-theme={colorTheme}>
       <div className={styles.widthContainer}>
         <div className={styles.headerContentWrapper}>
-          <div className={styles.goalWrapper}>
-            <button type='button' onClick={() => navigate('/')} className={styles.goalCard}>
-              Back to main page
-            </button>
-            <button type='button' className={styles.goalCard}>
-              Change user information
-            </button>
-          </div>
           <div className={styles.profileData}>
             <div className={styles.rightSide}>
               <img src={photoUrl ? photoUrl : userMockImgBlack} alt='' />
-              <p> {login} </p>
+              <p className={styles.userNameWrapper}>
+                {login} hello
+                <button className={styles.editProfile} type='button'>
+                  <img src={edit} alt='edit' />
+                </button>
+              </p>
             </div>
             <div className={styles.leftSide}>
-              <ChangeLanguageComponent />
-              <ThemeSwitchButton />
+              <div className={styles.buttons}>
+                <ChangeLanguageComponent />
+                <ThemeSwitchButton />
+              </div>
+              <div className={styles.backWrapper}>
+                <Link to='/' className={styles.goBack}>
+                  <img src={arrow} alt='back' />
+                  <span>Go home </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -65,9 +65,10 @@ export const TodosContainer: FC = () => {
                 <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
               </button>
             ))}
-        {todoPreviewType === 'inProgress' && todos.filter((todo) => !todo.dateEnded) && (
-          <p className={styles.noTodosText}>{t('no_todos_text')}</p>
-        )}
+        {todoPreviewType === 'inProgress' &&
+          todos.filter((todo) => todo.dateStarted && !todo.dateEnded).length === 0 && (
+            <p className={styles.noTodosText}>{t('no_todos_text')}</p>
+          )}
         {todoPreviewType === 'completed' && todos.filter((todo) => todo.dateEnded).length === 0 && (
           <p className={styles.noTodosText}>{t('no_completed_todos_text')}</p>
         )}

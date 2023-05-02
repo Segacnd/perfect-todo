@@ -4,6 +4,7 @@
   width: 100%;
   grid-template-columns: 30% 70%;
   grid-template-rows: 1fr 50px;
+  color: var(--text-clr);
 }
 
 .todoInfo {

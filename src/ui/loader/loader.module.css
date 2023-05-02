@@ -1,26 +1,15 @@
 .loader {
-  position: absolute;
+  position: fixed;
+  inset: 0;
   background: rgba(54, 54, 54, 0.3);
   backdrop-filter: blur(10px);
-  min-width: 100vw;
-  min-height: 100vh;
-  right: calc(-50vw + 50%);
-  left: calc(-50vw + 50%);
-  top: calc(-50vh + 50%);
-  bottom: calc(-60vh + 50%);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 4;
+  overflow: hidden;
 }
-.loader img {
-  animation: rotate 2s linear infinite;
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+.container {
+  aspect-ratio: 1/1;
+  width: 300px;
 }
