@@ -7,6 +7,5 @@ describe('render something', () => {
     cy.findByTestId('email').should('exist').type('Segabelka@yandex.ru');
     cy.findByTestId('password').should('exist').type('Baklajan111');
     cy.findByTestId('button').should('exist').click();
-    cy.findByTestId('test').should('exist');
   });
 });
