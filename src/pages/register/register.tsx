@@ -69,7 +69,9 @@ export const Register: FC = () => {
   }, [handlePreview]);
   return (
     <>
-      <h2 className={styles.registerTitle}>{t('registration_title')}</h2>
+      <h2 className={styles.registerTitle} data-testid='registrationTitle'>
+        {t('registration_title')}
+      </h2>
       <form autoComplete='off' onSubmit={formik.handleSubmit} className={styles.registerForm}>
         <FormInput
           onChange={formik.handleChange}
@@ -107,7 +109,10 @@ export const Register: FC = () => {
         />
       </form>
       <p className={styles.registerSubTitle}>
-        {t('registration_redirect_text')} <br /> <Link to='/auth'>{t('registration_link_text')}</Link>
+        {t('registration_redirect_text')} <br />{' '}
+        <Link to='/auth' data-testid='redirectToAuth'>
+          {t('registration_link_text')}
+        </Link>
       </p>
     </>
   );

@@ -1,6 +1,6 @@
 name: CI
 
-permissions: {}
+permissions: { checks: write, actions: read, contents: read }
 
 on:
   push:
@@ -24,8 +24,8 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: install # will run `yarn install` command
-       
-      - name: Build production bundle
+
+      - name: Build develop bundle
         uses: borales/actions-yarn@v4
         with:
           cmd: build # will run `yarn build:prod` command
@@ -34,3 +34,13 @@ jobs:
         with:
           cmd: lint # will run `yarn test` command
 
+      - name: Cypress run
+        uses: cypress-io/github-action@v4.1.0
+        with:
+          config-file: cypress.config.ts
+          browser: chrome
+          build: yarn build
+          start: yarn dev
+          wait-on: 'http://localhost:5173'
+          config: baseUrl=http://localhost:5173
+          spec: cypress/e2e/homepage.cy.ts

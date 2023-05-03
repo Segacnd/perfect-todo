@@ -47,7 +47,9 @@ export const Auth: FC = () => {
 
   return (
     <>
-      <h2 className={styles.authTitle}>{t('auth_title')}</h2>
+      <h2 className={styles.authTitle} data-testid='authTitle'>
+        {t('auth_title')}
+      </h2>
       <form autoComplete='off' onSubmit={formik.handleSubmit} className={styles.authForm}>
         <FormInput
           onChange={formik.handleChange}
@@ -56,6 +58,7 @@ export const Auth: FC = () => {
           name='email'
           errortext={formik.errors.email}
           type='email'
+          dti='email'
         />
         <FormInput
           onChange={formik.handleChange}
@@ -65,6 +68,7 @@ export const Auth: FC = () => {
           errortext={formik.touched.password ? formik.errors.password : ''}
           onBlur={formik.handleBlur}
           type='password'
+          dti='password'
         />
         <Button
           disabled={!formik.isValid ? true : false}
@@ -74,7 +78,10 @@ export const Auth: FC = () => {
         />
       </form>
       <p className={styles.authSubTitle}>
-        {t('auth_redirect_text')} <br /> <Link to='/registration'>{t('auth_create_acc_text')}</Link>
+        {t('auth_redirect_text')} <br />{' '}
+        <Link to='/registration' data-testid='redirectToRegister'>
+          {t('auth_create_acc_text')}
+        </Link>
       </p>
     </>
   );
