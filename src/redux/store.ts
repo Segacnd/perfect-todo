@@ -9,6 +9,7 @@ import { TodosReducer } from './slices/fetch-todos-slice';
 import { TodoReducer } from './slices/fetch-todo-slice';
 import { UserReducer } from './slices/user-slice';
 import { AlertReducer } from './slices/alert-slice';
+import { EditProfileReducer } from './slices/edit-profile-slice';
 
 const rootReducer = combineReducers({
   ViewController,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   TodoReducer,
   UserReducer,
   AlertReducer,
+  EditProfileReducer,
 });
 
 const persistConfig = {

@@ -59,6 +59,8 @@ i18next
           login_placeholder: 'enter your login',
           email_placeholder: 'enter your email',
           password_placeholder: 'enter your password',
+          change_data: 'here you can change your data',
+          update_username: 'change username',
         },
       },
       ru: {
@@ -112,6 +114,8 @@ i18next
           login_placeholder: 'введите логин',
           email_placeholder: 'введите почту',
           password_placeholder: 'введите пароль',
+          change_data: 'здесь вы можете изменить свои данные',
+          update_username: 'изменить имя пользователя',
         },
       },
     },
