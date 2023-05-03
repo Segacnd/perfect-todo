@@ -1,6 +1,10 @@
 name: CI
 
-permissions: {}
+permissions: {
+    checks: write,
+    actions: read,
+    contents: read
+}
 
 on:
   push:
@@ -37,6 +41,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with: 
-          build: yarn build
           start: yarn dev
+          wait-on: 'http://localhost:5173'
 
