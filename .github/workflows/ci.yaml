@@ -34,3 +34,9 @@ jobs:
         with:
           cmd: lint # will run `yarn test` command
 
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with: 
+          build: yarn build
+          start: yarn dev
+

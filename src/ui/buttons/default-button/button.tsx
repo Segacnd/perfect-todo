@@ -17,6 +17,7 @@ export const Button: FC<ButtonProps> = ({ text, buttonType = 'button', disabled,
       className={styles.button}
       type={buttonType === 'submit' ? 'submit' : 'button'}
       onClick={buttonClick}
+      data-testid='button'
     >
       {text}
     </button>

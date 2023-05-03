@@ -14,8 +14,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "types": ["cypress", "@testing-library/cypress"],
     "jsx": "react-jsx"
   },
-  "include": ["vite.config.ts", ".eslintrc.cjs", "src"],
+  "include": [
+    "vite.config.ts",
+    "vitest.config.ts",
+    ".eslintrc.cjs",
+    "src",
+    "src/sum.test.ts",
+    "cypress.config.ts",
+    "cypress"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

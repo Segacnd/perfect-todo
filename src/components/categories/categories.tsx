@@ -16,7 +16,7 @@ export const Categories: FC = () => {
     dispatch(todosActions.sortTodos(category));
   };
   return categoryList.length > 0 ? (
-    <aside className={isMobileModalOpen ? styles.mobileVersion : ''}>
+    <aside className={isMobileModalOpen ? styles.mobileVersion : ''} data-testid='test'>
       <div className={styles.categoryHeader}>
         <div className={styles.buttonWrapper}>
           <CloseButton click={() => dispatch(categoryActions.mobileToggler(false))} />

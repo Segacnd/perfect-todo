@@ -3,7 +3,7 @@ import { deleteDoc, doc, getDoc, updateDoc, addDoc } from 'firebase/firestore';
 import { db, todosCollection } from '../../firebase-config';
 import { ITodo } from './fetch-todos-slice';
 import { Status } from '../../enums/enums';
-import { Note, Todo } from '../../types';
+import { Note } from '../../types';
 
 export const fetchTodoById = createAsyncThunk('todo/fetchTodoById', async (id: string) => {
   const docRef = doc(todosCollection, id);
