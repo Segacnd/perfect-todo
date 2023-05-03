@@ -41,7 +41,15 @@ export const EditProfileModal: FC = () => {
             displayName: values.newUsername,
             photoURL: downloadUrl,
           });
-          dispatch(userActions.setUser({ login: auth.currentUser?.displayName, photoUrl: auth.currentUser?.photoURL }));
+          dispatch(
+            userActions.setUser({
+              login: auth.currentUser?.displayName,
+              photoUrl: auth.currentUser?.photoURL,
+              email: auth.currentUser.email,
+              id: auth.currentUser.uid,
+              token: auth.currentUser.refreshToken,
+            })
+          );
         }
       });
 
