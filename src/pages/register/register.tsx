@@ -10,12 +10,11 @@ import { Button } from '../../ui/buttons/default-button/button';
 import styles from './register.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
 import { loginRules } from '../../validation/form-validation-schemes';
-import { FileInput } from '../../ui/inputs/default-input/file-input/file-input';
+import { FileComponent } from '../../components/FileComponent';
 
 export const Register: FC = () => {
   const { t } = useTranslation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const formik = useFormik({
     initialValues: {
       login: '',
@@ -40,7 +39,9 @@ export const Register: FC = () => {
       const auth = getAuth();
       await createUserWithEmailAndPassword(auth, values.email, values.password);
       const storageRef = ref(storage, values.login);
+
       await uploadBytes(storageRef, selectedFile!);
+
       getDownloadURL(storageRef).then(async (downloadUrl) => {
         if (auth.currentUser) {
           await updateProfile(auth.currentUser, {
@@ -51,22 +52,6 @@ export const Register: FC = () => {
       });
     },
   });
-
-  const handlePreview = useCallback(() => {
-    const reader = new FileReader();
-    if (selectedFile) {
-      reader.readAsDataURL(selectedFile);
-      reader.onload = () => {
-        setPreviewUrl(reader.result as string | null);
-      };
-    }
-  }, [selectedFile]);
-  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedFile(event.target.files ? event.target.files[0] : null);
-  };
-  useEffect(() => {
-    handlePreview();
-  }, [handlePreview]);
   return (
     <>
       <h2 className={styles.registerTitle} data-testid='registrationTitle'>
@@ -100,7 +85,7 @@ export const Register: FC = () => {
           onBlur={formik.handleBlur}
           type='password'
         />
-        <FileInput handleFileInputChange={handleFileInputChange} previewUrl={previewUrl} />
+        <FileComponent selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
         <Button
           disabled={!formik.isValid ? true : false}
           text={t('registration_button_text')}

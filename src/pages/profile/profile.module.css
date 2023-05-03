@@ -71,11 +71,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin-top: auto;
 }
-.rightSide p{
-  margin-top: auto;
-}
+
 .rightSide {
   font-size: var(--font-big);
   font-weight: var(--fweight-medium);
@@ -126,19 +123,35 @@
   width: 14px;
 }
 
-.editProfile{
+.editProfile {
   background-color: transparent;
   border: transparent;
   outline: transparent;
   padding: 0;
   margin: 0;
   margin-top: auto;
+  cursor: pointer;
 }
-.editProfile img{
+.editPrompt {
+  position: absolute;
+  color: #f4f4f4;
+  font-weight: var(--fweight-medium);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-clr);
+  display: none;
+  left: 0px;
+  padding: 6px;
+  border-radius: 4px;
+}
+.editProfile:hover .editPrompt {
+  display: block;
+}
+.editProfile img {
   width: 24px;
 }
-.userNameWrapper{
+.userNameWrapper {
   display: flex;
+  position: relative;
   flex-direction: row-reverse;
   gap: 10px;
 }

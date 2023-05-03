@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
+import { editProfileSelector, todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
 import styles from './profile.module.css';
 import { PieGrap } from '../../components/pie-graph/pie-graph';
@@ -13,6 +13,8 @@ import { ThemeSwitchButton } from '../../ui/buttons/theme-switch-button/theme-sw
 import { ParallaxText } from '../../ui/parallax-text/parallax-text';
 import arrow from '../../assets/arrow-icon.svg';
 import edit from '../../assets/edit-profile-icon.svg';
+import { EditProfileModal } from '../../ui/pop-up/edit-profile-modal/edit-profile-modal';
+import { editProfileActions } from '../../redux/slices/edit-profile-slice';
 
 export type ObjecType = {
   [key: string]: number;
@@ -22,6 +24,7 @@ export const Profile: FC = () => {
   const { id, login, photoUrl } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
   const { colorTheme } = useAppSelector(viewControllerSelector);
+  const { isEditProfileModalOpen } = useAppSelector(editProfileSelector);
   const dispatch = useAppDispatch();
   const nonCompleted = todos.filter((el) => el.dateEnded === null);
   const completedTodos = todos.filter((el) => el.dateEnded !== null);
@@ -66,9 +69,14 @@ export const Profile: FC = () => {
             <div className={styles.rightSide}>
               <img src={photoUrl ? photoUrl : userMockImgBlack} alt='' />
               <p className={styles.userNameWrapper}>
-                {login} hello
-                <button className={styles.editProfile} type='button'>
+                {login}
+                <button
+                  className={styles.editProfile}
+                  type='button'
+                  onClick={() => dispatch(editProfileActions.editProfileModalTrigger(true))}
+                >
                   <img src={edit} alt='edit' />
+                  <p className={styles.editPrompt}>edit profile</p>
                 </button>
               </p>
             </div>
@@ -99,6 +107,7 @@ export const Profile: FC = () => {
           </div>
         </div>
       </div>
+      {isEditProfileModalOpen && <EditProfileModal />}
     </div>
   );
 };
