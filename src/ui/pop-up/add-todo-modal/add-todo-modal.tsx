@@ -122,8 +122,9 @@ export const AddTodoModal: FC = () => {
         <Button
           disabled={!formik.isValid ? true : false}
           text={t('button_add_todo')}
-          buttonClick={() => {}}
+          styleType='secondary'
           buttonType='submit'
+          size='standart'
         />
       </form>
     </div>,

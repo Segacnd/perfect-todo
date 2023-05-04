@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { editProfileSelector, todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
@@ -12,9 +12,11 @@ import { ChangeLanguageComponent } from '../../components/change-language-compon
 import { ThemeSwitchButton } from '../../ui/buttons/theme-switch-button/theme-switch-button';
 import { ParallaxText } from '../../ui/parallax-text/parallax-text';
 import arrow from '../../assets/arrow-icon.svg';
+import whiteArrow from '../../assets/arrow-icon-white.svg';
 import edit from '../../assets/edit-profile-icon.svg';
 import { EditProfileModal } from '../../ui/pop-up/edit-profile-modal/edit-profile-modal';
 import { editProfileActions } from '../../redux/slices/edit-profile-slice';
+import { Tooltip } from '../../ui/pop-up/tooltip/tooltip';
 
 export type ObjecType = {
   [key: string]: number;
@@ -55,6 +57,16 @@ export const Profile: FC = () => {
     };
   });
 
+  const [isTooltipOpen, setIsTooltipOpen] = useState<boolean>(false);
+
+  const hideTooltip = (): void => {
+    setIsTooltipOpen(false);
+  };
+
+  const showTooltip = (): void => {
+    setIsTooltipOpen(true);
+  };
+
   useEffect(() => {
     if (id) {
       dispatch(fetchTodos(id));
@@ -73,10 +85,12 @@ export const Profile: FC = () => {
                 <button
                   className={styles.editProfile}
                   type='button'
+                  onMouseEnter={showTooltip}
+                  onMouseLeave={hideTooltip}
                   onClick={() => dispatch(editProfileActions.editProfileModalTrigger(true))}
                 >
-                  <img src={edit} alt='edit' />
-                  <p className={styles.editPrompt}>edit profile</p>
+                  <img className={styles.userAvatar} src={edit} alt='edit' />
+                  {isTooltipOpen && <Tooltip text='edit account' />}
                 </button>
               </p>
             </div>
@@ -87,7 +101,7 @@ export const Profile: FC = () => {
               </div>
               <div className={styles.backWrapper}>
                 <Link to='/' className={styles.goBack}>
-                  <img src={arrow} alt='back' />
+                  <img src={colorTheme === 'light' ? arrow : whiteArrow} alt='back' />
                   <span>Go home </span>
                 </Link>
               </div>

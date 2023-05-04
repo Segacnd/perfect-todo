@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
@@ -40,7 +40,9 @@ export const Register: FC = () => {
       await createUserWithEmailAndPassword(auth, values.email, values.password);
       const storageRef = ref(storage, values.login);
 
-      await uploadBytes(storageRef, selectedFile!);
+      if (selectedFile) {
+        await uploadBytes(storageRef, selectedFile);
+      }
 
       getDownloadURL(storageRef).then(async (downloadUrl) => {
         if (auth.currentUser) {
@@ -89,8 +91,9 @@ export const Register: FC = () => {
         <Button
           disabled={!formik.isValid ? true : false}
           text={t('registration_button_text')}
-          buttonClick={() => {}}
           buttonType='submit'
+          size='standart'
+          styleType='primary'
         />
       </form>
       <p className={styles.registerSubTitle}>

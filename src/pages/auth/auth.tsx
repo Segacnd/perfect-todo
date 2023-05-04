@@ -73,8 +73,9 @@ export const Auth: FC = () => {
         <Button
           disabled={!formik.isValid ? true : false}
           text={t('auth_button_text')}
-          buttonClick={() => {}}
           buttonType='submit'
+          size='standart'
+          styleType='primary'
         />
       </form>
       <p className={styles.authSubTitle}>

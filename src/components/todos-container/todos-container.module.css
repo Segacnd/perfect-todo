@@ -9,9 +9,16 @@
 }
 .noTodosText {
   position: absolute;
-  left: 42%;
-  top: 45%;
-  font-size: xx-large;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20%;
+  font-size: var(--font-big);
 }
 .todosHeader {
   display: flex;
@@ -29,10 +36,12 @@
 }
 .todosWrapper {
   display: grid;
+  height: 100%;
   grid-template-columns: repeat(4, 1fr);
   gap: 28px;
   overflow: auto;
   padding: 4px 28px;
+  position: relative;
 }
 .burgerWrapper {
   display: none;
@@ -59,13 +68,14 @@
 }
 @media screen and (max-width: 470px) {
   .todosHeader {
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
+
   .rightSide {
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .todosHeader p {
     font-size: var(--font-small);

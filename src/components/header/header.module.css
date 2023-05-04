@@ -1,24 +1,31 @@
+header{
+  position: relative;
+}
 .leftSide {
   display: flex;
   flex-direction: row-reverse;
   gap: 10px;
 }
-.rightSide {
-  display: flex;
-  gap: 10px;
-  position: relative;
+.rightSide p {
+  color: var(--text-clr);
 }
 .rightSide img {
   border-radius: 50%;
 }
+
+.rightSide button{
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  cursor: pointer;
+}
 .accountModal {
   position: absolute;
-  bottom: -330%;
-  right: -10%;
+  bottom: -220%;
+  right: 0%;
   background-color: var(--clr-white);
   z-index: 4;
-  width: 200px;
-  padding: 8px 16px;
+  padding: 18px 16px;
   display: flex;
   gap: 12px;
   flex-direction: column;
@@ -27,6 +34,10 @@
   box-shadow: var(--box-shadow);
   border-radius: 6px;
 }
+.accountModal button{
+  align-items: center;
+  justify-content: center; 
+}
 .appTitle {
   font-size: var(--font-big);
   font-weight: var(--fweight-big);
@@ -34,4 +45,22 @@
 }
 .appTitle:hover {
   color: var(--text-clr);
+}
+.userAvatar{
+  width: 34px;
+  height: 34px;
+}
+@media screen and (max-width: 400px) {
+  .appTitle {
+    font-size: var(--font-medium);
+    font-weight: var(--fweight-medium);
+    color: var(--text-clr);
+  }
+}
+@media screen and (max-width: 400px) {
+  .appTitle {
+    font-size: var(--font-small);
+    font-weight: var(--fweight-small);
+    color: var(--text-clr);
+  }
 }

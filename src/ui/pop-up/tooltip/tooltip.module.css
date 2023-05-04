@@ -1,7 +1,7 @@
 .tooltip {
   position: absolute;
-  left: -200%;
-  bottom: -150%;
+  left: -30px;
+  bottom: -100%;
   width: clamp(80px, 120px, 150px);
   padding: 4px 4px;
   border-radius: 4px;
@@ -10,4 +10,5 @@
   box-shadow: var(--box-shadow);
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
+  color: var(--text-clr);
 }

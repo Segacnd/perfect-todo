@@ -3,19 +3,13 @@ import styles from './switch-button.module.css';
 import { TodoPreviewType } from '../../../redux/slices/view-controller-slice';
 
 type SwitchButtonProps = {
-  checked: TodoPreviewType;
-  change: (value: TodoPreviewType) => void;
+  change: (e: React.BaseSyntheticEvent) => void;
 };
 
-export const SwitchButton: FC<SwitchButtonProps> = ({ checked, change }) => {
+export const SwitchButton: FC<SwitchButtonProps> = ({ change }) => {
   return (
     <label htmlFor='inputChecker' className={styles.switch}>
-      <input
-        id='inputChecker'
-        type='checkbox'
-        onClick={() => change(checked === 'inProgress' ? 'completed' : 'inProgress')}
-        defaultChecked={checked === 'inProgress'}
-      />
+      <input id='inputChecker' type='checkbox' onClick={change} defaultChecked />
       <span className={`${styles.slider} ${styles.round}`} />
     </label>
   );

@@ -2,26 +2,68 @@
   --box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   outline: transparent;
-  background-color: var(--clr-yelow);
+  background-color: var(--primary-clr);
   border: transparent;
   font-size: var(--font-medium);
   font-weight: var(--fweight-medium);
   box-shadow: var(--box-shadow);
   min-width: fit-content;
-  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: fit-content;
+  color: #232323;
 }
+.primary {
+  background-color: var(--primary-clr);
+}
+.secondary {
+  background-color: var(--secondary-clr);
+}
+.distractive {
+  background-color: var(--distractive-clr);
+}
+
+.big {
+  width: 250px;
+  height: 40px;
+}
+.medium {
+  width: 180px;
+  height: 40px;
+}
+.small {
+  width: 100px;
+  height: 40px;
+}
+
 .button:hover {
-  color: var(--clr-white);
-  background-color: var(--clr-blue);
+  filter: invert(95%);
+  opacity: 0.6;
 }
 
 .button:focus {
-  color: var(--clr-white);
-  background-color: var(--clr-blue);
+  filter: invert(95%);
+  opacity: 0.6;
 }
 .button:disabled {
-  opacity: .5;
+  opacity: 0.5;
   cursor: not-allowed;
-  background-color: var(--clr-yelow);
-  color: var(--text-clr);
+}
+
+@media screen and (max-width: 768px) {
+  .big {
+    width: 150px;
+    height: 40px;
+  }
+  .medium {
+    width: 130px;
+    height: 40px;
+  }
+  .small {
+    width: 80px;
+    height: 40px;
+  }
 }
