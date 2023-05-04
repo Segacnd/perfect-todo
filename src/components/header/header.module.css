@@ -40,3 +40,17 @@ header{
 .appTitle:hover {
   color: var(--text-clr);
 }
+@media screen and (max-width: 400px) {
+  .appTitle {
+    font-size: var(--font-medium);
+    font-weight: var(--fweight-medium);
+    color: var(--text-clr);
+  }
+}
+@media screen and (max-width: 400px) {
+  .appTitle {
+    font-size: var(--font-small);
+    font-weight: var(--fweight-small);
+    color: var(--text-clr);
+  }
+}
