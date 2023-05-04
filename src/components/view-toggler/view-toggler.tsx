@@ -11,14 +11,19 @@ export const ViewToggler: FC = () => {
   const { todoPreviewType } = useAppSelector(viewControllerSelector);
   const dispatch = useAppDispatch();
 
-  const changeTodoType = (value: TodoPreviewType) => {
-    dispatch(viewControllerActions.todoPreviewToggler(value));
+  const changeTodoType = (e: React.BaseSyntheticEvent) => {
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      dispatch(viewControllerActions.todoPreviewToggler('inProgress'));
+    } else {
+      dispatch(viewControllerActions.todoPreviewToggler('completed'));
+    }
   };
 
   return (
     <div className={styles.viewBar}>
       <p>{todoPreviewType === 'inProgress' ? `${t('todo_view_in_progress')}` : `${t('todo_view_completed')}`}</p>
-      <SwitchButton checked={todoPreviewType} change={changeTodoType} />
+      <SwitchButton change={changeTodoType} />
     </div>
   );
 };
