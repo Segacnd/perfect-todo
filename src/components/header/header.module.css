@@ -6,7 +6,8 @@ header{
   flex-direction: row-reverse;
   gap: 10px;
 }
-.rightSide {
+.rightSide p {
+  color: var(--text-clr);
 }
 .rightSide img {
   border-radius: 50%;
@@ -14,6 +15,7 @@ header{
 
 .rightSide button{
   display: flex;
+  align-items: flex-end;
   gap: 10px;
   cursor: pointer;
 }
@@ -39,6 +41,10 @@ header{
 }
 .appTitle:hover {
   color: var(--text-clr);
+}
+.userAvatar{
+  width: 34px;
+  height: 34px;
 }
 @media screen and (max-width: 400px) {
   .appTitle {

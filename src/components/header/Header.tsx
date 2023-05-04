@@ -35,7 +35,7 @@ export const Header: FC = () => {
         <button type='button' onClick={() => setIsModalOpen((prev) => !prev)}>
           <p>{login}</p>
           {photoUrl ? (
-            <img src={photoUrl} alt='user avatar' />
+            <img src={photoUrl} className={styles.userAvatar} alt='user avatar' />
           ) : (
             <img src={colorTheme === 'dark' ? accountIconWhite : accountIconBlack} alt='user avatar' />
           )}

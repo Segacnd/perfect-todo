@@ -155,6 +155,11 @@
   flex-direction: row-reverse;
   gap: 10px;
 }
+.userNameWrapper img{
+  width: 24px;
+  height: 24px;
+}
+
 @media only screen and (max-width: 1080px) {
   .widthContainer {
     overflow-y: auto;
