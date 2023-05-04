@@ -1,9 +1,5 @@
 import { FC, useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import styles from './pages/register/register.module.css';
 import { FileInput } from '../ui/inputs/default-input/file-input/file-input';
-import { useAppDispatch, useAppSelector } from '../redux/store';
 
 type FileComponentProps = {
   selectedFile: File | null;
@@ -11,8 +7,6 @@ type FileComponentProps = {
 };
 
 export const FileComponent: FC<FileComponentProps> = ({ selectedFile, setSelectedFile }) => {
-  const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const handlePreview = useCallback(() => {
     const reader = new FileReader();
@@ -25,7 +19,6 @@ export const FileComponent: FC<FileComponentProps> = ({ selectedFile, setSelecte
   }, [selectedFile]);
   const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedFile(event.target.files ? event.target.files[0] : null);
-    console.log(selectedFile);
   };
   useEffect(() => {
     handlePreview();

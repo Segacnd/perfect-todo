@@ -1,24 +1,29 @@
+header{
+  position: relative;
+}
 .leftSide {
   display: flex;
   flex-direction: row-reverse;
   gap: 10px;
 }
 .rightSide {
-  display: flex;
-  gap: 10px;
-  position: relative;
 }
 .rightSide img {
   border-radius: 50%;
 }
+
+.rightSide button{
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
 .accountModal {
   position: absolute;
-  bottom: -330%;
-  right: -10%;
+  bottom: -220%;
+  right: 0%;
   background-color: var(--clr-white);
   z-index: 4;
-  width: 200px;
-  padding: 8px 16px;
+  padding: 18px 16px;
   display: flex;
   gap: 12px;
   flex-direction: column;

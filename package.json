@@ -8,7 +8,8 @@
     "build": "tsc && vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "test": "cypress open --config-file=cypress.config.ts"
+    "test": "vitest",
+    "cy": "cypress open --config-file=cypress.config.ts"
   },
   "dependencies": {
     "@motionone/utils": "^10.15.1",

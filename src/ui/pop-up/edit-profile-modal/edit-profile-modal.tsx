@@ -34,7 +34,9 @@ export const EditProfileModal: FC = () => {
     }),
     onSubmit: async (values) => {
       const storageRef = ref(storage, login ? login : '');
-      await uploadBytes(storageRef, selectedFile!);
+      if (selectedFile) {
+        await uploadBytes(storageRef, selectedFile);
+      }
       getDownloadURL(storageRef).then(async (downloadUrl) => {
         if (auth.currentUser) {
           await updateProfile(auth.currentUser, {
@@ -76,8 +78,9 @@ export const EditProfileModal: FC = () => {
         <Button
           disabled={formik.errors.newUsername ? true : false}
           text={t('button_text_create')}
-          buttonClick={() => {}}
+          styleType='secondary'
           buttonType='submit'
+          size='standart'
         />
       </form>
     </div>,

@@ -59,13 +59,15 @@
 }
 @media screen and (max-width: 470px) {
   .todosHeader {
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    
   }
+  
   .rightSide {
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .todosHeader p {
     font-size: var(--font-small);

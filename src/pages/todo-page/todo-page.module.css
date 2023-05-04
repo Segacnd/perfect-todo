@@ -38,7 +38,6 @@
   justify-content: space-between;
   flex-direction: row;
   padding: 6px;
-  height: 50px;
 }
 .mainButtons {
   display: flex;
@@ -117,17 +116,34 @@
   }
   .buttonsContainer {
     order: 3;
-    height: 100px;
+    margin-top: auto;
     border-bottom: 1px solid var(--border-clr);
     margin-bottom: 10px;
   }
   .todoContent {
     order: 2;
   }
+  .mainButtons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 @media screen and (max-width: 610px) {
   .noteContainer {
     grid-template-columns: 1fr;
+    min-height: 160px;
+  }
+  .buttonsContainer{
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 10px;
+    align-content: space-between;
+    flex-wrap: wrap;
+  }
+  .container {
+    padding: 12px 14px;
   }
 }
 
@@ -139,9 +155,5 @@
     font-size: var(--font-medium);
     font-weight: var(--fweight-small);
   }
-  .buttonsContainer{
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 10px;
-  }
+
 }

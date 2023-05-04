@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
-    "types": ["cypress", "@testing-library/cypress"],
+    "types": ["node", "jest", "@testing-library/jest-dom", "cypress", "@testing-library/cypress"],
     "jsx": "react-jsx"
   },
   "include": [

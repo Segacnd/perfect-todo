@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { t } from 'i18next';
 import styles from './todo-page.module.css';
 import { Card } from '../../ui/card/card';
@@ -11,6 +11,7 @@ import { Alert } from '../../ui/alert/alert';
 import { NotesForm } from '../../components/notes-form/notes-form';
 import { Note } from '../../types';
 import { alertActions } from '../../redux/slices/alert-slice';
+import arrowIcon from '../../assets/arrow-icon.svg';
 
 export const TodoPage: FC = () => {
   const { todo } = useAppSelector(todoSelector);
@@ -89,16 +90,32 @@ export const TodoPage: FC = () => {
         </div>
       </div>
       <div className={styles.buttonsContainer}>
-        <Link className={styles.goBackLink} to='/'>
-          {t('to_main_page')}
-        </Link>
+        <Button
+          text={t('to_main_page')}
+          styleType='primary'
+          icon={arrowIcon}
+          iconSide='left'
+          buttonType='button'
+          buttonClick={() => navigate('/')}
+          size='big'
+          customStyle={{ backgroundColor: '#f4f4f4' }}
+        />
+
         <div className={styles.mainButtons}>
-          <Button text={t('delete_todo')} buttonType='button' buttonClick={() => deleteCurrentTodo()} />
+          <Button
+            text={t('delete_todo')}
+            styleType='distractive'
+            buttonType='button'
+            buttonClick={() => deleteCurrentTodo()}
+            size='medium'
+          />
           <Button
             text={t('complete_todo')}
             buttonType='button'
             buttonClick={() => completeCurrentTodo()}
+            styleType='secondary'
             disabled={todo?.dateEnded ? true : false}
+            size='small'
           />
         </div>
       </div>

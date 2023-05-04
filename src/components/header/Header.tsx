@@ -32,8 +32,8 @@ export const Header: FC = () => {
         {t('app_title')}
       </Link>
       <div className={styles.rightSide}>
-        <p>{login}</p>
         <button type='button' onClick={() => setIsModalOpen((prev) => !prev)}>
+          <p>{login}</p>
           {photoUrl ? (
             <img src={photoUrl} alt='user avatar' />
           ) : (
@@ -42,9 +42,19 @@ export const Header: FC = () => {
         </button>
         {isModalOpen && (
           <div className={styles.accountModal}>
-            <Button buttonType='button' text='Profile' buttonClick={profileButtonHandler} />
             <Button
               buttonType='button'
+              styleType='secondary'
+              size='medium'
+              text='Profile'
+              buttonClick={profileButtonHandler}
+              customStyle={{ backgroundColor: '#f6f6f6' }}
+            />
+            <Button
+              size='medium'
+              buttonType='button'
+              styleType='distractive'
+              customStyle={{ backgroundColor: '#f6f6f6' }}
               buttonClick={() => {
                 dispatch(userActions.removeUser());
               }}
