@@ -34,6 +34,10 @@ header{
   box-shadow: var(--box-shadow);
   border-radius: 6px;
 }
+.accountModal button{
+  align-items: center;
+  justify-content: center; 
+}
 .appTitle {
   font-size: var(--font-big);
   font-weight: var(--fweight-big);
