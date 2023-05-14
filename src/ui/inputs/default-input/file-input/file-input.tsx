@@ -6,22 +6,17 @@ import styles from './file-input.module.css';
 type FileInputProps = {
   handleFileInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   previewUrl: string | null;
+  name: string;
 };
 
-export const FileInput: FC<FileInputProps> = ({ handleFileInputChange, previewUrl }) => {
+export const FileInput: FC<FileInputProps> = ({ handleFileInputChange, previewUrl, name }) => {
   const inputId = useId();
   return (
     <div className={styles.file}>
       <label htmlFor={inputId}>
         <img src={addPhotoSvg} alt='addPhoto' />
       </label>
-      <input
-        type='file'
-        name='image_uploads'
-        accept='.jpg, .jpeg, .png'
-        id={inputId}
-        onChange={handleFileInputChange}
-      />
+      <input type='file' name={name} accept='.jpg, .jpeg, .png' id={inputId} onChange={handleFileInputChange} />
       {previewUrl ? (
         <>
           <span>your chosen photo:</span>

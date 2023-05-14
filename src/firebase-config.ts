@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { CollectionReference, DocumentData, collection, getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+import { getAuth } from 'firebase/auth';
 import { Todo } from './types';
 
 const firebaseConfig = {
@@ -22,3 +23,4 @@ export const createCollection = <T = DocumentData>(collectionName: string) => {
 
 export const todosCollection = createCollection<Todo>('todos');
 export const storage = getStorage(app);
+export const auth = getAuth();

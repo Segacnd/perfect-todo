@@ -11,4 +11,10 @@ export const alertSelector = (state: RootState) => state.AlertReducer;
 export const editProfileSelector = (state: RootState) => state.EditProfileReducer;
 
 export const isLoadingStatus = (state: RootState) =>
-  [state.TodoReducer.status, state.TodoReducer.status].includes(Status.LOADING);
+  [
+    state.TodosReducer.status,
+    state.TodoReducer.status,
+    state.UserReducer.status,
+    state.UserReducer.registerStatus,
+    state.UserReducer.editProfileStatus,
+  ].includes(Status.LOADING);

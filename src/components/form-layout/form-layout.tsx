@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './form-layout.module.css';
 import { ChangeLanguageComponent } from '../change-language-component/change-language-component';
 import { useAuth } from '../../hooks/use-auth';
+import { Loader } from '../../ui/loader/loader';
 
 export const FormLayout: FC = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export const FormLayout: FC = () => {
           <ChangeLanguageComponent />
         </div>
       </div>
+      <Loader />
     </div>
   );
 };

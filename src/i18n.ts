@@ -61,6 +61,8 @@ i18next
           password_placeholder: 'enter your password',
           change_data: 'here you can change your data',
           update_username: 'change username',
+          successful_reg: 'successfully!',
+          unseccessful_reg: 'something went wrong',
         },
       },
       ru: {
@@ -116,6 +118,8 @@ i18next
           password_placeholder: 'введите пароль',
           change_data: 'здесь вы можете изменить свои данные',
           update_username: 'изменить имя пользователя',
+          successful_reg: 'успешно!',
+          unseccessful_reg: 'что-то пошло не так',
         },
       },
     },

@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { updateProfile } from 'firebase/auth';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { editProfileSelector, todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
@@ -17,13 +18,18 @@ import edit from '../../assets/edit-profile-icon.svg';
 import { EditProfileModal } from '../../ui/pop-up/edit-profile-modal/edit-profile-modal';
 import { editProfileActions } from '../../redux/slices/edit-profile-slice';
 import { Tooltip } from '../../ui/pop-up/tooltip/tooltip';
+import { Alert } from '../../ui/alert/alert';
+import { Status } from '../../enums/enums';
+import { Loader } from '../../ui/loader/loader';
+import { editProfile, userActions } from '../../redux/slices/user-slice';
+import { auth } from '../../firebase-config';
 
 export type ObjecType = {
   [key: string]: number;
 };
 
 export const Profile: FC = () => {
-  const { id, login, photoUrl } = useAppSelector(userSelector);
+  const { id, login, photoUrl, editProfileStatus } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
   const { colorTheme } = useAppSelector(viewControllerSelector);
   const { isEditProfileModalOpen } = useAppSelector(editProfileSelector);
@@ -72,7 +78,14 @@ export const Profile: FC = () => {
       dispatch(fetchTodos(id));
     }
   }, [dispatch, id]);
-
+  useEffect(() => {
+    if (editProfileStatus === Status.LOADING) {
+      dispatch(
+        userActions.updateUserData({ login: auth.currentUser?.displayName, photoUrl: auth.currentUser?.photoURL })
+      );
+    }
+  }, [dispatch, editProfileStatus]);
+  console.log(editProfileStatus);
   return (
     <div className={styles.root} data-theme={colorTheme}>
       <div className={styles.widthContainer}>
@@ -122,6 +135,8 @@ export const Profile: FC = () => {
         </div>
       </div>
       {isEditProfileModalOpen && <EditProfileModal />}
+      {editProfileStatus === Status.SUCCESS && <Alert alertText='user is updated' type='success' />}
+      <Loader />
     </div>
   );
 };

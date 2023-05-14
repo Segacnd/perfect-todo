@@ -14,7 +14,6 @@ export const App: FC = () => {
     <>
       {modalIsOpen && <Modal />}
       {isAddTodoModalOpen && <AddTodoModal />}
-      <Loader />
       <Categories />
       <TodosContainer />
     </>

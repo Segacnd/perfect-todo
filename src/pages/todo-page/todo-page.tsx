@@ -12,9 +12,11 @@ import { NotesForm } from '../../components/notes-form/notes-form';
 import { Note } from '../../types';
 import { alertActions } from '../../redux/slices/alert-slice';
 import arrowIcon from '../../assets/arrow-icon.svg';
+import { Status } from '../../enums/enums';
+import { Loader } from '../../ui/loader/loader';
 
 export const TodoPage: FC = () => {
-  const { todo } = useAppSelector(todoSelector);
+  const { todo, status } = useAppSelector(todoSelector);
   const { isAlertOpen } = useAppSelector(alertSelector);
   const dispatch = useAppDispatch();
   const { id } = useParams();
@@ -68,6 +70,7 @@ export const TodoPage: FC = () => {
       dispatch(addNewNote({ updatedNotes: newArr, id }));
     }
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.todoInfo}>
@@ -115,7 +118,7 @@ export const TodoPage: FC = () => {
             buttonClick={() => completeCurrentTodo()}
             styleType='secondary'
             disabled={todo?.dateEnded ? true : false}
-            size='small'
+            size='medium'
           />
         </div>
       </div>
