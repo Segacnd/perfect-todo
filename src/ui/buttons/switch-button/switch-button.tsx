@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import styles from './switch-button.module.css';
-import { TodoPreviewType } from '../../../redux/slices/view-controller-slice';
 
 type SwitchButtonProps = {
   change: (e: React.BaseSyntheticEvent) => void;
