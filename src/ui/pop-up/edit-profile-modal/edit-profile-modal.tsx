@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
@@ -12,16 +12,19 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { Button } from '../../buttons/default-button/button';
 import { editProfileActions } from '../../../redux/slices/edit-profile-slice';
 import { FileComponent } from '../../../components/FileComponent';
-import { userActions } from '../../../redux/slices/user-slice';
-import { storage } from '../../../firebase-config';
-import { userSelector } from '../../../redux/selectors';
+import { editProfile, userActions } from '../../../redux/slices/user-slice';
+import { auth, storage } from '../../../firebase-config';
+import { isLoadingStatus, userSelector } from '../../../redux/selectors';
+import { Loader } from '../../loader/loader';
+import { Status } from '../../../enums/enums';
+import { Alert } from '../../alert/alert';
+import { alertActions } from '../../../redux/slices/alert-slice';
 
 export const EditProfileModal: FC = () => {
   const dispatch = useAppDispatch();
-  const { login } = useAppSelector(userSelector);
+  const { login, editProfileStatus } = useAppSelector(userSelector);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { t } = useTranslation();
-  const auth = getAuth();
   const closeModal = (): void => {
     dispatch(editProfileActions.editProfileModalTrigger(false));
   };
@@ -33,29 +36,13 @@ export const EditProfileModal: FC = () => {
       newUsername: yup.string().required(`${t('form_errors_require')}`),
     }),
     onSubmit: async (values) => {
-      const storageRef = ref(storage, login ? login : '');
-      if (selectedFile) {
-        await uploadBytes(storageRef, selectedFile);
-      }
-      getDownloadURL(storageRef).then(async (downloadUrl) => {
-        if (auth.currentUser) {
-          await updateProfile(auth.currentUser, {
-            displayName: values.newUsername,
-            photoURL: downloadUrl,
-          });
-          dispatch(
-            userActions.setUser({
-              login: auth.currentUser?.displayName,
-              photoUrl: auth.currentUser?.photoURL,
-              email: auth.currentUser.email,
-              id: auth.currentUser.uid,
-              token: auth.currentUser.refreshToken,
-            })
-          );
-        }
-      });
-
       dispatch(editProfileActions.editProfileModalTrigger(false));
+      await dispatch(editProfile({ selectedFile, newLogin: values.newUsername }));
+      dispatch(
+        userActions.updateUserData({ login: auth.currentUser?.displayName, photoUrl: auth.currentUser?.photoURL })
+      );
+      console.log(auth.currentUser);
+      dispatch(alertActions.setAlertStatus(true));
     },
   });
 
@@ -74,7 +61,7 @@ export const EditProfileModal: FC = () => {
           errortext={formik.touched.newUsername ? formik.errors.newUsername : ''}
           onBlur={formik.handleBlur}
         />
-        <FileComponent selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
+        <FileComponent name='image_uploads' selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
         <Button
           disabled={formik.errors.newUsername ? true : false}
           text={t('button_text_create')}
@@ -83,6 +70,8 @@ export const EditProfileModal: FC = () => {
           size='standart'
         />
       </form>
+
+      {editProfileStatus === Status.SUCCESS && <Alert alertText='user is updated' type='success' />}
     </div>,
     document.getElementById('edit-modal') as Element
   );

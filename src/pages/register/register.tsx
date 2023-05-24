@@ -1,20 +1,31 @@
-import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { FC, useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { storage } from '../../firebase-config';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, storage } from '../../firebase-config';
 import { Button } from '../../ui/buttons/default-button/button';
 import styles from './register.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
 import { loginRules } from '../../validation/form-validation-schemes';
 import { FileComponent } from '../../components/FileComponent';
+import { Alert } from '../../ui/alert/alert';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { alertSelector, userSelector } from '../../redux/selectors';
+import { alertActions } from '../../redux/slices/alert-slice';
+import { authPath } from '../../routes';
+import { registerUser, updateUser, uploadFile, userActions } from '../../redux/slices/user-slice';
+import { Status } from '../../enums/enums';
 
 export const Register: FC = () => {
   const { t } = useTranslation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const dispatch = useAppDispatch();
+  const { registerStatus } = useAppSelector(userSelector);
+  const { isAlertOpen } = useAppSelector(alertSelector);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       login: '',
@@ -36,24 +47,15 @@ export const Register: FC = () => {
         .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
     }),
     onSubmit: async (values) => {
-      const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, values.email, values.password);
-      const storageRef = ref(storage, values.login);
-
-      if (selectedFile) {
-        await uploadBytes(storageRef, selectedFile);
-      }
-
-      getDownloadURL(storageRef).then(async (downloadUrl) => {
-        if (auth.currentUser) {
-          await updateProfile(auth.currentUser, {
-            displayName: values.login,
-            photoURL: downloadUrl,
-          });
-        }
-      });
+      dispatch(registerUser({ email: values.email, login: values.login, password: values.password, selectedFile }));
     },
   });
+  useEffect(() => {
+    if (registerStatus === Status.SUCCESS) {
+      navigate(authPath);
+      dispatch(userActions.resetStatus('registerStatus'));
+    }
+  }, [registerStatus, navigate, dispatch]);
   return (
     <>
       <h2 className={styles.registerTitle} data-testid='registrationTitle'>
@@ -87,7 +89,7 @@ export const Register: FC = () => {
           onBlur={formik.handleBlur}
           type='password'
         />
-        <FileComponent selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
+        <FileComponent selectedFile={selectedFile} setSelectedFile={setSelectedFile} name='image_uploads' />
         <Button
           disabled={!formik.isValid ? true : false}
           text={t('registration_button_text')}
@@ -96,6 +98,8 @@ export const Register: FC = () => {
           styleType='primary'
         />
       </form>
+      {isAlertOpen && <Alert alertText={t('unsuccessful_reg')} type='error' />}
+      {isAlertOpen && <Alert alertText={t('successful_reg')} type='success' />}
       <p className={styles.registerSubTitle}>
         {t('registration_redirect_text')} <br />{' '}
         <Link to='/auth' data-testid='redirectToAuth'>

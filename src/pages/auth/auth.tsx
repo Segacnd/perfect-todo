@@ -8,8 +8,9 @@ import { Button } from '../../ui/buttons/default-button/button';
 import styles from './auth.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
 import { loginRules } from '../../validation/form-validation-schemes';
-import { useAppDispatch } from '../../redux/store';
-import { userActions } from '../../redux/slices/user-slice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { loginUser, userActions } from '../../redux/slices/user-slice';
+import { userSelector } from '../../redux/selectors';
 
 export const Auth: FC = () => {
   const { t } = useTranslation();
@@ -30,18 +31,7 @@ export const Auth: FC = () => {
         .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
     }),
     onSubmit: (values) => {
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth, values.email, values.password).then(({ user }) => {
-        dispatch(
-          userActions.setUser({
-            login: auth.currentUser?.displayName,
-            email: user.email,
-            id: user.uid,
-            token: user.refreshToken,
-            photoUrl: auth.currentUser?.photoURL,
-          })
-        );
-      });
+      dispatch(loginUser({ email: values.email, password: values.password }));
     },
   });
 

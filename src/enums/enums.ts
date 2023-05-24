@@ -1,6 +1,6 @@
 export enum Status {
-  LOADING,
-  SUCCESS,
-  ERROR,
-  INIT,
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+  INIT = 'init',
 }

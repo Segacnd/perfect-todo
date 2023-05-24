@@ -6,4 +6,11 @@ export default defineConfig({
     defaultCommandTimeout: 10000,
     baseUrl: 'http://localhost:5173/',
   },
+
+  component: {
+    devServer: {
+      framework: 'react',
+      bundler: 'vite',
+    },
+  },
 });

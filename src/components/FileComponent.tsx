@@ -4,9 +4,10 @@ import { FileInput } from '../ui/inputs/default-input/file-input/file-input';
 type FileComponentProps = {
   selectedFile: File | null;
   setSelectedFile: Dispatch<SetStateAction<File | null>>;
+  name: string;
 };
 
-export const FileComponent: FC<FileComponentProps> = ({ selectedFile, setSelectedFile }) => {
+export const FileComponent: FC<FileComponentProps> = ({ selectedFile, setSelectedFile, name }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const handlePreview = useCallback(() => {
     const reader = new FileReader();
@@ -25,7 +26,7 @@ export const FileComponent: FC<FileComponentProps> = ({ selectedFile, setSelecte
   }, [handlePreview]);
   return (
     <>
-      <FileInput handleFileInputChange={handleFileInputChange} previewUrl={previewUrl} />
+      <FileInput handleFileInputChange={handleFileInputChange} previewUrl={previewUrl} name={name} />
     </>
   );
 };

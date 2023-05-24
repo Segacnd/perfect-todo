@@ -6,6 +6,7 @@ import { useAppSelector } from '../../redux/store';
 import { viewControllerSelector } from '../../redux/selectors';
 import styles from './layout.module.css';
 import { useAuth } from '../../hooks/use-auth';
+import { Loader } from '../../ui/loader/loader';
 
 export const Layout: FC = () => {
   const { t } = useTranslation();
@@ -27,6 +28,7 @@ export const Layout: FC = () => {
         </main>
       </div>
       <footer>{t('app_author')}</footer>
+      <Loader />
     </div>
   );
 };
