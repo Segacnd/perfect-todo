@@ -32,7 +32,7 @@ export const NotesForm: FC<NotesFormProps> = ({ handleSubmit, disabled }) => {
         onChange={formik.handleChange}
         value={formik.values.note}
         name='note'
-        errortext={formik.errors.note}
+        errorText={formik.errors.note}
         onBlur={formik.handleBlur}
         type='string'
         disabled={disabled}

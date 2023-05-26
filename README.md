@@ -19,6 +19,7 @@ Work with <a href="https://github.com/harmmselution">Roman</a>
 - <a href="https://www.cypress.io/"> Cypress</a>
 - <a href="https://vitest.dev/"> Vitest</a>
 - <a href="https://recharts.org/">Recharts </a>
+- Github Actions
 
 ![enter image description here](https://firebasestorage.googleapis.com/v0/b/perfect-todo.appspot.com/o/profile.jpg?alt=media&token=3fb472df-9c4e-496b-be94-4ccd091f5396)
 

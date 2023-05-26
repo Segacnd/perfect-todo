@@ -39,7 +39,7 @@ export const Modal: FC = () => {
           value={formik.values.categoryName}
           placeholder={t('input_add_category_placeholder')}
           name='categoryName'
-          errortext={formik.touched.categoryName ? formik.errors.categoryName : ''}
+          errorText={formik.touched.categoryName ? formik.errors.categoryName : ''}
           onBlur={formik.handleBlur}
         />
         <Button
