@@ -63,6 +63,11 @@ i18next
           update_username: 'change username',
           successful_reg: 'successfully!',
           unseccessful_reg: 'something went wrong',
+          email_validation_error: 'uncorrect email adress',
+          email_validation_support_text: 'Enter your email',
+          password_validation_support_text: 'Enter your password',
+          password_validation_error:
+            'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters',
         },
       },
       ru: {
@@ -120,6 +125,11 @@ i18next
           update_username: 'изменить имя пользователя',
           successful_reg: 'успешно!',
           unseccessful_reg: 'что-то пошло не так',
+          email_validation_error: 'неверный адрес почты',
+          email_validation_support_text: 'Введите свою почту',
+          password_validation_support_text: 'Введите свой пароль',
+          password_validation_error:
+            'Должен содержать не менее одной цифры и одной прописной и строчной буквы, а также не менее 8 символов.',
         },
       },
     },

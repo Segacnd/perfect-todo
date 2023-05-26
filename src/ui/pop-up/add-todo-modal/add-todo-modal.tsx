@@ -93,7 +93,7 @@ export const AddTodoModal: FC = () => {
             value={formik.values.category}
             placeholder={t('form_add_todo_category_placeholder')}
             name='category'
-            errortext={formik.touched.category ? formik.errors.category : ''}
+            errorText={formik.touched.category ? formik.errors.category : ''}
             onBlur={formik.handleBlur}
           />
         </div>
@@ -104,7 +104,7 @@ export const AddTodoModal: FC = () => {
             value={formik.values.title}
             placeholder={t('form_add_todo_placeholder')}
             name='title'
-            errortext={formik.touched.title ? formik.errors.title : ''}
+            errorText={formik.touched.title ? formik.errors.title : ''}
             onBlur={formik.handleBlur}
           />
         </div>
@@ -115,7 +115,7 @@ export const AddTodoModal: FC = () => {
             value={formik.values.description}
             placeholder={t('form_add_todo_description_placeholder')}
             name='description'
-            errortext={formik.touched.description ? formik.errors.description : ''}
+            errorText={formik.touched.description ? formik.errors.description : ''}
             onBlur={formik.handleBlur}
           />
         </div>

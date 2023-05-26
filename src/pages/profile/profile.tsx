@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { updateProfile } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { editProfileSelector, todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
@@ -21,19 +20,22 @@ import { Tooltip } from '../../ui/pop-up/tooltip/tooltip';
 import { Alert } from '../../ui/alert/alert';
 import { Status } from '../../enums/enums';
 import { Loader } from '../../ui/loader/loader';
-import { editProfile, userActions } from '../../redux/slices/user-slice';
+import { userActions } from '../../redux/slices/user-slice';
 import { auth } from '../../firebase-config';
+import { Button } from '../../ui/buttons/default-button/button';
 
 export type ObjecType = {
   [key: string]: number;
 };
 
 export const Profile: FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { id, login, photoUrl, editProfileStatus } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
   const { colorTheme } = useAppSelector(viewControllerSelector);
   const { isEditProfileModalOpen } = useAppSelector(editProfileSelector);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const nonCompleted = todos.filter((el) => el.dateEnded === null);
   const completedTodos = todos.filter((el) => el.dateEnded !== null);
 
@@ -85,14 +87,30 @@ export const Profile: FC = () => {
       );
     }
   }, [dispatch, editProfileStatus]);
-  console.log(editProfileStatus);
   return (
     <div className={styles.root} data-theme={colorTheme}>
       <div className={styles.widthContainer}>
         <div className={styles.headerContentWrapper}>
           <div className={styles.profileData}>
             <div className={styles.rightSide}>
-              <img src={photoUrl ? photoUrl : userMockImgBlack} alt='' />
+              <button type='button' onClick={() => setIsModalOpen((prev) => !prev)}>
+                <img src={photoUrl ? photoUrl : userMockImgBlack} alt='' />
+              </button>
+              {isModalOpen && (
+                <div className={styles.accountModal}>
+                  <Button
+                    size='medium'
+                    buttonType='button'
+                    styleType='distractive'
+                    customStyle={{ backgroundColor: '#f6f6f6' }}
+                    buttonClick={() => {
+                      dispatch(userActions.removeUser());
+                      navigate('/');
+                    }}
+                    text='end session'
+                  />
+                </div>
+              )}
               <p className={styles.userNameWrapper}>
                 {login}
                 <button

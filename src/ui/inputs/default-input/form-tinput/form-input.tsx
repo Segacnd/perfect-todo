@@ -6,7 +6,8 @@ import styles from './form-input.module.css';
 interface IFormInputProps extends Omit<IInputProps, 'change' | 'labelText' | 'setIsLabelOpen' | 'isLabelOpen'> {
   onChange: (e: ChangeEvent) => void;
   onBlur?: (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => void;
-  errortext?: string;
+  errorText?: string;
+  supportText?: string;
   type?: string;
   disabled?: boolean;
   labelText?: string;
@@ -19,16 +20,17 @@ export const FormInput: FC<IFormInputProps> = ({
   onChange,
   value,
   name,
-  errortext,
+  errorText,
   onBlur,
   type,
   disabled,
   labelText,
   accept,
   dti,
+  supportText,
 }) => {
   return (
-    <div className={classNames(styles.inputWrapper, { [styles.error]: errortext, disabled })}>
+    <div className={classNames(styles.inputWrapper, { [styles.error]: errorText, disabled })}>
       <input
         onBlur={onBlur}
         id={name}
@@ -41,7 +43,11 @@ export const FormInput: FC<IFormInputProps> = ({
         accept={accept}
         data-testid={dti}
       />
-      <label htmlFor={name}>{errortext}</label>
+      <dialog>hello</dialog>
+
+      <label htmlFor={name} className={errorText ? styles.error : ''}>
+        {errorText || supportText}
+      </label>
       <label htmlFor='file'>{labelText}</label>
     </div>
   );
