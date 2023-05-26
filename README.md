@@ -4,7 +4,7 @@ Work with <a href="https://github.com/harmmselution">Roman</a>
 
 ![](https://firebasestorage.googleapis.com/v0/b/perfect-todo.appspot.com/o/photo_2023-05-26_13-40-57.jpg?alt=media&token=87bb7f4b-0460-4184-956f-c732eab083b4)
 
-## : <a href="https://perfect-todo.vercel.app/" > Demo </a>
+## : <a href="https://perfect-todo-o0zxe3edb-segacnd.vercel.app/ > Demo </a>
 
 ### Stack:
 
