@@ -18,3 +18,8 @@
   bottom: -32px;
   right: 0;
 }
+@media screen and (max-width: 400px) {
+  .content {
+    width: 94%;
+  }
+}

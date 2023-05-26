@@ -64,7 +64,6 @@ const todoSlice = createSlice({
     builder.addCase(fetchTodoById.fulfilled, (state, action: PayloadAction<ITodo | undefined>) => {
       state.todo = action.payload;
       state.status = Status.SUCCESS;
-      console.log(state.status);
     });
     builder.addCase(fetchTodoById.rejected, (state) => {
       state.todo = undefined;

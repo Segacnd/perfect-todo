@@ -27,3 +27,9 @@
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
 }
+.error{
+  color: #f42c4f;
+}
+::placeholder{
+  text-transform: capitalize;
+}

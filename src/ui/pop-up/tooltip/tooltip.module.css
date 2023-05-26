@@ -2,13 +2,15 @@
   position: absolute;
   left: -30px;
   bottom: -100%;
-  width: clamp(80px, 120px, 150px);
-  padding: 4px 4px;
+  min-width: 120px;
+  width:fit-content;
+  padding: 4px 8px;
   border-radius: 4px;
   text-align: center;
   background-color: var(--preview-bg);
   box-shadow: var(--box-shadow);
   font-size: var(--font-small);
-  font-weight: var(--fweight-small);
+  font-weight: var(--fweight-medium);
   color: var(--text-clr);
+  z-index: 3;
 }

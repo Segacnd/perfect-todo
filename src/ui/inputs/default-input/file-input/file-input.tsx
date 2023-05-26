@@ -19,11 +19,11 @@ export const FileInput: FC<FileInputProps> = ({ handleFileInputChange, previewUr
       <input type='file' name={name} accept='.jpg, .jpeg, .png' id={inputId} onChange={handleFileInputChange} />
       {previewUrl ? (
         <>
-          <span>your chosen photo:</span>
+          <span>chosen photo:</span>
           <img src={previewUrl} alt='Preview' />
         </>
       ) : (
-        <span>{t('choose_your_image')}</span>
+        <label htmlFor={inputId}>{t('choose_your_image')}</label>
       )}
     </div>
   );

@@ -38,7 +38,6 @@ export const uploadFile = createAsyncThunk(
   'user/uploadFile',
   async ({ storageRef, selectedFile }: { storageRef: StorageReference; selectedFile: File }) => {
     await uploadBytes(storageRef, selectedFile);
-    console.log(selectedFile);
   }
 );
 
@@ -66,13 +65,6 @@ export const loginUser = createAsyncThunk(
     return { email: user.email, login: user.displayName, photoUrl: user.photoURL, id: user.uid };
   }
 );
-
-// export const getPhotoUrl = createAsyncThunk('user/getPhotoUrl', async (storageRef: StorageReference) => {
-//   const downloadUrl = await getDownloadURL(storageRef);
-//   console.log(downloadUrl);
-//   console.log('ssss');
-//   return downloadUrl;
-// });
 export const editProfile = createAsyncThunk(
   'user/editProfile',
   async ({ selectedFile, newLogin }: { selectedFile: File | null; newLogin: string }) => {
@@ -91,8 +83,6 @@ export const editProfile = createAsyncThunk(
       await updateProfile(auth.currentUser, {
         displayName: newLogin,
       });
-      const user = auth.currentUser;
-      console.log(user);
     }
   }
 );
@@ -166,20 +156,10 @@ export const userSlice = createSlice({
     });
     builder.addCase(editProfile.fulfilled, (state) => {
       state.editProfileStatus = Status.SUCCESS;
-      console.log('dolbaeb sega');
     });
     builder.addCase(editProfile.rejected, (state) => {
       state.editProfileStatus = Status.ERROR;
     });
-    // builder.addCase(getPhotoUrl.pending, (state) => {
-    //   state.photoUrl = null;
-    // });
-    // builder.addCase(getPhotoUrl.fulfilled, (state, action) => {
-    //   state.photoUrl = action.payload;
-    // });
-    // builder.addCase(getPhotoUrl.rejected, (state) => {
-    //   state.photoUrl = null;
-    // });
   },
 });
 

@@ -12,11 +12,9 @@ import { NotesForm } from '../../components/notes-form/notes-form';
 import { Note } from '../../types';
 import { alertActions } from '../../redux/slices/alert-slice';
 import arrowIcon from '../../assets/arrow-icon.svg';
-import { Status } from '../../enums/enums';
-import { Loader } from '../../ui/loader/loader';
 
 export const TodoPage: FC = () => {
-  const { todo, status } = useAppSelector(todoSelector);
+  const { todo } = useAppSelector(todoSelector);
   const { isAlertOpen } = useAppSelector(alertSelector);
   const dispatch = useAppDispatch();
   const { id } = useParams();

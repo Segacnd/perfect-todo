@@ -3,21 +3,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth, storage } from '../../firebase-config';
+import { motion } from 'framer-motion';
 import { Button } from '../../ui/buttons/default-button/button';
 import styles from './register.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
-import { loginRules } from '../../validation/form-validation-schemes';
+import { emailRules, loginRules, passwordRules } from '../../validation/form-validation-schemes';
 import { FileComponent } from '../../components/FileComponent';
 import { Alert } from '../../ui/alert/alert';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { alertSelector, userSelector } from '../../redux/selectors';
-import { alertActions } from '../../redux/slices/alert-slice';
 import { authPath } from '../../routes';
-import { registerUser, updateUser, uploadFile, userActions } from '../../redux/slices/user-slice';
+import { registerUser, userActions } from '../../redux/slices/user-slice';
 import { Status } from '../../enums/enums';
+import { formAnimation, pAnimation, titleAnimation } from '../../animations/animations';
 
 export const Register: FC = () => {
   const { t } = useTranslation();
@@ -36,11 +34,11 @@ export const Register: FC = () => {
       email: yup
         .string()
         .required(`${t('form_errors_require')}`)
-        .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
+        .matches(emailRules.mailPattern, `${t('email_validation_error')}`),
       password: yup
         .string()
         .required(`${t('form_errors_require')}`)
-        .matches(loginRules.latinPattern, `${t('form_errors_latin')}`),
+        .matches(passwordRules.passwordPattern, `${t('password_validation_error')}`),
       login: yup
         .string()
         .required(`${t('form_errors_require')}`)
@@ -58,36 +56,53 @@ export const Register: FC = () => {
   }, [registerStatus, navigate, dispatch]);
   return (
     <>
-      <h2 className={styles.registerTitle} data-testid='registrationTitle'>
+      <motion.h2
+        initial='hidden'
+        viewport={{ once: true }}
+        whileInView='visible'
+        variants={titleAnimation}
+        className={styles.registerTitle}
+        data-testid='registrationTitle'
+      >
         {t('registration_title')}
-      </h2>
-      <form autoComplete='off' onSubmit={formik.handleSubmit} className={styles.registerForm}>
+      </motion.h2>
+      <motion.form
+        initial='hidden'
+        whileInView='visible'
+        variants={formAnimation}
+        autoComplete='off'
+        onSubmit={formik.handleSubmit}
+        className={styles.registerForm}
+      >
         <FormInput
-          onChange={formik.handleChange}
+          type='text'
+          name='login'
           value={formik.values.login}
           placeholder={t('login_placeholder')}
-          name='login'
-          errortext={formik.touched.login ? formik.errors.login : ''}
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          type='text'
+          supportText={`${t('form_errors_latin')}`}
+          errorText={formik.touched.login ? formik.errors.login : ''}
         />
         <FormInput
-          onChange={formik.handleChange}
+          type='email'
+          name='email'
           value={formik.values.email}
           placeholder={t('email_placeholder')}
-          name='email'
-          errortext={formik.touched.email ? formik.errors.email : ''}
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          type='email'
+          supportText={`${t('form_errors_latin')}`}
+          errorText={formik.touched.email ? formik.errors.email : ''}
         />
         <FormInput
-          onChange={formik.handleChange}
+          type='password'
+          name='password'
           value={formik.values.password}
           placeholder={t('password_placeholder')}
-          name='password'
-          errortext={formik.touched.password ? formik.errors.password : ''}
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          type='password'
+          supportText={`${t('password_validation_error')}`}
+          errorText={formik.touched.password ? formik.errors.password : ''}
         />
         <FileComponent selectedFile={selectedFile} setSelectedFile={setSelectedFile} name='image_uploads' />
         <Button
@@ -97,15 +112,21 @@ export const Register: FC = () => {
           size='standart'
           styleType='primary'
         />
-      </form>
+      </motion.form>
       {isAlertOpen && <Alert alertText={t('unsuccessful_reg')} type='error' />}
       {isAlertOpen && <Alert alertText={t('successful_reg')} type='success' />}
-      <p className={styles.registerSubTitle}>
+      <motion.p
+        initial='hidden'
+        viewport={{ once: true }}
+        whileInView='visible'
+        variants={pAnimation}
+        className={styles.registerSubTitle}
+      >
         {t('registration_redirect_text')} <br />{' '}
         <Link to='/auth' data-testid='redirectToAuth'>
           {t('registration_link_text')}
         </Link>
-      </p>
+      </motion.p>
     </>
   );
 };

@@ -1,10 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { getAuth, updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import styles from '../modal/modal.module.css';
 import { CloseButton } from '../../buttons/close-button/close-button';
 import { FormInput } from '../../inputs/default-input/form-tinput/form-input';
@@ -13,16 +11,15 @@ import { Button } from '../../buttons/default-button/button';
 import { editProfileActions } from '../../../redux/slices/edit-profile-slice';
 import { FileComponent } from '../../../components/FileComponent';
 import { editProfile, userActions } from '../../../redux/slices/user-slice';
-import { auth, storage } from '../../../firebase-config';
-import { isLoadingStatus, userSelector } from '../../../redux/selectors';
-import { Loader } from '../../loader/loader';
+import { auth } from '../../../firebase-config';
+import { userSelector } from '../../../redux/selectors';
 import { Status } from '../../../enums/enums';
 import { Alert } from '../../alert/alert';
 import { alertActions } from '../../../redux/slices/alert-slice';
 
 export const EditProfileModal: FC = () => {
   const dispatch = useAppDispatch();
-  const { login, editProfileStatus } = useAppSelector(userSelector);
+  const { editProfileStatus } = useAppSelector(userSelector);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { t } = useTranslation();
   const closeModal = (): void => {
@@ -41,7 +38,6 @@ export const EditProfileModal: FC = () => {
       dispatch(
         userActions.updateUserData({ login: auth.currentUser?.displayName, photoUrl: auth.currentUser?.photoURL })
       );
-      console.log(auth.currentUser);
       dispatch(alertActions.setAlertStatus(true));
     },
   });
@@ -58,7 +54,7 @@ export const EditProfileModal: FC = () => {
           value={formik.values.newUsername}
           placeholder={t('update_username')}
           name='newUsername'
-          errortext={formik.touched.newUsername ? formik.errors.newUsername : ''}
+          errorText={formik.touched.newUsername ? formik.errors.newUsername : ''}
           onBlur={formik.handleBlur}
         />
         <FileComponent name='image_uploads' selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
