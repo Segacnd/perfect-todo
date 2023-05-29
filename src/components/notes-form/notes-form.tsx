@@ -36,6 +36,7 @@ export const NotesForm: FC<NotesFormProps> = ({ handleSubmit, disabled }) => {
         onBlur={formik.handleBlur}
         type='string'
         disabled={disabled}
+        inputMode='text'
       />
       {formik.dirty && !formik.errors.note && <p className={styles.inputPrompt}>{t('notes_input_prompt')}</p>}
     </form>

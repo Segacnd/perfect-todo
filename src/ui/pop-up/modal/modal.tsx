@@ -44,11 +44,12 @@ export const Modal: FC = () => {
         />
         <Button
           disabled={formik.errors.categoryName ? true : false}
-          text={t('button_text_create')}
           styleType='secondary'
           buttonType='submit'
           size='standart'
-        />
+        >
+          {t('button_text_create')}
+        </Button>
       </form>
     </div>,
     document.getElementById('modal') as Element

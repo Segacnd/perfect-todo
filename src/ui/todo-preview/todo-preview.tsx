@@ -1,5 +1,6 @@
 import React, { FC, useId, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import styles from './todo-preview.module.css';
 import deleteIcon from '../../assets/delete-icon.svg';
 import completeIcon from '../../assets/complete-circle.svg';
@@ -17,6 +18,7 @@ type TodopreviewProps = {
   todo: ITodo;
 };
 export const TodoPreview: FC<TodopreviewProps> = ({ text, index, todo }) => {
+  const { t } = useTranslation();
   const [isTooltipOpen, setIsTooltipOpen] = useState<boolean>(false);
   const userState = useAppSelector(userSelector);
   const userId = userState.id;
@@ -66,7 +68,7 @@ export const TodoPreview: FC<TodopreviewProps> = ({ text, index, todo }) => {
           <img src={deleteIcon} alt='delete icon' />
         </button>
       </div>
-      {isTooltipOpen && <Tooltip text='use doubleclick to open todo' />}
+      {isTooltipOpen && <Tooltip text={t('doubleclick_tooltip_text')} />}
     </motion.div>
   );
 };

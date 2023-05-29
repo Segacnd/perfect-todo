@@ -1,4 +1,4 @@
-import { useEffect, FC, useRef } from 'react';
+import { useEffect, FC, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, useDragControls } from 'framer-motion';
@@ -28,6 +28,13 @@ export const TodosContainer: FC = () => {
       dispatch(fetchTodos(id));
     }
   }, [dispatch, id]);
+  const filteredTodos = useMemo(() => {
+    return todos
+      .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
+      .filter((todo) =>
+        activeCategory === 'all' ? todo : todo.category.toLowerCase() === activeCategory && !todo.dateEnded
+      );
+  }, [activeCategory, todos, todoPreviewType]);
   return (
     <section className={styles.todosContainer}>
       <motion.div initial='hidden' whileInView='visible' variants={formAnimation} className={styles.todosHeader}>
@@ -50,28 +57,23 @@ export const TodosContainer: FC = () => {
       </motion.div>
       <motion.div className={styles.todosWrapper} ref={parentRef}>
         {todos &&
-          todos
-            .filter((el) => (todoPreviewType === 'completed' ? el.dateEnded : !el.dateEnded))
-            .filter((todo) => (activeCategory === 'all' ? todo : todo.category.toLowerCase() === activeCategory))
-            .map((el) => (
-              <motion.div
-                style={{ touchAction: 'none' }}
-                drag
-                dragConstraints={parentRef}
-                dragControls={controls}
-                key={el.description}
-              >
-                <button type='button' onDoubleClick={() => navigate(`/todo/${el.id}`)} className={styles.navButton}>
-                  <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
-                </button>
-              </motion.div>
-            ))}
-        {todoPreviewType === 'inProgress' &&
-          todos.filter((todo) => todo.dateStarted && !todo.dateEnded).length === 0 && (
-            <p className={styles.noTodosText}>{t('no_todos_text')}</p>
-          )}
-        {todoPreviewType === 'completed' && todos.filter((todo) => todo.dateEnded).length === 0 && (
-          <p className={styles.noTodosText}>{t('no_completed_todos_text')}</p>
+          filteredTodos.map((el) => (
+            <motion.div
+              style={{ touchAction: 'none' }}
+              drag
+              dragConstraints={parentRef}
+              dragControls={controls}
+              key={el.description}
+            >
+              <button type='button' onDoubleClick={() => navigate(`/todo/${el.id}`)} className={styles.navButton}>
+                <TodoPreview text={el.title} key={el.id} index={el.id} todo={el} />
+              </button>
+            </motion.div>
+          ))}
+        {!filteredTodos.length && (
+          <p className={styles.noTodosText}>
+            {todoPreviewType === 'inProgress' ? `${t('no_todos_text')}` : `${t('no_completed_todos_text')}`}
+          </p>
         )}
       </motion.div>
     </section>

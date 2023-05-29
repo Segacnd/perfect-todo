@@ -18,6 +18,9 @@
 .closeButton:focus {
   background-color: var(--clr-blue);
 }
-.closeButton:hover {
-  background-color: var(--clr-blue);
+
+@media (hover: hover) {
+  .closeButton:hover {
+    background-color: var(--clr-blue);
+  }
 }

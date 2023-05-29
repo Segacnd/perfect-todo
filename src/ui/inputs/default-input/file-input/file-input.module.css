@@ -3,7 +3,6 @@
   display: flex;
   gap: 30px;
   align-items: center;
-
 }
 .file label img {
   width: 30px;
@@ -16,7 +15,7 @@
   height: 50px;
   border-radius: 50%;
 }
-.file label{
+.file label {
   font-weight: var(--fweight-medium);
   color: var(--text-clr);
 }
@@ -24,10 +23,10 @@
   font-weight: var(--fweight-medium);
   color: var(--text-clr);
 }
-.file label::first-letter{
+.file label::first-letter {
   text-transform: uppercase;
 }
-.file span::first-letter{
+.file span::first-letter {
   text-transform: uppercase;
 }
 .file input[type='file'] {

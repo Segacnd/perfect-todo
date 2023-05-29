@@ -1,4 +1,4 @@
-header{
+header {
   position: relative;
 }
 .leftSide {
@@ -13,7 +13,7 @@ header{
   border-radius: 50%;
 }
 
-.rightSide button{
+.rightSide button {
   display: flex;
   align-items: flex-end;
   gap: 10px;
@@ -33,20 +33,16 @@ header{
   justify-content: flex-end;
   box-shadow: var(--box-shadow);
   border-radius: 6px;
+  
 }
-.accountModal button{
-  align-items: center;
-  justify-content: center; 
-}
+
 .appTitle {
   font-size: var(--font-big);
   font-weight: var(--fweight-big);
   color: var(--text-clr);
 }
-.appTitle:hover {
-  color: var(--text-clr);
-}
-.userAvatar{
+
+.userAvatar {
   width: 34px;
   height: 34px;
 }
@@ -61,6 +57,11 @@ header{
   .appTitle {
     font-size: var(--font-small);
     font-weight: var(--fweight-small);
+    color: var(--text-clr);
+  }
+}
+@media (hover: hover) {
+  .appTitle:hover {
     color: var(--text-clr);
   }
 }

@@ -1,10 +1,8 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend from 'i18next-xhr-backend';
 
 i18next
-  .use(Backend)
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
@@ -66,6 +64,9 @@ i18next
           email_validation_error: 'uncorrect email adress',
           email_validation_support_text: 'Enter your email',
           password_validation_support_text: 'Enter your password',
+          doubleclick_tooltip_text: 'use doubleclick to open todo',
+          account_modal_profile_text: 'profile',
+          account_modal_end_text: 'end session',
           password_validation_error:
             'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters',
         },
@@ -128,6 +129,9 @@ i18next
           email_validation_error: 'неверный адрес почты',
           email_validation_support_text: 'Введите свою почту',
           password_validation_support_text: 'Введите свой пароль',
+          doubleclick_tooltip_text: 'используйте двойной щелчок, чтобы открыть todo',
+          account_modal_profile_text: 'Профиль',
+          account_modal_end_text: 'Выйти',
           password_validation_error:
             'Должен содержать не менее одной цифры и одной прописной и строчной буквы, а также не менее 8 символов.',
         },

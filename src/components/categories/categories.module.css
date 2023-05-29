@@ -22,9 +22,6 @@ aside li {
   color: var(--text-clr);
 }
 
-aside li:hover {
-  color: var(--clr-blue);
-}
 .buttonWrapper {
   display: none;
 }
@@ -40,13 +37,16 @@ aside li:hover {
   cursor: pointer;
   background-color: transparent;
   text-overflow: ellipsis;
-  overflow: hidden; 
-  width: 80%; 
+  overflow: hidden;
+  width: 80%;
   white-space: nowrap;
   color: var(--text-clr);
 }
 
-.categoryList li:hover button {
+aside .active {
+  color: var(--clr-blue);
+}
+.active button {
   color: var(--clr-blue);
 }
 
@@ -93,6 +93,14 @@ aside li:hover {
     font-weight: var(--fweight-medium);
     width: 100%;
     padding-right: 5%;
+  }
+}
+@media (hover: hover) {
+  aside li:hover {
+    color: var(--clr-blue);
+  }
+  .categoryList li:hover button {
+    color: var(--clr-blue);
   }
   .mobileVersion li:hover button {
     color: var(--clr-blue);

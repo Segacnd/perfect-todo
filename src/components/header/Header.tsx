@@ -46,20 +46,22 @@ export const Header: FC = () => {
               buttonType='button'
               styleType='secondary'
               size='medium'
-              text='Profile'
               buttonClick={profileButtonHandler}
-              customStyle={{ backgroundColor: '#f6f6f6' }}
-            />
+              customStyle={{ backgroundColor: '#f6f6f6', alignItems: 'center' }}
+            >
+              {t('account_modal_profile_text')}
+            </Button>
             <Button
               size='medium'
               buttonType='button'
               styleType='distractive'
-              customStyle={{ backgroundColor: '#f6f6f6' }}
+              customStyle={{ backgroundColor: '#f6f6f6', alignItems: 'center' }}
               buttonClick={() => {
                 dispatch(userActions.removeUser());
               }}
-              text='end session'
-            />
+            >
+              {t('account_modal_end_text')}
+            </Button>
           </div>
         )}
       </div>
