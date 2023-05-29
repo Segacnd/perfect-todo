@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { editProfileSelector, todosSelector, userSelector, viewControllerSelector } from '../../redux/selectors';
 import { fetchTodos } from '../../redux/slices/fetch-todos-slice';
@@ -29,6 +30,7 @@ export type ObjecType = {
 };
 
 export const Profile: FC = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { id, login, photoUrl, editProfileStatus } = useAppSelector(userSelector);
   const { todos } = useAppSelector(todosSelector);
@@ -107,8 +109,9 @@ export const Profile: FC = () => {
                       dispatch(userActions.removeUser());
                       navigate('/');
                     }}
-                    text='end session'
-                  />
+                  >
+                    {t('end session')}
+                  </Button>
                 </div>
               )}
               <p className={styles.userNameWrapper}>

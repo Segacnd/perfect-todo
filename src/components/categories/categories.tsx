@@ -13,7 +13,7 @@ export const Categories: FC = () => {
   const { t } = useTranslation();
   const { isMobileModalOpen } = useAppSelector(categorySelector);
   const dispatch = useAppDispatch();
-  const { categoryList } = useAppSelector(todosSelector);
+  const { categoryList, activeCategory } = useAppSelector(todosSelector);
   const sortTodos = (category: string) => {
     dispatch(todosActions.sortTodos(category));
     dispatch(categoryActions.mobileToggler(false));
@@ -33,13 +33,13 @@ export const Categories: FC = () => {
         <h3>{t('categories')}</h3>
       </div>
       <ul className={styles.categoryList}>
-        <li>
+        <li className={activeCategory === 'all' ? styles.active : ''}>
           <button type='button' onClick={() => sortTodos('all')}>
             all
           </button>
         </li>
         {categoryList.map((category) => (
-          <li key={category + Date.now()}>
+          <li className={activeCategory === category ? styles.active : ''} key={category + Date.now()}>
             <button type='button' onClick={() => sortTodos(category)}>
               {category}
             </button>

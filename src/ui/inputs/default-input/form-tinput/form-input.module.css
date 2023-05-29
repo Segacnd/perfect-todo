@@ -3,8 +3,6 @@
   flex-direction: column;
   min-height: 62px;
 }
-.inputWrapper input[type='file'] {
-}
 
 .inputWrapper input {
   min-width: 250px;
@@ -27,9 +25,9 @@
   font-size: var(--font-small);
   font-weight: var(--fweight-small);
 }
-.error{
+.error {
   color: #f42c4f;
 }
-::placeholder{
+::placeholder {
   text-transform: capitalize;
 }

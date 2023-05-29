@@ -77,41 +77,40 @@ export const Register: FC = () => {
         <FormInput
           type='text'
           name='login'
+          inputMode='text'
           value={formik.values.login}
           placeholder={t('login_placeholder')}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          supportText={`${t('form_errors_latin')}`}
+          supportText={formik.errors.login ? `${t('form_errors_latin')}` : ''}
           errorText={formik.touched.login ? formik.errors.login : ''}
         />
         <FormInput
           type='email'
           name='email'
+          inputMode='email'
           value={formik.values.email}
           placeholder={t('email_placeholder')}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          supportText={`${t('form_errors_latin')}`}
+          supportText={formik.errors.email ? `your.email@example.com` : ''}
           errorText={formik.touched.email ? formik.errors.email : ''}
         />
         <FormInput
           type='password'
           name='password'
+          inputMode='text'
           value={formik.values.password}
           placeholder={t('password_placeholder')}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          supportText={`${t('password_validation_error')}`}
+          supportText={formik.errors.password ? `${t('password_validation_error')}` : ''}
           errorText={formik.touched.password ? formik.errors.password : ''}
         />
         <FileComponent selectedFile={selectedFile} setSelectedFile={setSelectedFile} name='image_uploads' />
-        <Button
-          disabled={!formik.isValid ? true : false}
-          text={t('registration_button_text')}
-          buttonType='submit'
-          size='standart'
-          styleType='primary'
-        />
+        <Button disabled={!formik.isValid ? true : false} buttonType='submit' size='standart' styleType='primary'>
+          {t('registration_button_text')}
+        </Button>
       </motion.form>
       {isAlertOpen && <Alert alertText={t('unsuccessful_reg')} type='error' />}
       {isAlertOpen && <Alert alertText={t('successful_reg')} type='success' />}

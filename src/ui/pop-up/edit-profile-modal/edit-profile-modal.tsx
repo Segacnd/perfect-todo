@@ -60,11 +60,12 @@ export const EditProfileModal: FC = () => {
         <FileComponent name='image_uploads' selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
         <Button
           disabled={formik.errors.newUsername ? true : false}
-          text={t('button_text_create')}
           styleType='secondary'
           buttonType='submit'
           size='standart'
-        />
+        >
+          {t('button_text_create')}
+        </Button>
       </form>
 
       {editProfileStatus === Status.SUCCESS && <Alert alertText='user is updated' type='success' />}

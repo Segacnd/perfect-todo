@@ -13,36 +13,15 @@ interface IFormInputProps extends Omit<IInputProps, 'change' | 'labelText' | 'se
   labelText?: string;
   accept?: string;
   dti?: string;
+  inputMode?: 'none' | 'search' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal';
 }
 
-export const FormInput: FC<IFormInputProps> = ({
-  placeholder,
-  onChange,
-  value,
-  name,
-  errorText,
-  onBlur,
-  type,
-  disabled,
-  labelText,
-  accept,
-  dti,
-  supportText,
-}) => {
+export const FormInput: FC<IFormInputProps> = (props) => {
+  const { name, accept, dti, errorText, supportText, disabled, labelText } = props;
   return (
     <div className={classNames(styles.inputWrapper, { [styles.error]: errorText, disabled })}>
-      <input
-        onBlur={onBlur}
-        id={name}
-        type={type}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        name={name}
-        disabled={disabled}
-        accept={accept}
-        data-testid={dti}
-      />
+      {/* eslint-disable-next-line */}
+      <input {...props} id={name} accept={accept} data-testid={dti} />
       <dialog>hello</dialog>
 
       <label htmlFor={name} className={errorText ? styles.error : ''}>

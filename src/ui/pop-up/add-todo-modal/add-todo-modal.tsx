@@ -119,13 +119,9 @@ export const AddTodoModal: FC = () => {
             onBlur={formik.handleBlur}
           />
         </div>
-        <Button
-          disabled={!formik.isValid ? true : false}
-          text={t('button_add_todo')}
-          styleType='secondary'
-          buttonType='submit'
-          size='standart'
-        />
+        <Button disabled={!formik.isValid ? true : false} styleType='secondary' buttonType='submit' size='standart'>
+          {t('button_add_todo')}
+        </Button>
       </form>
     </div>,
     document.getElementById('add-modal') as Element

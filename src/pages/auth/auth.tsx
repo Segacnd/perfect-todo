@@ -61,9 +61,10 @@ export const Auth: FC = () => {
           placeholder={t('auth_input_placeholder_login')}
           name='email'
           errorText={formik.errors.email}
-          supportText={`${t('email_validation_support_text')}`}
+          supportText={formik.errors.email ? `${t('email_validation_support_text')}` : ''}
           type='email'
           dti='email'
+          inputMode='email'
         />
         <FormInput
           onChange={formik.handleChange}
@@ -74,15 +75,12 @@ export const Auth: FC = () => {
           onBlur={formik.handleBlur}
           type='password'
           dti='password'
-          supportText={`${t('password_validation_support_text')}`}
+          inputMode='text'
+          supportText={formik.errors.password ? `${t('password_validation_support_text')}` : ''}
         />
-        <Button
-          disabled={!formik.isValid ? true : false}
-          text={t('auth_button_text')}
-          buttonType='submit'
-          size='standart'
-          styleType='primary'
-        />
+        <Button disabled={!formik.isValid ? true : false} buttonType='submit' size='standart' styleType='primary'>
+          {t('auth_button_text')}
+        </Button>
       </motion.form>
       <motion.p
         initial='hidden'

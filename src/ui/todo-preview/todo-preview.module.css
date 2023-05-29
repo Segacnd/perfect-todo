@@ -46,9 +46,6 @@
   }
 }
 
-.previewWrapper:hover {
-  box-shadow: var(--box-shadow-active);
-}
 .completeTodo {
   border-radius: 50%;
   position: relative;
@@ -85,4 +82,9 @@
 .completeTodo button {
   display: contents;
   cursor: pointer;
+}
+@media (hover: hover) {
+  .previewWrapper:hover {
+    box-shadow: var(--box-shadow-active);
+  }
 }

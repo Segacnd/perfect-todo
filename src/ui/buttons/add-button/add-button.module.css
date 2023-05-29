@@ -20,6 +20,8 @@
   font-weight: var(--fweight-medium);
 }
 
-.addButton:hover {
-  color: var(--text-clr);
+@media (hover: hover) {
+  .addButton:hover {
+    color: var(--text-clr);
+  }
 }

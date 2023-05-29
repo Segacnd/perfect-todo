@@ -28,24 +28,26 @@
   width: 100%;
   height: 100%;
 }
-.note:hover {
-  box-shadow: var(--box-shadow-active);
-}
-.note:hover .closeNote {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: -18px;
-  right: -16px;
-  background-color: var(--clr-blue);
-  cursor: pointer;
-}
 
 @media screen and (max-width: 400px) {
-  .note{
+  .note {
     height: 100px;
+  }
+}
+@media (hover: hover) {
+  .note:hover {
+    box-shadow: var(--box-shadow-active);
+  }
+  .note:hover .closeNote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: -18px;
+    right: -16px;
+    background-color: var(--clr-blue);
+    cursor: pointer;
   }
 }

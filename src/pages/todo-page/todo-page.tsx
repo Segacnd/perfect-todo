@@ -92,32 +92,29 @@ export const TodoPage: FC = () => {
       </div>
       <div className={styles.buttonsContainer}>
         <Button
-          text={t('to_main_page')}
           styleType='primary'
-          icon={arrowIcon}
-          iconSide='left'
           buttonType='button'
           buttonClick={() => navigate('/')}
-          size='big'
+          size='medium'
           customStyle={{ backgroundColor: '#f4f4f4' }}
-        />
+        >
+          <img src={arrowIcon} alt='arrow' />
+          {t('to_main_page')}
+        </Button>
 
         <div className={styles.mainButtons}>
+          <Button styleType='distractive' buttonType='button' buttonClick={() => deleteCurrentTodo()} size='medium'>
+            {t('delete_todo')}
+          </Button>
           <Button
-            text={t('delete_todo')}
-            styleType='distractive'
-            buttonType='button'
-            buttonClick={() => deleteCurrentTodo()}
-            size='medium'
-          />
-          <Button
-            text={t('complete_todo')}
             buttonType='button'
             buttonClick={() => completeCurrentTodo()}
             styleType='secondary'
             disabled={todo?.dateEnded ? true : false}
             size='medium'
-          />
+          >
+            {t('complete_todo')}
+          </Button>
         </div>
       </div>
       {todo?.dateEnded && isAlertOpen && <Alert type='success' alertText='congs,this todo is finished!' />}
