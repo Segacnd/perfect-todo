@@ -7,6 +7,7 @@ import styles from './alert.module.css';
 import { alertActions } from '../../redux/slices/alert-slice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { alertSelector } from '../../redux/selectors';
+import { userActions } from '../../redux/slices/user-slice';
 
 interface IAlert {
   type: 'error' | 'success';
@@ -16,9 +17,15 @@ export const Alert: FC<IAlert> = ({ alertText, type }) => {
   const dispatch = useAppDispatch();
   const { isAlertOpen } = useAppSelector(alertSelector);
 
+  const closeAlert = () => {
+    dispatch(alertActions.setAlertStatus(false));
+    dispatch(userActions.clearError());
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(alertActions.setAlertStatus(false));
+      dispatch(userActions.clearError());
     }, 4000);
 
     return () => clearTimeout(timer);
@@ -33,7 +40,7 @@ export const Alert: FC<IAlert> = ({ alertText, type }) => {
         <img src={type === 'success' ? successIcon : errorIcon} alt='icon' />
       </div>
       <p className={styles.title}>{alertText}</p>
-      <button type='button' onClick={() => dispatch(alertActions.setAlertStatus(false))}>
+      <button type='button' onClick={closeAlert}>
         <img src={closeIcon} alt='close' />
       </button>
     </div>

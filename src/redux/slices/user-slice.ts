@@ -88,6 +88,7 @@ export const editProfile = createAsyncThunk(
 );
 export type UserState = {
   email: string | null;
+  error?: string | null;
   id: string | null;
   login: string | null;
   photoUrl: string | null;
@@ -98,6 +99,7 @@ export type UserState = {
 
 const initialState: UserState = {
   login: null,
+  error: null,
   email: null,
   id: null,
   photoUrl: null,
@@ -115,6 +117,9 @@ export const userSlice = createSlice({
       state.id = null;
       state.login = null;
       state.photoUrl = null;
+    },
+    clearError(state) {
+      state.error = null;
     },
     resetStatus(state, action: PayloadAction<keyof UserState>) {
       state[action.payload] = Status.INIT;
@@ -135,7 +140,8 @@ export const userSlice = createSlice({
       state.login = action.payload.login;
       state.photoUrl = action.payload.photoUrl;
     });
-    builder.addCase(loginUser.rejected, (state) => {
+    builder.addCase(loginUser.rejected, (state, error) => {
+      state.error = error.error.code;
       state.status = Status.ERROR;
       state.email = null;
       state.id = null;

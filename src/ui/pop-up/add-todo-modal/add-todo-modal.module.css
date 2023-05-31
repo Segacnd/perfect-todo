@@ -1,5 +1,5 @@
 .modalWrapper {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background: #36363621;
   backdrop-filter: blur(5px);
@@ -49,12 +49,14 @@
   font-weight: var(--fweight-medium);
 }
 
-.box {
-  width: 350px;
-}
-
 .closeButton {
   position: absolute;
   top: 3%;
   right: 3%;
+}
+
+@media screen and (max-width: 600px) {
+  .modalContainer{
+    width: 300px;
+  }
 }

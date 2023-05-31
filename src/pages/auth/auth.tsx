@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
@@ -8,14 +8,17 @@ import { Button } from '../../ui/buttons/default-button/button';
 import styles from './auth.module.css';
 import { FormInput } from '../../ui/inputs/default-input/form-tinput/form-input';
 import { emailRules, loginRules } from '../../validation/form-validation-schemes';
-import { useAppDispatch } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { loginUser } from '../../redux/slices/user-slice';
 import { formAnimation, pAnimation, titleAnimation } from '../../animations/animations';
+import { userSelector } from '../../redux/selectors';
+import { Alert } from '../../ui/alert/alert';
+import { alertActions } from '../../redux/slices/alert-slice';
 
 export const Auth: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
+  const { error } = useAppSelector(userSelector);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -35,8 +38,16 @@ export const Auth: FC = () => {
       dispatch(loginUser({ email: values.email, password: values.password }));
     },
   });
+
+  useEffect(() => {
+    if (error === 'auth/user-not-found') {
+      dispatch(alertActions.setAlertStatus(true));
+    }
+  }, [error, dispatch]);
+
   return (
     <>
+      {error === 'auth/user-not-found' && <Alert type='error' alertText={t('auth_error')} />}
       <motion.h2
         viewport={{ once: true }}
         initial='hidden'
@@ -76,6 +87,7 @@ export const Auth: FC = () => {
           type='password'
           dti='password'
           inputMode='text'
+          passCheck={formik.values.password.length > 0}
           supportText={formik.errors.password ? `${t('password_validation_support_text')}` : ''}
         />
         <Button disabled={!formik.isValid ? true : false} buttonType='submit' size='standart' styleType='primary'>

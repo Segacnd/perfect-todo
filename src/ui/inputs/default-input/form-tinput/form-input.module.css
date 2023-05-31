@@ -2,8 +2,13 @@
   display: flex;
   flex-direction: column;
   min-height: 62px;
+  position: relative;
 }
-
+.showHidePasswordButton {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
 .inputWrapper input {
   min-width: 250px;
   max-width: 100%;
