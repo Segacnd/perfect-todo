@@ -67,13 +67,14 @@ i18next
           doubleclick_tooltip_text: 'use doubleclick to open todo',
           account_modal_profile_text: 'profile',
           account_modal_end_text: 'end session',
+          auth_error: 'Incorrect email or password. Please insure you use correct email and password.',
           password_validation_error:
             'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters',
         },
       },
       ru: {
         translation: {
-          app_title: 'Идеальный список дел',
+          app_title: 'Cписок дел',
           app_author: 'создатель Бергей',
           categories: 'Категории',
           todo_view_in_progress: 'В процессе',
@@ -132,6 +133,7 @@ i18next
           doubleclick_tooltip_text: 'используйте двойной щелчок, чтобы открыть todo',
           account_modal_profile_text: 'Профиль',
           account_modal_end_text: 'Выйти',
+          auth_error: 'Неверный логин или пароль. Пожалуйста, убедитесь что вы вводите правильные данные.',
           password_validation_error:
             'Должен содержать не менее одной цифры и одной прописной и строчной буквы, а также не менее 8 символов.',
         },
